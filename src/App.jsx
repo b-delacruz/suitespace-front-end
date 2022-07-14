@@ -8,6 +8,14 @@ import Profiles from './pages/Profiles/Profiles'
 import ChangePassword from './pages/ChangePassword/ChangePassword'
 import * as authService from './services/authService'
 
+// Our pages
+import FavoriteBar from './pages/FavoriteBar/FavoriteBar'
+import Todolist from './pages/TodoList/TodoList'
+import SideBar from './components/SideBar/SideBar'
+import NewsFeed from './pages/NewsFeed/NewsFeed'
+import Weather from './pages/Weather/Weather'
+
+
 const App = () => {
   const [user, setUser] = useState(authService.getUser())
   const navigate = useNavigate()
@@ -25,6 +33,12 @@ const App = () => {
   return (
     <>
       <NavBar user={user} handleLogout={handleLogout} />
+      <SideBar/>
+      <FavoriteBar />
+      <NewsFeed />
+      <Todolist />
+      <Weather />
+
       <Routes>
         <Route path="/" element={<Landing user={user} />} />
         <Route
