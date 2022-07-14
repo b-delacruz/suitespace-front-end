@@ -6,9 +6,12 @@ import Login from './pages/Login/Login'
 import Landing from './pages/Landing/Landing'
 import Profiles from './pages/Profiles/Profiles'
 import ChangePassword from './pages/ChangePassword/ChangePassword'
-import * as authService from './services/authService'
 
-// Our pages
+// Services
+import * as authService from './services/authService'
+import * as locationService from './services/locationService'
+
+// Main Pages
 import FavoriteBar from './pages/FavoriteBar/FavoriteBar'
 import Todolist from './pages/TodoList/TodoList'
 import SideBar from './components/SideBar/SideBar'
@@ -18,6 +21,8 @@ import Weather from './pages/Weather/Weather'
 
 const App = () => {
   const [user, setUser] = useState(authService.getUser())
+  const [location, setLocation] = useState(locationService.getLocation())
+
   const navigate = useNavigate()
 
   const handleLogout = () => {
