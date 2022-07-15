@@ -3,10 +3,21 @@ import WeatherGraph from '../../components/Weather/WeatherGraph'
 import WeatherNav from '../../components/Weather/WeatherNav'
 import * as weatherService from '../../services/weatherService'
 import * as locationService from '../../services/locationService'
+import { useEffect, useState } from 'react'
 
 const Weather = (props) => {
 
-  
+  const [location, setLocation] = useState({})
+  const [weather, setWeather] = useState({})
+  const [weatherForecast, setWeatherForecast] = useState({})
+
+  useEffect(()=>{
+
+  })
+
+  const handleLocationSearch = (location) => {
+    
+  }
 
   return (
     <>
