@@ -5,12 +5,18 @@ import { daysOfWeek, result, currentDay, monthArray, monthsInYear, currentMonth}
 const Calendar = (props) => {
   //* STATE //
   const [year, setYear] = useState(2022)
+
   const [month, setMonth] = useState(monthsInYear[currentMonth])
+
   const [day, setDay] = useState(currentDay)
   const [daysInMonth, setDaysInMonth] = useState([])
 
   function handleMonthForward () {
-    setMonth(monthsInYear[currentMonth + 1])
+    setMonth(monthsInYear[month.index + 1])
+  }
+
+  function handleMonthBackwards () {
+    setMonth(monthsInYear[month.index - 1])
   }
   return (
     <>
@@ -24,7 +30,7 @@ const Calendar = (props) => {
           <div className='calendar-body-header | flex justify-between py-2 px-5 border-b-4'>
             <h1 className="text-xl">{month.title}</h1>
             <div className='calendar-button-header-container | flex gap-2'>
-              <button className='bg-slate-400 rounded-md px-2'>Left</button>
+              <button className='bg-slate-400 rounded-md px-2' onClick={() => handleMonthBackwards()}>Left</button>
               <button className='bg-slate-400 rounded-md px-2' onClick={() => handleMonthForward()}>Right</button>
             </div>
           </div>
