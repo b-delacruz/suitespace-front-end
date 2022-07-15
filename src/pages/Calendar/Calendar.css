@@ -1,0 +1,27 @@
+.calendar-container {
+  max-width: 400px; /*! Responsive */
+  height: 800px;
+}
+
+.calendar-header {
+  width: 90%;
+  height: 10%;
+}
+
+.calendar-body {
+  width: 90%;
+  height: 50%;
+}
+
+.day-of-week,
+.date-grid {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  gap: 1em;
+}
+
+.date-grid button:first-child {
+  grid-column: 6;
+}
+
+
