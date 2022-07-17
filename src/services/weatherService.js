@@ -6,16 +6,16 @@ async function getPref() {
 }
 
 async function getCurrentDetails(location) {
-  const res = await fetch(`${SERVER_URL}/${location}`)
+  const res = await fetch(`${SERVER_URL}/${location}/current`)
 }
 
 async function getHourlyDetails(location) {
-  const res = await fetch(`${SERVER_URL}/`)
+  const res = await fetch(`${SERVER_URL}/${location}/hourly`)
 }
 
 async function getDailyDetails(location) {
-  const res = await fetch(`${SERVER_URL}/`)
+  const res = await fetch(`${SERVER_URL}/${location}/daily`)
 }
 
 
-export { getCurrentDetails, getHourlyDetails, getDailyDetails }
+export { getPref, getCurrentDetails, getHourlyDetails, getDailyDetails }
