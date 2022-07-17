@@ -1,16 +1,24 @@
-import { useState } from 'react';
-import { PropaneSharp } from "@mui/icons-material";
+import { useState, useRef, useEffect } from 'react';
+import { PropaneSharp } from '@mui/icons-material';
 import { Typography, Button, Modal, Box } from '@mui/material'
-import TodoItem from "../../components/Todo/TodoItem";
+import TodoItem from '../../components/Todo/TodoItem';
 import './TodoList.css';
 
 const TodoList = () => {
 
-  const [list, setList] = useState([])
+  useEffect(() => {
+    formElement.current.checkValidity() ? setValidForm(true) : setValidForm(false)
+  }, [formData])
 
+  const [formData, setformData] = useState({
+    title: '',
+    text: '',
+    dueDate: new Date(),
+  })
   const [open, setOpen] = useState(false);
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
+  const [validForm, setValidForm] = useState(false)
 
   const style = {
     position: 'absolute',
@@ -23,6 +31,15 @@ const TodoList = () => {
     boxShadow: 6,
     p: 4,
   }
+
+  const handleChange = evt => {
+    setformData({...formData, [evt.target.name]: evt.target.value })
+  }
+
+
+
+  const formElement = useRef()
+  console.log(formElement)
   
   return (
     <div className='todo-list'>
@@ -36,42 +53,50 @@ const TodoList = () => {
         <Modal
           open={open}
           onClose={handleClose}
-          aria-labelledby="modal-modal-title"
-          aria-describedby="modal-modal-description"
+          aria-labelledby='modal-modal-title'
+          aria-describedby='modal-modal-description'
+          formData={formData}
         >
-          <Box sx={style}>
-            <Typography id="modal-modal-title" variant="h6" component="h2">
-              Add a todo
+          <Box sx={style} formData={formData}>
+            <Typography id='modal-modal-title' variant='h6' component='h2'>
+              Add Todo
             </Typography>
-            <Typography id="modal-modal-description" sx={{ mt: 2 }}>
-              <form action="" className='flex flex-col gap-3'>
+            <Typography id='modal-modal-description' sx={{ mt: 2 }} formData={formData}>
+              <form autoComplete='off' ref={formElement} action='' className='flex flex-col gap-3'>
                 <div className='flex flex-col'>
                   <label>Title</label>
                   <input className='input-item'
-                    name="title"
-                    type="text"
+                    name='title'
+                    type='text'
+                    value={formData.name}
                     required
+                    onChange={handleChange}
                   />
                 </div>
                 <div className='flex flex-col'>
                   <label>Description</label>
                   <input className='input-item'
-                    name="description"
-                    type="text"
+                    name='description'
+                    type='text'
+                    value={formData.description}
                     required
+                    onChange={handleChange}
                   />
                 </div>
                 <div className='flex flex-col'>
                   <label>Due Date</label>
                   <input className='input-item'
-                    name="dueDate"
-                    type="date"
+                    name='dueDate'
+                    type='date'
+                    value={formData.dueDate}
                     required
+                    onChange={handleChange}
                   />
                 </div>
                 <div className='btn-submit'>
                   <button
                     type='submit'
+                    disabled={!validForm}
                   >
                     Add Todo
                   </button>
