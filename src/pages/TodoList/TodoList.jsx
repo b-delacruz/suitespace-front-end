@@ -5,21 +5,29 @@ import TodoItem from '../../components/Todo/TodoItem';
 import './TodoList.css';
 
 const TodoList = () => {
-
+  const [formData, setformData] = useState({
+    title: '',
+    description: '',
+    dueDate: new Date(),
+  })
+  const [validForm, setValidForm] = useState(false)
+  const handleChange = evt => {
+    setformData({...formData, [evt.target.name]: evt.target.value })
+  }
+  const formElement = useRef()
   useEffect(() => {
     formElement.current.checkValidity() ? setValidForm(true) : setValidForm(false)
   }, [formData])
+  const [todos, setTodos] = useState([])
+  
+  const handleSubmit = evt => {
+    evt.preventDefault()
+  }
 
-  const [formData, setformData] = useState({
-    title: '',
-    text: '',
-    dueDate: new Date(),
-  })
+
   const [open, setOpen] = useState(false);
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
-  const [validForm, setValidForm] = useState(false)
-
   const style = {
     position: 'absolute',
     top: '50%',
@@ -31,15 +39,6 @@ const TodoList = () => {
     boxShadow: 6,
     p: 4,
   }
-
-  const handleChange = evt => {
-    setformData({...formData, [evt.target.name]: evt.target.value })
-  }
-
-
-
-  const formElement = useRef()
-  console.log(formElement)
   
   return (
     <div className='todo-list'>
@@ -49,7 +48,7 @@ const TodoList = () => {
         <div>grab button</div>
       </div>
       <div>
-        <Button onClick={handleOpen}>Add Todo</Button>
+        {/* <Button onClick={handleOpen}>Add Todo</Button>
         <Modal
           open={open}
           onClose={handleClose}
@@ -61,8 +60,8 @@ const TodoList = () => {
             <Typography id='modal-modal-title' variant='h6' component='h2'>
               Add Todo
             </Typography>
-            <Typography id='modal-modal-description' sx={{ mt: 2 }} formData={formData}>
-              <form autoComplete='off' ref={formElement} action='' className='flex flex-col gap-3'>
+            <Typography id='modal-modal-description' sx={{ mt: 2 }} formData={formData}> */}
+              <form onSubmit={handleSubmit} autoComplete='off' ref={formElement} className='flex flex-col gap-3'>
                 <div className='flex flex-col'>
                   <label>Title</label>
                   <input className='input-item'
@@ -97,14 +96,15 @@ const TodoList = () => {
                   <button
                     type='submit'
                     disabled={!validForm}
+                    hidden={!validForm}
                   >
                     Add Todo
                   </button>
                 </div>
               </form>
-            </Typography>
+            {/* </Typography>
           </Box>
-        </Modal>
+        </Modal> */}
       </div>
       <div className='todo-list-showing | flex'>
         <div>Showing Tag</div>
