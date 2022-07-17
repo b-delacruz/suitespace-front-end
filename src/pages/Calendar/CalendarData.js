@@ -1,4 +1,4 @@
-export default function renderCalendar(value) {
+export function renderCalendar(value) {
   const startDay = value.clone().startOf('month').startOf('week')
   const endDay = value.clone().endOf('month').endOf('week')
   const day = startDay.clone().subtract(1, 'day')
@@ -10,3 +10,13 @@ export default function renderCalendar(value) {
   }
   return calendar
 }
+
+export const daysOfWeek = [
+  'S',
+  'M',
+  'T',
+  'W',
+  'T',
+  'F',
+  'S',
+]

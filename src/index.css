@@ -12,6 +12,10 @@ html {
   box-sizing: inherit;
 }
 
+:root {
+  --soft-yellow: #F2D3AB;
+  --dark-blue: #35445D;
+}
 
 body {
   margin: 0;
