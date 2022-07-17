@@ -7,7 +7,6 @@ import { useEffect, useState } from 'react'
 
 const Weather = (props) => {
 
-  const [location, setLocation] = useState({})
   const [weather, setWeather] = useState({})
   const [weatherForecast, setWeatherForecast] = useState({})
 
@@ -16,7 +15,7 @@ const Weather = (props) => {
   })
 
   const handleLocationSearch = (location) => {
-    
+
   }
 
   return (
