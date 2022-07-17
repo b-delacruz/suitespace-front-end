@@ -7,8 +7,13 @@ import { useEffect, useState } from 'react'
 
 const Weather = (props) => {
 
-  const [weather, setWeather] = useState({})
-  const [weatherForecast, setWeatherForecast] = useState({})
+  // Weather States for all 3 data
+  const [weatherCurrent, setWeather] = useState({})
+  const [weatherHourly, setWeatherHourly] = useState({})
+  const [weatherDaily, setWeatherDaily] = useState({})
+
+  // Location state different from preference
+  const [searchLocation, setSearchLocation] = useState({})
 
   useEffect(()=>{
 
@@ -21,7 +26,9 @@ const Weather = (props) => {
   return (
     <>
       <div>
-
+        <WeatherNav/>
+        <WeatherGraph/>
+        <WeatherDisplay/>
       </div>
     </>
   );

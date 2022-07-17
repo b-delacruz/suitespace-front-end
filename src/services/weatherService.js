@@ -7,14 +7,17 @@ async function getPref() {
 
 async function getCurrentDetails(location) {
   const res = await fetch(`${SERVER_URL}/${location}/current`)
+  return res.json()
 }
 
 async function getHourlyDetails(location) {
   const res = await fetch(`${SERVER_URL}/${location}/hourly`)
+  return res.json()
 }
 
 async function getDailyDetails(location) {
   const res = await fetch(`${SERVER_URL}/${location}/daily`)
+  return res.json()
 }
 
 
