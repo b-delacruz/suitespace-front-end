@@ -1,7 +1,16 @@
-const TodoItem = () => {
+import '../../pages/TodoList/TodoList.css'
+
+const TodoItem = (props) => {
 	// console.log(props)
 	return (
-    <h1>TodoItem</h1>
+		<div className="todo-item-container | flex justify-between">
+			<div>Checkbox</div>
+			<div>
+				<div>Header</div>
+				<div>Content</div>
+			</div>
+			<div>X</div>
+		</div>
 	)
 }
 
