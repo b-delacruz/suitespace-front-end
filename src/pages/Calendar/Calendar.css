@@ -1,27 +1,58 @@
-.calendar-container {
-  max-width: 400px; /*! Responsive */
-  height: 800px;
+@import url('https://fonts.googleapis.com/css2?family=Sora:wght@100;200;300;400;500;600;700;800&display=swap');
+
+
+.calendar {
+  width: 400px;
+  height: 300px;
+  display: flex;
+  text-align: center;
+  flex-wrap: wrap;
+  font-family: 'Sora', sans-serif;
 }
 
-.calendar-header {
-  width: 90%;
-  height: 10%;
+.week {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
 }
 
-.calendar-body {
-  width: 90%;
-  height: 50%;
+.day {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 50px;
+  width: 50px;
+  border-radius: 50%;
+  cursor: pointer;
 }
 
-.day-of-week,
-.date-grid {
-  display: grid;
-  grid-template-columns: repeat(7, 1fr);
-  gap: 1em;
+.today {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 75%;
+  width: 75%;
+  border-radius: 50%;
+  background-color: rgba(93, 53, 53, 0.9);
+  color: #F2D3AB;
 }
 
-.date-grid button:first-child {
-  grid-column: 6;
+.selected {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 75%;
+  width: 75%;
+  border-radius: 50%;
+  background-color: #35445d;
+  color: #F2D3AB;
 }
 
-
+.before {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 75%;
+  width: 75%;
+  color: rgba(0, 0, 0, 0.5);
+}

@@ -1,57 +1,54 @@
+import { useState, useEffect } from 'react';
 import './Calendar.css'
-import { useEffect, useState } from 'react'
-import { daysOfWeek, result, currentDay, monthArray, monthsInYear, currentMonth} from './CalendarData.js'
+import moment from "moment";
+import renderCalendar from './CalendarData';
 
 const Calendar = (props) => {
-  //* STATE //
-  const [year, setYear] = useState(2022)
+  const [calendar, setCalendar] = useState([])
+  const [value, setValue] = useState(moment())
+  
+  useEffect(() => {
+    setCalendar(renderCalendar(value))
+  }, [value])
 
-  const [month, setMonth] = useState(monthsInYear[currentMonth])
-
-  const [day, setDay] = useState(currentDay)
-  const [daysInMonth, setDaysInMonth] = useState([])
-
-  function handleMonthForward () {
-    setMonth(monthsInYear[month.index + 1])
+  function isSelected(day) {
+    return value.isSame(day, 'day')
   }
 
-  function handleMonthBackwards () {
-    setMonth(monthsInYear[month.index - 1])
+  function beforeToday(day) {
+    return day.isBefore(new Date(), 'day')
   }
+
+  function isToday(day) {
+    return day.isSame(new Date(), 'day')
+  }
+
+  function dayStyles(day) {
+    if (beforeToday(day)) return 'before'
+    if (isSelected(day) && !isToday(day)) return 'selected'
+    if (isToday(day)) return 'today'
+  }
+
   return (
     <>
-      <div className="border flex h-80 justify-start items-center flex-col w-screen gap-3 | calendar-container">
-        <header className="calendar-header | flex justify-between items-center ">
-          <h1 className="text-xl">Calendar</h1>
-          <h1 className="text-xl">{year}</h1>
-        </header>
-        {/* Make Calendar-Dates Component */}
-        <main className='calendar-body | border bg-slate-50 rounded-md'>
-          <div className='calendar-body-header | flex justify-between py-2 px-5 border-b-4'>
-            <h1 className="text-xl">{month.title}</h1>
-            <div className='calendar-button-header-container | flex gap-2'>
-              <button className='bg-slate-400 rounded-md px-2' onClick={() => handleMonthBackwards()}>Left</button>
-              <button className='bg-slate-400 rounded-md px-2' onClick={() => handleMonthForward()}>Right</button>
-            </div>
-          </div>
-          {/* CALENDAR BODY  */}
-          <div className='day-of-week | pt-2 pb-5 text-center'>
-            {daysOfWeek.map((day, idx) => 
-              <div key={idx}>{day.title}</div>
+      <div>
+        Calendar
+      </div>
+      <div className='calendar'>
+        {calendar.map(week => 
+          <div className='week'>
+            {week.map(day => 
+              <div className='day' onClick={() => setValue(day)}>
+                <span className={dayStyles(day)}>
+                  {day.format('D')}
+                </span>
+              </div>  
             )}
           </div>
-          <div className='date-grid'>
-            {monthArray.map((day, idx) =>
-              currentDay === day ? 
-              <button key={idx} className='bg-slate-300'>{day}</button>
-              : 
-              <button key={idx}>{day}</button>
-            )}
-          </div>
-        </main>
+        )}
       </div>
     </>
   )
 }
 
-export default Calendar
+export default Calendar 
