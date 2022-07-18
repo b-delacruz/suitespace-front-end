@@ -1,14 +1,24 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import SearchIcon from '@mui/icons-material/Search';
 import { getNews } from '../../services/newsService';
 
 
-const NewsFeed = () => {
+
+const NewsFeed = (props) => {
   const [formData, setFormData] = useState({
     search:''
   })
 
-  const [newsData, setNewsData] = useState({})
+  const [newsData, setNewsData] = useState([])
+
+  useEffect(() => {
+    const fetchNews = async () => {
+      const newsData = await getNews()
+      console.log(newsData.response.results)
+      setNewsData(newsData.response.results.slice(0,3))
+    }
+    fetchNews()
+  }, [])
 
   const handleChange = evt => {
 		setFormData({ 
@@ -21,7 +31,8 @@ const NewsFeed = () => {
     try{
       getNews(formData.search)
       .then(newsData => {
-        setNewsData(newsData)
+        console.log(newsData.response.results)
+        setNewsData(newsData.response.results)
       })
     } catch (error) {
       console.log(error)
@@ -49,12 +60,20 @@ const NewsFeed = () => {
           placeholder='Search News'
           value={search}
           onChange={handleChange}
+          required
           />
         <button type="submit" disabled={isFormInvalid()}>
           <SearchIcon/>
         </button>
         </div>    
       </form>
+      <div>
+      {newsData.map(news =>
+        <div key={news.id}>
+          <p> {news.webTitle}</p>
+        </div> 
+      )}
+      </div>
     </>
   )
 }
