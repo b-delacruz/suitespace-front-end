@@ -69,8 +69,10 @@ const Weather = (props) => {
     <>
       <div className='weather-container'>
         <WeatherNav className='weather-nav'/>
-        <WeatherGraph className='weather-graph'/>
-        <WeatherDisplay className='weather-display'/>
+        <div>
+          <WeatherGraph className='weather-graph'/>
+          <WeatherDisplay className='weather-display'/>
+        </div>
       </div>
     </>
   );
