@@ -1,12 +1,25 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import SearchIcon from '@mui/icons-material/Search';
 import { getNews } from '../../services/newsService';
+import './NewsFeed.css'
 
 
-const NewsFeed = () => {
+
+const NewsFeed = (props) => {
   const [formData, setFormData] = useState({
     search:''
   })
+
+  const [newsData, setNewsData] = useState([])
+
+  useEffect(() => {
+    const fetchNews = async () => {
+      const newsData = await getNews()
+      console.log(newsData.response.results)
+      setNewsData(newsData.response.results.slice(0,3))
+    }
+    fetchNews()
+  }, [])
 
   const handleChange = evt => {
 		setFormData({ 
@@ -19,7 +32,8 @@ const NewsFeed = () => {
     try{
       getNews(formData.search)
       .then(newsData => {
-        console.log(newsData)
+        console.log(newsData.response.results)
+        setNewsData(newsData.response.results)
       })
     } catch (error) {
       console.log(error)
@@ -35,24 +49,37 @@ const NewsFeed = () => {
   return (
     <>
       <h2>News</h2>
-
+      <div className="news">
       <form 
       autoComplete="off" 
       onSubmit={handleSubmit}
       >
-        <div className="form-group mb-3">
+        <div className="news-body">
           <input 
           type="text"
           name="search"
           placeholder='Search News'
           value={search}
           onChange={handleChange}
+          className='news-button'
+          required
           />
-        <button type="submit" disabled={isFormInvalid()}>
+        <button 
+        type="submit" 
+        disabled={isFormInvalid()}
+        >
           <SearchIcon/>
         </button>
         </div>    
       </form>
+      <div className='news-body'>
+      {newsData.map(news =>
+        <div className='news-totl' key={news.id}>
+          <p> {news.webTitle}</p>
+        </div> 
+      )}
+      </div>
+      </div>
     </>
   )
 }
