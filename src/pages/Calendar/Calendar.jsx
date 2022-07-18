@@ -44,11 +44,11 @@ const Calendar = (props) => {
   }
 
   function handlePrevMonth() {
-    return setValue(value.clone().subtract(1, 'month'))
+    return setValue(value.clone().subtract(1, 'month').startOf('month'))
   }
 
   function handleNextMonth() {
-    return setValue(value.clone().add(1, 'month'))
+    setValue(value.clone().add(1, 'month').startOf('month'))
   }
 
   function handleCurrentDay() {
