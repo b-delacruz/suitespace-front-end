@@ -49,31 +49,36 @@ const NewsFeed = (props) => {
   return (
     <>
       <h2>News</h2>
-
+      <div className="news">
       <form 
       autoComplete="off" 
       onSubmit={handleSubmit}
       >
-        <div className="form-group mb-3">
+        <div className="news-body">
           <input 
           type="text"
           name="search"
           placeholder='Search News'
           value={search}
           onChange={handleChange}
+          className='news-button'
           required
           />
-        <button type="submit" disabled={isFormInvalid()}>
+        <button 
+        type="submit" 
+        disabled={isFormInvalid()}
+        >
           <SearchIcon/>
         </button>
         </div>    
       </form>
-      <div>
+      <div className='news-body'>
       {newsData.map(news =>
-        <div key={news.id}>
+        <div className='news-totl' key={news.id}>
           <p> {news.webTitle}</p>
         </div> 
       )}
+      </div>
       </div>
     </>
   )
