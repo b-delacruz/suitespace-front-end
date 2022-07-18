@@ -38,7 +38,7 @@ const App = () => {
   return (
     <>
       <NavBar user={user} handleLogout={handleLogout} />
-      <SideBar/>
+      <SideBar />
       <FavoriteBar />
       <NewsFeed />
       <Todolist />
