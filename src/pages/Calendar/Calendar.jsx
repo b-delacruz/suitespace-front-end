@@ -38,10 +38,6 @@ const Calendar = ({ value, setValue }) => {
     return value.format('MMMM')
   }
 
-  function currentYear() {
-    return value.format('YYYY')
-  }
-
   function handlePrevMonth() {
     return setValue(value.clone().subtract(1, 'month').startOf('month'))
   }

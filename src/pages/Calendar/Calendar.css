@@ -4,8 +4,8 @@
 .calendar {
   /* Dimensions */
   flex-wrap: wrap;
-  width: 400px;
-  height: 400px;
+  width: 375px;
+  height: 375px;
   /* Glass Morphism */
   background: rgba(255, 255, 255, 0.045);
   backdrop-filter: blur( 8px );

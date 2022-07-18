@@ -1,0 +1,29 @@
+.scheduler {
+  margin-top: -1em;
+  width: 375px;
+  height: 375px;
+  font-family: 'Sora', sans-serif;
+
+  color: rgba(255, 255, 255, 0.95);
+  font-weight: 300;
+  --calendar-soft-yellow: #F2D3AB;
+  --calendar-today-soft-yellow: #f2d3ab;
+  --calendar-today-dark-blue: #35445d;
+  --calendar-selected-dark-blue: rgba(53, 68, 93, 0.5);
+}
+
+.scheduler-date-display {
+  font-weight: 400;
+  color: var(--calendar-soft-yellow);
+}
+
+.scheduler-add-event-button {
+  height: 32px;
+  background-color: #ffffff18;
+  transition: .5s;
+  color: var(--calendar-soft-yellow);
+}
+.scheduler-add-event-button:hover {
+  background-color: #35445d6d;
+  transition: .5s;
+}
