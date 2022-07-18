@@ -19,13 +19,21 @@ const TodoList = () => {
   useEffect(() => {
     formElement.current.checkValidity() ? setValidForm(true) : setValidForm(false)
   }, [formData])
-
+  useEffect(() => {
+    const fetchAllTodos = async () =>{
+      const todoData = await todoService.getAll()
+      setTodos(todoData)
+    }
+    fetchAllTodos()
+  }, [])
+  
   const [todos, setTodos] = useState([])
-
+  
   const handleAddTodo = async newTodoData => {
     const newTodo = await todoService.create(newTodoData)
-    setTodos([...todos, newTodoData])
+    setTodos([...todos, newTodo])
   }
+  console.log(todos)
   const handleSubmit = evt => {
     evt.preventDefault()
     handleAddTodo(formData)
@@ -69,11 +77,21 @@ const TodoList = () => {
             <Typography id='modal-modal-description' sx={{ mt: 2 }} formData={formData}> */}
               <form onSubmit={handleSubmit} autoComplete='off' ref={formElement} className='flex flex-col gap-3'>
                 <div className='flex flex-col'>
+                  <label>Due Date</label>
+                  <input className='input-item'
+                    name='dueDate'
+                    type='date'
+                    value={formData.dueDate}
+                    required
+                    onChange={handleChange}
+                  />
+                </div>
+                <div className='flex flex-col'>
                   <label>Title</label>
                   <input className='input-item'
                     name='title'
                     type='text'
-                    value={formData.name}
+                    value={formData.title}
                     required
                     onChange={handleChange}
                   />
@@ -88,20 +106,9 @@ const TodoList = () => {
                     onChange={handleChange}
                   />
                 </div>
-                <div className='flex flex-col'>
-                  <label>Due Date</label>
-                  <input className='input-item'
-                    name='dueDate'
-                    type='date'
-                    value={formData.dueDate}
-                    required
-                    onChange={handleChange}
-                  />
-                </div>
                 <div className='btn-submit'>
                   <button
                     type='submit'
-                    disabled={!validForm}
                     hidden={!validForm}
                   >
                     Add Todo
@@ -116,14 +123,17 @@ const TodoList = () => {
         <div>Showing Tag</div>
       </div>
       <div className='todo-list-body'>
-        <TodoItem
-        todos={todos}
-        // key={idx}
-        // isList={true}
-        // addTodo={}
-        // deleteTodo={}
-        // updateTodo={}
-        />
+        <>
+          {todos.map(todo => 
+            <TodoItem
+              // key={todo._id}
+              // isList={true}
+              // addTodo={}
+              // deleteTodo={}
+              // updateTodo={}
+            />
+          )}
+        </>
       </div>
     </div>
     );
