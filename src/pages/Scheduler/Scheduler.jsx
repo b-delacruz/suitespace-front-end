@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import ScheduleItem from './ScheduleItem';
 import AddScheduleItem from './AddScheduleItem'
-import { Modal, Button, Box, Typography  } from '@mui/material';
+import { Modal, Button, Box, Typography, Backdrop, Fade } from '@mui/material';
 import './Scheduler.css'
 
 const Scheduler = ({ value }) => {
@@ -17,7 +17,10 @@ const Scheduler = ({ value }) => {
   
   const [open, setOpen] = useState(false);
   const handleOpen = () => setOpen(true);
-  const handleClose = () => setOpen(false);
+  const handleClose = () => {
+    
+    setOpen(false)
+  }
 
   return (
     <div className='scheduler | flex flex-col gap-6'>
@@ -31,22 +34,29 @@ const Scheduler = ({ value }) => {
         <Modal
           open={open}
           onClose={handleClose}
-          aria-labelledby="modal-modal-title"
-          aria-describedby="modal-modal-description"
+          aria-labelledby="transition-modal-title"
+          aria-describedby="transition-modal-description"
+          closeAfterTransition
+          BackdropComponent={Backdrop}
+          BackdropProps={{
+          timeout: 1000,
+        }}
         >
-          <Box sx={style}>
-            <Typography id="modal-modal-title" variant="h6" component="h2">
-              <span className='form-header'>
-                <span className='soft-yellow'>               
-                  Add Event on: <br />
-                </span> 
-                {value.format('MMMM DD YYYY')}               
-              </span>
-            </Typography>
-            <Typography id="modal-modal-description" sx={{ mt: 2 }}>
-              <AddScheduleItem />
-            </Typography>
-          </Box>
+          <Fade in={open}>
+            <Box sx={style}>
+              <Typography id="transition-modal-title" variant="h6" component="h2">
+                <span className='form-header'>
+                  <span className='soft-yellow'>               
+                    Add Event on: <br />
+                  </span> 
+                  {value.format('MMMM DD YYYY')}               
+                </span>
+              </Typography>
+              <Typography id="transition-modal-description" sx={{ mt: 2 }}>
+                <AddScheduleItem />
+              </Typography>
+            </Box>
+          </Fade>
         </Modal>
       </div>
     {/* Map over this for how ever many schedule items exist in state */}
