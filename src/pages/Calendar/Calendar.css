@@ -1,0 +1,123 @@
+@import url('https://fonts.googleapis.com/css2?family=Sora:wght@100;200;300;400;500;600;700;800&display=swap');
+
+
+.calendar {
+  /* Dimensions */
+  flex-wrap: wrap;
+  width: 400px;
+  height: 400px;
+  /* Glass Morphism */
+  background: rgba(255, 255, 255, 0.045);
+  backdrop-filter: blur( 8px );
+  -webkit-backdrop-filter: blur( 8px );
+  border-radius: 10px;
+  border: 1px solid rgba( 255, 255, 255, 0.18 );
+  /* Font */
+  font-family: 'Sora', sans-serif;
+  text-align: center;
+  color: rgba(255, 255, 255, 0.85);
+  font-weight: 300;
+  --calendar-soft-yellow: #F2D3AB;
+  --calendar-today-soft-yellow: #f2d3ab;
+  --calendar-today-dark-blue: #35445d;
+  --calendar-selected-dark-blue: rgba(53, 68, 93, 0.5);
+  padding: .5em;
+}
+
+.calendar-today-button {
+  background-color: #ffffff18;
+  transition: .5s;
+}
+
+.calendar-today-button:hover {
+  background-color: #35445d6d;
+  transition: .5s;
+}
+
+.calendar-header {
+  color: var(--calendar-soft-yellow);
+  height: 10%;
+  width: 100%;
+  padding-inline-start: 5%;
+  margin-bottom: .5em;
+  margin-top: .25em;
+  padding-top: .5em;
+}
+
+.calendar-button-container {
+  padding-right: .5em;
+}
+
+.calendar-days-of-week {
+  height: 10%;
+  width: 100%;
+  color: var(--calendar-soft-yellow);
+  font-weight: 400;
+  padding-right: .5em;
+}
+
+.calendar-body {
+  height: 80%;
+  flex-wrap: wrap;
+  width: 100%;
+  padding-right: .5em;
+  padding-bottom: 1em;
+}
+.week {
+  height: calc(100% / 7);
+  width: 100%;
+}
+
+.day {
+  height: 51px;
+  width: calc(100% / 7);
+  border-radius: 50%;
+  cursor: pointer;
+}
+
+#day {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 75%;
+  width: 75%;
+  border-radius: 50%;
+  transition: .5s;
+}
+
+#day:hover {
+  background-color: var(--calendar-selected-dark-blue);
+  color: var(--soft-yellow);
+}
+
+.today {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 75%;
+  width: 75%;
+  border-radius: 50%;
+  background-color: var(--calendar-soft-yellow);
+  color: var(--dark-blue);
+  font-weight: 400;
+}
+
+.selected {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 75%;
+  width: 75%;
+  background-color: var(--calendar-selected-dark-blue);
+  color: var(--calendar-soft-yellow);
+  transition: .5s;
+}
+
+
+.before-month {
+  color: rgba(255, 255, 255, 0.50);
+}
+
+.after-month {
+  color: rgba(255, 255, 255, 0.50);
+}
