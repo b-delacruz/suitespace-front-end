@@ -1,8 +1,11 @@
+import { useState } from "react"
+
 const ScheduleItem = ({ value }) => {
+
   return (
     <>
       <div className="schedule-item | flex w-full justify-between items-start">
-        <h1 className="schedule-item-time | text-lg self-center">{value.format('HH:mm A')}</h1>
+        <h1 className="schedule-item-time | text-lg self-center">{value.format('hh:mm A')}</h1>
         <div className="schedule-item-divider-container | flex items-center justify-center">
           <div className="schedule-item-vertical-line"></div>
         </div>
