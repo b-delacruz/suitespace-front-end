@@ -1,0 +1,17 @@
+.sidebar-container {
+  position: fixed;
+  right: 0;
+  top: 0; 
+  width: 450px;
+  background: rgba(255, 255, 255, 0.111);
+  backdrop-filter: blur( 9px );
+  -webkit-backdrop-filter: blur( 9px );
+  border-radius: 10px;
+  border: 1px solid rgba( 255, 255, 255, 0.18 );
+}
+
+.widget-header {
+  padding-top: 2em;
+  padding-inline: .75em;
+  color: var(--soft-yellow);
+}
