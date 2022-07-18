@@ -29,4 +29,11 @@ async function getDailyDetails(location) {
 }
 
 
-export { getPref, getCurrentDetails, getHourlyDetails, getDailyDetails, setLocationLocalStorage, getLocationLocalStorage }
+export { 
+  getPref, 
+  getCurrentDetails, 
+  getHourlyDetails, 
+  getDailyDetails, 
+  setLocationLocalStorage, 
+  getLocationLocalStorage 
+}
