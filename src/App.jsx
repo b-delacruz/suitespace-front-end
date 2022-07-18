@@ -59,7 +59,7 @@ const App = () => {
       </div>      <FavoriteBar />
       <NewsFeed />
       <Todolist />
-      <Weather />
+      <Weather user={user}/>
 
       <Routes>
         <Route path="/" element={<Landing user={user} />} />
