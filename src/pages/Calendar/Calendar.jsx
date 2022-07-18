@@ -9,10 +9,9 @@ import moment from "moment";
 import ChevronLeftIcon from '@mui/icons-material/ChevronLeft';
 import ChevronRightIcon from '@mui/icons-material/ChevronRight';
 
-const Calendar = (props) => {
+const Calendar = ({ value, setValue }) => {
   //* State
   const [calendar, setCalendar] = useState([])
-  const [value, setValue] = useState(moment())
 
   useEffect(() => {
     setCalendar(renderCalendar(value))
