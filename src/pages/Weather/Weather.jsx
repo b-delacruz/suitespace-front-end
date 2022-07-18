@@ -1,9 +1,42 @@
+// Components
 import WeatherDisplay from '../../components/Weather/WeatherDisplay'
 import WeatherGraph from '../../components/Weather/WeatherGraph'
 import WeatherNav from '../../components/Weather/WeatherNav'
+
+// Services
 import * as weatherService from '../../services/weatherService'
 import * as locationService from '../../services/locationService'
+
+// React
 import { useEffect, useState } from 'react'
+
+// CSS
+import './weather.css'
+
+const getLocationInfo = () => {
+
+  const pref = weatherService.getPref()
+  console.log(pref);
+  if(pref && pref.location?.area) {
+    return pref
+  } else if (weatherService.getLocationLocalStorage()) {
+    return weatherService.getLocationLocalStorage()
+  } else {
+    return 'New York'
+  }
+}
+
+const getDisplayPref = () => {
+
+  const pref = weatherService.getPref()
+
+  if(pref && pref.weather?.display) {
+    return pref.display
+  } else {
+    return 'today'
+  }
+
+}
 
 const Weather = (props) => {
 
@@ -13,7 +46,8 @@ const Weather = (props) => {
   const [weatherDaily, setWeatherDaily] = useState({})
 
   // Location state different from preference
-  const [searchLocation, setSearchLocation] = useState( props.user ? weatherService.getPref() : 'New York' )
+  const [searchLocation, setSearchLocation] = useState( getLocationInfo() )
+  const [displayPref, setDisplayPref] = useState( getDisplayPref() )
 
   useEffect(()=>{
     const fetchWeatherDetails = async () => {
@@ -26,7 +60,7 @@ const Weather = (props) => {
     }
     fetchWeatherDetails()
     
-  })
+  },[searchLocation])
 
   const handleLocationSearch = (formData) => {
     
@@ -34,10 +68,10 @@ const Weather = (props) => {
 
   return (
     <>
-      <div>
-        <WeatherNav/>
-        <WeatherGraph/>
-        <WeatherDisplay/>
+      <div className='weather-container'>
+        <WeatherNav className='weather-nav'/>
+        <WeatherGraph className='weather-graph'/>
+        <WeatherDisplay className='weather-display'/>
       </div>
     </>
   );

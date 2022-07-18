@@ -5,7 +5,7 @@ const WeatherNav = (props) => {
 
   return (
     <>
-      <div>
+      <div className='weather-nav'>
         <h2>Weather | </h2>
         {/* <h2>{props.searchlocation.location.name}</h2> */}
         <WeatherSearchForm/>
