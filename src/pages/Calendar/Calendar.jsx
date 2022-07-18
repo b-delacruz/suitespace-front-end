@@ -24,8 +24,8 @@ const Calendar = (props) => {
   function isToday(day) {
     return day.isSame(new Date(), 'day')
   }
-  const startOfMonth = moment().startOf('month')
-  const endOfMonth = moment().endOf('month')
+  let startOfMonth = value.clone().startOf('month')
+  let endOfMonth = value.clone().endOf('month')
 
   function dayStyles(day) {
     if (isToday(day)) return 'today' 
@@ -54,8 +54,6 @@ const Calendar = (props) => {
   function handleCurrentDay() {
     return setValue(moment())
   }
-  
-  console.log(value);
   
   return (
     <>
