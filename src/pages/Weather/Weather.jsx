@@ -16,7 +16,6 @@ import './weather.css'
 const getLocationInfo = () => {
 
   const pref = weatherService.getPref()
-  console.log(pref);
   if(pref && pref.location?.area) {
     return pref
   } else if (weatherService.getLocationLocalStorage()) {
