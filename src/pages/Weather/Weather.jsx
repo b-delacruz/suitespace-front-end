@@ -19,8 +19,8 @@ const Weather = (props) => {
 
   })
 
-  const handleLocationSearch = (location) => {
-
+  const handleLocationSearch = (formData) => {
+    
   }
 
   return (
