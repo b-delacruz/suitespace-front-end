@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import SearchIcon from '@mui/icons-material/Search';
 import { getNews } from '../../services/newsService';
+import './NewsFeed.css'
 
 
 
