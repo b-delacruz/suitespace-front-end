@@ -1,18 +1,29 @@
 import React, { useState } from 'react'
 import SearchIcon from '@mui/icons-material/Search';
+import { getNews } from '../../services/newsService';
 
-const NewsFeed = (props) => {
+
+const NewsFeed = () => {
   const [formData, setFormData] = useState({
     search:''
   })
 
   const handleChange = evt => {
-		setFormData({ ...formData, [evt.target.name]: evt.target.value })
+		setFormData({ 
+      ...formData, 
+      [evt.target.name]: evt.target.value })
 	}
 
-	const handleSubmit = evt => {
+	const handleSubmit = async evt => {
 		evt.preventDefault()
-		// API Call with(formData)
+    try{
+      getNews(formData.search)
+      .then(newsData => {
+        console.log(newsData)
+      })
+    } catch (error) {
+      console.log(error)
+    }
 	}
 
   const { search } = formData
