@@ -8,6 +8,8 @@ const NewsFeed = () => {
     search:''
   })
 
+  const [newsData, setNewsData] = useState({})
+
   const handleChange = evt => {
 		setFormData({ 
       ...formData, 
@@ -19,7 +21,7 @@ const NewsFeed = () => {
     try{
       getNews(formData.search)
       .then(newsData => {
-        console.log(newsData)
+        setNewsData(newsData)
       })
     } catch (error) {
       console.log(error)
