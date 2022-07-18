@@ -16,7 +16,16 @@ const Weather = (props) => {
   const [searchLocation, setSearchLocation] = useState({})
 
   useEffect(()=>{
-
+    if(props.user){
+      const pref = weatherService.getPref()
+      console.log(pref)
+    }
+    const fetchWeatherDetails = async () => {
+      const weather = await weatherService.getCurrentDetails('boston')
+      console.log(weather)
+    }
+    fetchWeatherDetails()
+    
   })
 
   const handleLocationSearch = (formData) => {

@@ -1,7 +1,15 @@
 const SERVER_URL = `${process.env.REACT_APP_BACK_END_SERVER_URL}/api/weather`
 
+function setLocationLocalStorage(location) {
+  localStorage.setItem('location', location)
+}
+
+function getLocationLocalStorage(){
+  return localStorage.getItem('location')
+}
+
 async function getPref() {
-  const res = await fetch(SERVER_URL)
+  const res = await fetch(`${SERVER_URL}/preference}`)
   return res.json()
 }
 
@@ -21,4 +29,4 @@ async function getDailyDetails(location) {
 }
 
 
-export { getPref, getCurrentDetails, getHourlyDetails, getDailyDetails }
+export { getPref, getCurrentDetails, getHourlyDetails, getDailyDetails, setLocationLocalStorage, getLocationLocalStorage }
