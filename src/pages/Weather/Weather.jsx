@@ -8,21 +8,21 @@ import { useEffect, useState } from 'react'
 const Weather = (props) => {
 
   // Weather States for all 3 data
-  const [weatherCurrent, setWeather] = useState({})
+  const [weatherCurrent, setWeatherCurrent] = useState({})
   const [weatherHourly, setWeatherHourly] = useState({})
   const [weatherDaily, setWeatherDaily] = useState({})
 
   // Location state different from preference
-  const [searchLocation, setSearchLocation] = useState({})
+  const [searchLocation, setSearchLocation] = useState( props.user ? weatherService.getPref() : 'New York' )
 
   useEffect(()=>{
-    if(props.user){
-      const pref = weatherService.getPref()
-      console.log(pref)
-    }
     const fetchWeatherDetails = async () => {
-      const weather = await weatherService.getCurrentDetails('boston')
-      console.log(weather)
+      const weatherCurrentDetail = await weatherService.getCurrentDetails(searchLocation)
+      const weatherHourlyDetail = await weatherService.getHourlyDetails(searchLocation)
+      const weatherDailyDetail = await weatherService.getDailyDetails(searchLocation)
+      setWeatherCurrent(weatherCurrentDetail)
+      setWeatherHourly(weatherHourlyDetail)
+      setWeatherDaily(weatherDailyDetail)
     }
     fetchWeatherDetails()
     
