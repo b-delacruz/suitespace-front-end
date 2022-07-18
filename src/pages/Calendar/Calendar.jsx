@@ -9,10 +9,9 @@ import moment from "moment";
 import ChevronLeftIcon from '@mui/icons-material/ChevronLeft';
 import ChevronRightIcon from '@mui/icons-material/ChevronRight';
 
-const Calendar = (props) => {
+const Calendar = ({ value, setValue }) => {
   //* State
   const [calendar, setCalendar] = useState([])
-  const [value, setValue] = useState(moment())
 
   useEffect(() => {
     setCalendar(renderCalendar(value))
@@ -24,8 +23,8 @@ const Calendar = (props) => {
   function isToday(day) {
     return day.isSame(new Date(), 'day')
   }
-  const startOfMonth = moment().startOf('month')
-  const endOfMonth = moment().endOf('month')
+  let startOfMonth = value.clone().startOf('month')
+  let endOfMonth = value.clone().endOf('month')
 
   function dayStyles(day) {
     if (isToday(day)) return 'today' 
@@ -39,23 +38,17 @@ const Calendar = (props) => {
     return value.format('MMMM')
   }
 
-  function currentYear() {
-    return value.format('YYYY')
-  }
-
   function handlePrevMonth() {
-    return setValue(value.clone().subtract(1, 'month'))
+    return setValue(value.clone().subtract(1, 'month').startOf('month'))
   }
 
   function handleNextMonth() {
-    return setValue(value.clone().add(1, 'month'))
+    setValue(value.clone().add(1, 'month').startOf('month'))
   }
 
   function handleCurrentDay() {
     return setValue(moment())
   }
-  
-  console.log(value);
   
   return (
     <>

@@ -4,8 +4,8 @@
 .calendar {
   /* Dimensions */
   flex-wrap: wrap;
-  width: 400px;
-  height: 400px;
+  width: 375px;
+  height: 375px;
   /* Glass Morphism */
   background: rgba(255, 255, 255, 0.045);
   backdrop-filter: blur( 8px );
@@ -15,7 +15,7 @@
   /* Font */
   font-family: 'Sora', sans-serif;
   text-align: center;
-  color: rgba(255, 255, 255, 0.85);
+  color: rgba(255, 255, 255, 0.95);
   font-weight: 300;
   --calendar-soft-yellow: #F2D3AB;
   --calendar-today-soft-yellow: #f2d3ab;
@@ -99,7 +99,7 @@
   border-radius: 50%;
   background-color: var(--calendar-soft-yellow);
   color: var(--dark-blue);
-  font-weight: 400;
+
 }
 
 .selected {
@@ -115,9 +115,9 @@
 
 
 .before-month {
-  color: rgba(255, 255, 255, 0.50);
+  color: rgba(255, 255, 255, 0.40);
 }
 
 .after-month {
-  color: rgba(255, 255, 255, 0.50);
+  color: rgba(255, 255, 255, 0.40);
 }
