@@ -1,7 +1,7 @@
 .scheduler {
   margin-top: -1em;
   width: 375px;
-  height: 375px;
+  height: 475px;
   font-family: 'Sora', sans-serif;
 
   color: rgba(255, 255, 255, 0.95);
@@ -27,3 +27,47 @@
   background-color: #35445d6d;
   transition: .5s;
 }
+
+.schedule-items-container {
+  height: 65%;
+  padding-block: 1em;
+}
+
+::-webkit-scrollbar {
+  background-color: rgba(0, 0, 0, 0);
+  width: 5px;
+}
+
+::-webkit-scrollbar-thumb {
+  border-radius: 20px;
+  background-color: #ffffff76;
+}
+
+
+.schedule-item {
+  height: fit-content;
+}
+
+.schedule-item-time {
+  width: 30%;
+}
+
+.schedule-item-divider-container {
+  height: 100%;
+  width: 20%;
+}
+
+.schedule-item-vertical-line {
+  height: 100%;
+  width: 3px;
+  background-color: var(--calendar-soft-yellow);
+}
+
+.schedule-item-description {
+  width: 50%;
+}
+
+.schedule-item-category {
+  color: rgba(255, 255, 255, 0.75);
+}
+
