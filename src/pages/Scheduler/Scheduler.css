@@ -12,6 +12,18 @@
   --calendar-selected-dark-blue: rgba(53, 68, 93, 0.5);
 }
 
+.MuiBackdrop-root {
+  opacity: .2 !important;
+}
+
+.MuiBox-root {
+  background: rgba(255, 255, 255, 0.111);
+  backdrop-filter: blur( 9px );
+  -webkit-backdrop-filter: blur( 9px );
+  border-radius: 10px;
+  border: 1px solid rgba( 255, 255, 255, 0.18 );
+}
+
 .scheduler-date-display {
   font-weight: 400;
   color: var(--calendar-soft-yellow);
