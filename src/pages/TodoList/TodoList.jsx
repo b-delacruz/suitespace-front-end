@@ -3,6 +3,7 @@ import { PropaneSharp } from '@mui/icons-material';
 import { Typography, Button, Modal, Box } from '@mui/material'
 import TodoItem from '../../components/Todo/TodoItem';
 import './TodoList.css';
+import * as todoService from '../../services/todoService'
 
 const TodoList = () => {
   const [formData, setformData] = useState({
@@ -18,12 +19,17 @@ const TodoList = () => {
   useEffect(() => {
     formElement.current.checkValidity() ? setValidForm(true) : setValidForm(false)
   }, [formData])
+
   const [todos, setTodos] = useState([])
-  
+
+  const handleAddTodo = async newTodoData => {
+    const newTodo = await todoService.create(newTodoData)
+    setTodos([...todos, newTodoData])
+  }
   const handleSubmit = evt => {
     evt.preventDefault()
+    handleAddTodo(formData)
   }
-
 
   const [open, setOpen] = useState(false);
   const handleOpen = () => setOpen(true);
@@ -111,10 +117,11 @@ const TodoList = () => {
       </div>
       <div className='todo-list-body'>
         <TodoItem
+        todos={todos}
         // key={idx}
         // isList={true}
         // addTodo={}
-        // removeFromList={}
+        // deleteTodo={}
         // updateTodo={}
         />
       </div>
