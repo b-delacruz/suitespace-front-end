@@ -28,27 +28,52 @@ const Calendar = (props) => {
   const endOfMonth = moment().endOf('month')
 
   function dayStyles(day) {
-    if (isSelected(day) && !isToday(day)) return 'selected'
-    if (isToday(day)) return 'today'
+    if (isToday(day)) return 'today' 
+    if (isSelected(day)) return 'selected'
     if (day.isBefore(startOfMonth)) return 'before-month'
     if (day.isAfter(endOfMonth)) return 'after-month'
+    return ''
   }
 
-  console.log(moment().month('July'))
+  function currentMonth() {
+    return value.format('MMMM')
+  }
+
+  function currentYear() {
+    return value.format('YYYY')
+  }
+
+  function handlePrevMonth() {
+    return setValue(value.clone().subtract(1, 'month'))
+  }
+
+  function handleNextMonth() {
+    return setValue(value.clone().add(1, 'month'))
+  }
+
+  function handleCurrentDay() {
+    return setValue(moment())
+  }
+  
+  console.log(value);
   
   return (
     <>
-      <div>
-        Calendar
-      </div>
       <div className='calendar | flex justify-center items-center'>
         <div className='calendar-header | flex justify-between items-center text-2xl'>
-          <div>July</div>
+          <div className='flex gap-6'>
+            <h1>
+              {currentMonth()} 
+            </h1>
+            <button className='calendar-today-button | flex justify-center items-center text-base rounded px-5' onClick={() => handleCurrentDay()}>
+              Today
+            </button>
+          </div>
           <div className='calendar-button-container | flex'>
-            <button className='flex justify-end'>
+            <button className='flex justify-end' onClick={() => handlePrevMonth()}>
               <ChevronLeftIcon fontSize='large' />
             </button>
-            <button className='flex justify-end'>
+            <button className='flex justify-end' onClick={() => handleNextMonth()}>
               <ChevronRightIcon fontSize='large'/>
             </button>
           </div>
@@ -67,6 +92,7 @@ const Calendar = (props) => {
                   {day.format('D')}
                 </span>
               </div>  
+              // set current day on next month to first day of month
             )}
           </div>
         )}
