@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import ScheduleItem from './ScheduleItem';
+import AddScheduleItem from './AddScheduleItem'
 import { Modal, Button, Box, Typography  } from '@mui/material';
 import './Scheduler.css'
 
@@ -35,10 +36,15 @@ const Scheduler = ({ value }) => {
         >
           <Box sx={style}>
             <Typography id="modal-modal-title" variant="h6" component="h2">
-              Add Event
+              <span className='form-header'>
+                <span className='soft-yellow'>               
+                  Add Event on: <br />
+                </span> 
+                {value.format('MMMM DD YYYY')}               
+              </span>
             </Typography>
             <Typography id="modal-modal-description" sx={{ mt: 2 }}>
-              
+              <AddScheduleItem />
             </Typography>
           </Box>
         </Modal>
