@@ -1,8 +1,9 @@
 import * as tokenService from './tokenService'
-const BASE_URL = `${process.env.REACT_APP_BACK_END_SERVER_URL}/api/todos`
+const SERVER_URL = 'http://localhost:3001/api/todos'
 
 async function create(todo) {
-  const res = await fetch(BASE_URL, {
+  console.log(todo)
+  const res = await fetch(SERVER_URL, {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',
@@ -10,14 +11,18 @@ async function create(todo) {
     },
     body: JSON.stringify(todo)
   })
-	return res.json()
+	return await res.json()
 }
 
+
+// ----------------NEED TO READJUST PROTECTED ROUTES----------------
+
 async function getAll() {
-  const res = await fetch(BASE_URL)
-  return res.json()
+  const res = await fetch(SERVER_URL)
+  return await res.json()
 }
 
 export {
-	create
+	create,
+  getAll
 }
