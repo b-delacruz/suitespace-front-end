@@ -1,7 +1,39 @@
-function setLocation(token) {
+import * as tokenService from './tokenService'
+const SERVER_URL = `${process.env.REACT_APP_BACK_END_SERVER_URL}/api/profiles`
+
+async function create(location) {
+  const res = await fetch(SERVER_URL, {
+    method: 'POST',
+    headers: {
+      'Authorization': `Bearer ${tokenService.getToken()}`,
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify(location)
+  })
+  return res.json()
 }
 
-function getLocation() {
+async function update(user,location) {
+  const res = await fetch(`${SERVER_URL}/${user._id}`, {
+    method: 'PUT',
+    headers: {
+      'Content-Type': 'application/json',
+      'Authorization': `Bearer ${tokenService.getToken()}`
+    },
+    body: JSON.stringify(location)
+  })
+	return res.json()
 }
 
-export { setLocation, getLocation }
+async function getLocation() {
+  const res = await fetch(`${SERVER_URL}/location`, {
+    method: 'GET',
+    headers: {
+      'Authorization': `Bearer ${tokenService.getToken()}`,
+      'Content-Type': 'application/json'
+    },
+  })
+  return res.json()
+}
+
+export { getLocation,create,update }
