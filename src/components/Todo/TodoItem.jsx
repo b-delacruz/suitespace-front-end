@@ -3,12 +3,22 @@ import '../../pages/TodoList/TodoList.css'
 const TodoItem = (props) => {
 	return (
 		<>
-      <h1>Todo List</h1>
       <div className='todo-item'>
-          <div>
-            <p>title</p>
-            <p>description</p>
-          </div>
+				<input type="checkbox" />
+				<div className='todo-item-content'>
+					<p>Title: {props.todo.title}</p>
+					<p>Description: {props.todo.description}</p>
+				</div>
+				{props.user?.profile === props.todo.owner._id && 
+					<div className=''>
+						<button
+							className='delete-todo-item'
+							onClick={() => props.handleDeleteTodo(props.todo._id)}
+						>
+							X
+						</button>
+					</div>
+				}
       </div>
     </>
 	)

@@ -5,7 +5,7 @@ import TodoItem from '../../components/Todo/TodoItem';
 import './TodoList.css';
 import * as todoService from '../../services/todoService'
 
-const TodoList = () => {
+const TodoList = (props) => {
   const [formData, setformData] = useState({
     title: '',
     description: '',
@@ -33,10 +33,14 @@ const TodoList = () => {
     const newTodo = await todoService.create(newTodoData)
     setTodos([...todos, newTodo])
   }
-  console.log(todos)
   const handleSubmit = evt => {
     evt.preventDefault()
     handleAddTodo(formData)
+  }
+
+  const handleDeleteTodo = async id => {
+    const deletedTodo = await todoService.deleteTodo(id)
+    setTodos(todos.filter(todo => todo._id !== deletedTodo._id))
   }
 
   const [open, setOpen] = useState(false);
@@ -126,10 +130,11 @@ const TodoList = () => {
         <>
           {todos.map(todo => 
             <TodoItem
-              // key={todo._id}
+              todo={todo}
+              key={todo._id}
+              handleDeleteTodo={handleDeleteTodo}
+              user={props.user}
               // isList={true}
-              // addTodo={}
-              // deleteTodo={}
               // updateTodo={}
             />
           )}
