@@ -6,6 +6,10 @@ function EditTodo(props) {
 
   const [formData, setFormData] = useState(location.state.todo)
 
+  const handleChange = evt => {
+		setFormData({ ...formData, [evt.target.name]: evt.target.value })
+	}
+
   return (
     <>
     {console.log(formData)}
@@ -16,7 +20,8 @@ function EditTodo(props) {
         <input className='input-item'
           name='dueDate'
           type='date'
-          // value={formData.dueDate}
+          value={formData.dueDate}
+          onChange={handleChange}
           required
         />
       </div>
@@ -25,7 +30,8 @@ function EditTodo(props) {
         <input className='input-item'
           name='title'
           type='text'
-          // value={formData.title}
+          value={formData.title}
+          onChange={handleChange}
           required
         />
       </div>
@@ -34,7 +40,8 @@ function EditTodo(props) {
         <input className='input-item'
           name='description'
           type='text'
-          // value={formData.description}
+          value={formData.description}
+          onChange={handleChange}
           required
         />
       </div>
