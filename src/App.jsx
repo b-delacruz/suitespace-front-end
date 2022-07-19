@@ -53,15 +53,22 @@ const App = () => {
   return (
     <>
       <NavBar user={user} handleLogout={handleLogout} />
-      <SideBar open={open} handleSideBarOpen={handleSideBarOpen} handleSideBarClose={handleSideBarClose} />
-      <div className='app-toggle-sidebar | absolute right-0 top-0 flex justify-center items-center group' onClick={open ? () => handleSideBarClose() : () => handleSideBarOpen()} style={open ? {display: 'none'} : {display: 'flex'}}>
-        <ChevronLeft fontSize='large'/>
+      <SideBar
+        open={open}
+        handleSideBarOpen={handleSideBarOpen}
+        handleSideBarClose={handleSideBarClose}
+      />
+      <div
+        className='app-toggle-sidebar | absolute right-0 top-0 flex justify-center items-center group'
+        onClick={open ? () => handleSideBarClose() : () => handleSideBarOpen()}
+        style={open ? { display: 'none' } : { display: 'flex' }}>
+        <ChevronLeft fontSize='large' />
         <span className='sidebar-tooltip | group-hover:scale-100 scale-0'>Open Sidebar</span>
-      </div>      <FavoriteBar />
+      </div>
+      <FavoriteBar />
       <NewsFeed />
-      <Weather user={user}/>
-      <Todolist user={user}/>
-
+      <Todolist user={user} />
+      <Weather user={user} />
       <Routes>
         <Route path="/" element={<Landing user={user} />} />
         <Route
