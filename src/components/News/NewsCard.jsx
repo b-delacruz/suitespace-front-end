@@ -7,6 +7,7 @@ import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
 import { Link } from 'react-router-dom'
 import './NewsCard.css'
+import CardMedia from '@mui/material/CardMedia';
 
 
 
@@ -18,22 +19,21 @@ import './NewsCard.css'
 
 export default function NewsCard(props) {
   return (
-    <Card sx={{ maxWidth: 250 }}>
-      <CardContent>
-        <Typography sx={{ mb: 1.5 }} color="text.secondary">
+    <Card sx={{ display: 'flex' }}>
+      <CardMedia
+      component="img"
+      sx={{ width: 100 }}
+      image={props.news.urlToImage}
+      alt="News image"
+      />
+      <Box sx={{ display: 'flex', flexDirection: 'column' }}>
+        <Typography sx={{ mb: 1.5 }} color="black">
         {props.news.title}
         </Typography>
-        <Typography variant="body">
-        {props.news.pillarName}
-          <br />
-          <img src={props.news.urlToImage} width={200} height={100}></img>
+        <Typography sx={{ mb: 1.5, fontSize: 10 }} variant="body2" color="text.secondary" component="div">
+          {props.news.description}
         </Typography>
-      </CardContent>
-      <CardActions>
-        <Button size="small">
-          <a href={props.news.url}>Learn More</a>
-        </Button>
-      </CardActions>
+      </Box>   
     </Card>
        
   );

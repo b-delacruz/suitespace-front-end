@@ -17,7 +17,7 @@ const NewsFeed = (props) => {
     const fetchNews = async () => {
       const newsData = await getNews()
       console.log(newsData.articles)
-      setNewsData(newsData.articles.slice(0,1))
+      setNewsData(newsData.articles.slice(0,2))
     }
     fetchNews()
   }, [])
@@ -34,7 +34,7 @@ const NewsFeed = (props) => {
       getNews(formData.search)
       .then(newsData => {
         console.log(newsData.articles)
-        setNewsData(newsData.articles.slice(0,1))
+        setNewsData(newsData.articles.slice(0,2))
       })
     } catch (error) {
       console.log(error)
