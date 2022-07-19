@@ -16,8 +16,8 @@ const NewsFeed = (props) => {
   useEffect(() => {
     const fetchNews = async () => {
       const newsData = await getNews()
-      console.log(newsData.response.results)
-      setNewsData(newsData.response.results.slice(0,2))
+      console.log(newsData.articles)
+      setNewsData(newsData.articles.slice(0,1))
     }
     fetchNews()
   }, [])
@@ -33,8 +33,8 @@ const NewsFeed = (props) => {
     try{
       getNews(formData.search)
       .then(newsData => {
-        console.log(newsData.response.results)
-        setNewsData(newsData.response.results.slice(0,2))
+        console.log(newsData.articles)
+        setNewsData(newsData.articles.slice(0,1))
       })
     } catch (error) {
       console.log(error)
@@ -75,7 +75,7 @@ const NewsFeed = (props) => {
           </form>
           <div className='news-body'>
             {newsData.map(news =>
-            <div className='news-title' key={news.id}>
+            <div className='news-title' key={news.title}>
               <NewsCard news={news}/>
             </div> 
             )}
