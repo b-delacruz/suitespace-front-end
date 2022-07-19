@@ -58,8 +58,8 @@ const App = () => {
         <span className='sidebar-tooltip | group-hover:scale-100 scale-0'>Open Sidebar</span>
       </div>      <FavoriteBar />
       <NewsFeed />
-      <Todolist />
       <Weather user={user}/>
+      <Todolist user={user}/>
 
       <Routes>
         <Route path="/" element={<Landing user={user} />} />
