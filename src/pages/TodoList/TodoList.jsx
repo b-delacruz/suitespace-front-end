@@ -33,6 +33,7 @@ const TodoList = (props) => {
     const newTodo = await todoService.create(newTodoData)
     setTodos([...todos, newTodo])
   }
+  
   const handleSubmit = evt => {
     evt.preventDefault()
     handleAddTodo(formData)
@@ -130,8 +131,9 @@ const TodoList = (props) => {
         <>
           {todos.map(todo => 
             <TodoItem
-              todo={todo}
               key={todo._id}
+              todo={todo}
+              state={{todo}}
               handleDeleteTodo={handleDeleteTodo}
               user={props.user}
               // isList={true}

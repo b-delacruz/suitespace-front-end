@@ -1,8 +1,10 @@
+import { Link } from 'react-router-dom'
 import '../../pages/TodoList/TodoList.css'
 
 const TodoItem = (props) => {
 	return (
 		<>
+		{console.log(props.state)}
       <div className='todo-item'>
 				<input type="checkbox" />
 				<div className='todo-item-content'>
@@ -10,12 +12,18 @@ const TodoItem = (props) => {
 					<p>Description: {props.todo.description}</p>
 				</div>
 				{props.user?.profile === props.todo.owner._id && 
-					<div className=''>
+					<div className='flex flex-col'>
+						<Link
+							to="/edit"
+							state={props.state}
+          	>
+            	Edit
+          	</Link>
 						<button
 							className='delete-todo-item'
 							onClick={() => props.handleDeleteTodo(props.todo._id)}
 						>
-							X
+							Delete
 						</button>
 					</div>
 				}
