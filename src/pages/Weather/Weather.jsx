@@ -21,7 +21,7 @@ const getLocationInfo = () => {
   } else if (weatherService.getLocationLocalStorage()) {
     return weatherService.getLocationLocalStorage()
   } else {
-    return 'New York'
+    return 'Boston'
   }
 }
 
@@ -39,26 +39,20 @@ const getDisplayPref = () => {
 
 const Weather = (props) => {
 
-  // Weather States for all 3 data
-  const [weatherCurrent, setWeatherCurrent] = useState({})
-  const [weatherHourly, setWeatherHourly] = useState({})
-  const [weatherDaily, setWeatherDaily] = useState({})
-
-  // Location state different from preference
   const [searchLocation, setSearchLocation] = useState( getLocationInfo() )
   const [displayPref, setDisplayPref] = useState( getDisplayPref() )
+  const [weather, setWeather] = useState({})
 
   useEffect(()=>{
-    const fetchWeatherDetails = async () => {
-      const weatherCurrentDetail = await weatherService.getCurrentDetails(searchLocation)
-      const weatherHourlyDetail = await weatherService.getHourlyDetails(searchLocation)
-      const weatherDailyDetail = await weatherService.getDailyDetails(searchLocation)
-      setWeatherCurrent(weatherCurrentDetail)
-      setWeatherHourly(weatherHourlyDetail)
-      setWeatherDaily(weatherDailyDetail)
+    try{
+      weatherService.getWeatherDetails(searchLocation)
+      .then(result => {
+        setWeather(result)
+      })
+    } catch(error) {
+      console.log(error)
     }
-    fetchWeatherDetails()
-    
+
   },[searchLocation])
 
   const handleLocationSearch = (formData) => {
@@ -68,9 +62,9 @@ const Weather = (props) => {
   return (
     <>
       <div className='weather-container'>
-        <WeatherNav className='weather-nav'/>
-        <div>
-          <WeatherGraph className='weather-graph'/>
+        <WeatherNav className='weather-nav' searchLocation={searchLocation}/>
+        <div className='weather-body'>
+          <WeatherGraph className='weather-graph' weather={weather}/>
           <WeatherDisplay className='weather-display'/>
         </div>
       </div>

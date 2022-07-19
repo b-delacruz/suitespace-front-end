@@ -20,27 +20,40 @@ async function getPref() {
   return res.json()
 }
 
-async function getCurrentDetails(location) {
-  const res = await fetch(`${SERVER_URL}/${location}/current`)
+async function getWeatherDetails(location) {
+  const res = await fetch(`${SERVER_URL}/${location}/`)
   return res.json()
 }
 
-async function getHourlyDetails(location) {
-  const res = await fetch(`${SERVER_URL}/${location}/hourly`)
+async function createWeatherPref(location) {
+  const res = await fetch(SERVER_URL, {
+    method: 'POST',
+    headers: {
+      'Authorization': `Bearer ${tokenService.getToken()}`,
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify(location)
+  })
   return res.json()
 }
 
-async function getDailyDetails(location) {
-  const res = await fetch(`${SERVER_URL}/${location}/daily`)
-  return res.json()
+async function updateWeatherPref(location) {
+  const res = await fetch(`${SERVER_URL}/${location._id}`, {
+    method: 'PUT',
+    headers: {
+      'Content-Type': 'application/json',
+      'Authorization': `Bearer ${tokenService.getToken()}`
+    },
+    body: JSON.stringify(location)
+  })
+	return res.json()
 }
-
 
 export { 
   getPref, 
-  getCurrentDetails, 
-  getHourlyDetails, 
-  getDailyDetails, 
+  getWeatherDetails,
   setLocationLocalStorage, 
-  getLocationLocalStorage 
+  getLocationLocalStorage,
+  createWeatherPref,
+  updateWeatherPref 
 }

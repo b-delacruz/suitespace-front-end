@@ -6,8 +6,10 @@ const WeatherNav = (props) => {
   return (
     <>
       <div className='weather-nav'>
-        <h2>Weather | </h2>
-        {/* <h2>{props.searchlocation.location.name}</h2> */}
+        <div className='weather-nav-name-container'>
+          <h2>Weather | </h2>
+          <h2>{props.searchLocation}</h2>
+        </div>
         <WeatherSearchForm/>
       </div>
     </>
