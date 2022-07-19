@@ -1,4 +1,5 @@
 import { useState } from 'react'
+import SearchIcon from '@mui/icons-material/Search';
 import './weather.css'
 
 const WeatherSearchForm = (props) => {
@@ -11,7 +12,9 @@ const WeatherSearchForm = (props) => {
 
   const handleSubmit = evt => {
     evt.preventDefault()
-    // props.handleLocationSearch(formData)
+    props.handleSearchLocation(formData)
+    setFormData({ query: '' })
+    
   }
 
   return (
@@ -21,11 +24,12 @@ const WeatherSearchForm = (props) => {
           <input className='weather-input-item'
             name="query"
             type="text"
+            placeholder="Search Location"
             autoComplete="off"
             value={formData.query}
             onChange={handleChange}
           />
-          <button type="submit">Search</button>
+          <button type="submit"><SearchIcon/></button>
         </form>
       </div>
     </>

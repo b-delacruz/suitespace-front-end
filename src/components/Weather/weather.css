@@ -12,5 +12,12 @@
 
 .weather-nav {
   display:flex;
-  display:inline-flex
+  flex-direction: row;
+  justify-content: space-between;
+  margin:2rem;
+}
+
+.weather-nav-name-container {
+  display:inline-flex;
+  align-items: flex-start;
 }
