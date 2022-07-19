@@ -67,7 +67,7 @@ const Weather = (props) => {
         <WeatherNav className='weather-nav' weather={weather} handleSearchLocation={handleSearchLocation}/>
         <div className='weather-body'>
           <WeatherGraph className='weather-graph' weather={weather}/>
-          <WeatherDisplay className='weather-display'/>
+          <WeatherDisplay className='weather-display' weather={weather} displayPref={displayPref}/>
         </div>
       </div>
     </>
