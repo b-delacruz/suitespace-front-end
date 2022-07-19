@@ -1,8 +1,9 @@
-import { useState } from 'react';
+import { useState, useRef, useEffect } from 'react';
 import ScheduleItem from './ScheduleItem';
 import AddScheduleItem from './AddScheduleItem'
 import { Modal, Button, Box, Typography, Backdrop, Fade } from '@mui/material';
 import './Scheduler.css'
+import * as eventService from '../../services/eventsService'
 
 const Scheduler = ({ value }) => {
   const style = {
@@ -14,13 +15,31 @@ const Scheduler = ({ value }) => {
     p: 4,
     color: 'white',
   };
-  
+
+  // Modal State
   const [open, setOpen] = useState(false);
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
-  const [formData, setFormData] = useState([
+  
+  // event state where we push the form data 
+  const [eventsData, setEventsData] = useState([])
 
-  ])
+  // Backend
+  const handleAddEvent = async newEventData => {
+    const newEvent = await eventService.create(newEventData)
+    setEventsData([...eventsData, newEvent])
+  }
+  useEffect(() => {
+    const fetchAllEvents = async () =>{
+      const eventData = await eventService.getAll()
+      setEventsData(eventData)
+    }
+    fetchAllEvents()
+  }, [])
+
+  // WHAT ARE WE PASSING DOWN
+  // 1. handleAddevent
+  //
 
   return (
     <div className='scheduler | flex flex-col gap-6'>
@@ -38,6 +57,7 @@ const Scheduler = ({ value }) => {
           aria-describedby="transition-modal-description"
           closeAfterTransition
           BackdropComponent={Backdrop}
+          handleAddEvent={handleAddEvent}
           BackdropProps={{
           timeout: 1000,
         }}
@@ -53,7 +73,7 @@ const Scheduler = ({ value }) => {
                 </span>
               </Typography>
               <Typography id="transition-modal-description" sx={{ mt: 2 }}>
-                <AddScheduleItem value={value} />
+                <AddScheduleItem value={value} handleAddEvent={handleAddEvent} />
               </Typography>
             </Box>
           </Fade>
@@ -61,8 +81,11 @@ const Scheduler = ({ value }) => {
       </div>
     {/* Map over this for how ever many schedule items exist in state */}
       <div className=' schedule-items-container | overflow-y-scroll flex flex-col gap-4'>
-        <ScheduleItem value={value} />
-        <ScheduleItem value={value} />
+        {eventsData.map((event, idx) => 
+          value.format('MMMM DD YYYY') === event.date ? 
+            <ScheduleItem key={idx} value={value} event={event} />
+          : ''
+        )}
       </div>
       
     </div>
