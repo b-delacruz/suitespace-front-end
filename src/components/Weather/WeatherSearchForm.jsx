@@ -12,7 +12,9 @@ const WeatherSearchForm = (props) => {
 
   const handleSubmit = evt => {
     evt.preventDefault()
-    // props.handleLocationSearch(formData)
+    props.handleSearchLocation(formData)
+    setFormData({ query: '' })
+    
   }
 
   return (
@@ -21,7 +23,7 @@ const WeatherSearchForm = (props) => {
         <form onSubmit={handleSubmit}>
           <input className='weather-input-item'
             name="query"
-            type="search"
+            type="text"
             placeholder="Search Location"
             autoComplete="off"
             value={formData.query}

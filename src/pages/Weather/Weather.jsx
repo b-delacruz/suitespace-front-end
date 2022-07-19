@@ -43,6 +43,8 @@ const Weather = (props) => {
   const [displayPref, setDisplayPref] = useState( getDisplayPref() )
   const [weather, setWeather] = useState({})
 
+  // const [preference, setPreference] = useState(weatherService.getPref())
+
   useEffect(()=>{
     try{
       weatherService.getWeatherDetails(searchLocation)
@@ -55,14 +57,14 @@ const Weather = (props) => {
 
   },[searchLocation])
 
-  const handleLocationSearch = (formData) => {
-    
+  const handleSearchLocation = (formData) => {
+    setSearchLocation(formData.query)
   }
 
   return (
     <>
       <div className='weather-container'>
-        <WeatherNav className='weather-nav' searchLocation={searchLocation}/>
+        <WeatherNav className='weather-nav' weather={weather} handleSearchLocation={handleSearchLocation}/>
         <div className='weather-body'>
           <WeatherGraph className='weather-graph' weather={weather}/>
           <WeatherDisplay className='weather-display'/>

@@ -1,6 +1,5 @@
 import React from 'react';
 import { Line } from 'react-chartjs-2';
-import { faker } from '@faker-js/faker';
 import {
   Chart as ChartJS,
   CategoryScale,
@@ -31,15 +30,16 @@ const WeatherDisplay = (props) => {
 
   let labels = []
   let hourData = []
-  for (let i = 0; i < 24; i++) {
-    labels.push(`${i}:00`)
-  }
 
   if (props.weather?.forecast) {
     const day = props.weather.forecast.forecastday
     hourData = (day[0]).hour.map(hour => {
       return hour.temp_f
     })
+
+    for (let i = 0; i < 24; i++) {
+      labels.push(`${i}:00`)
+    }
   }
 
   const options = {
@@ -47,10 +47,14 @@ const WeatherDisplay = (props) => {
     plugins: {
       legend: {
         position: 'top',
+        labels: {
+          color: 'white'
+        }
       },
       title: {
         display: true,
-        text: 'Chart.js Line Chart',
+        text: 'Temperature',
+        color: 'white'
       },
     },
   };
@@ -61,15 +65,11 @@ const WeatherDisplay = (props) => {
       {
         label: 'Hourly Forecast',
         data: hourData.map(hour => hour),
-        borderColor: 'rgb(255, 99, 132)',
-        backgroundColor: 'rgba(255, 99, 132, 0.5)',
+        borderColor: 'rgb(255, 99, 132, 0.5)',
+        backgroundColor: 'rgb(255, 99, 132)',
       }
     ],
   };
-
-
-
-
 
   return <Line className='weather-graph' options={options} data={data} />
 }

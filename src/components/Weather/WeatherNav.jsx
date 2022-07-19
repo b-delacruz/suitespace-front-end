@@ -1,4 +1,3 @@
-import { useEffect, useState } from 'react'
 import WeatherSearchForm from '../Weather/WeatherSearchForm'
 
 const WeatherNav = (props) => {
@@ -8,9 +7,9 @@ const WeatherNav = (props) => {
       <div className='weather-nav'>
         <div className='weather-nav-name-container'>
           <h2>Weather | </h2>
-          <h2>{props.searchLocation}</h2>
+          <h2>{props.weather.location.name}</h2>
         </div>
-        <WeatherSearchForm/>
+        <WeatherSearchForm handleSearchLocation={props.handleSearchLocation}/>
       </div>
     </>
   );
