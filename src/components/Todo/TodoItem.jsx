@@ -4,7 +4,6 @@ import '../../pages/TodoList/TodoList.css'
 const TodoItem = (props) => {
 	return (
 		<>
-		{console.log(props.state)}
       <div className='todo-item'>
 				<input type="checkbox" />
 				<div className='todo-item-content'>
@@ -15,7 +14,8 @@ const TodoItem = (props) => {
 					<div className='flex flex-col'>
 						<Link
 							to="/edit"
-							state={props.state}
+							state={props.todo}
+							handleUpdateTodo={props.handleUpdateTodo}
           	>
             	Edit
           	</Link>

@@ -44,6 +44,16 @@ const TodoList = (props) => {
     setTodos(todos.filter(todo => todo._id !== deletedTodo._id))
   }
 
+  const handleUpdateTodo = updatedTodoFormData => {
+    console.log(updatedTodoFormData)
+    // // Using map to replace just the todo that was updated
+    // const newTodosArray = todos.map(todo => 
+    //   todo._id === updatedTodoFormData._id ? updatedTodoFormData : todo
+    // )
+    // setTodos(newTodosArray)
+		// // navigate('/') -------------- Navigate back to main page after submission
+  }
+
   const [open, setOpen] = useState(false);
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
@@ -133,11 +143,10 @@ const TodoList = (props) => {
             <TodoItem
               key={todo._id}
               todo={todo}
-              state={{todo}}
               handleDeleteTodo={handleDeleteTodo}
+              handleUpdateTodo={handleUpdateTodo}
               user={props.user}
               // isList={true}
-              // updateTodo={}
             />
           )}
         </>

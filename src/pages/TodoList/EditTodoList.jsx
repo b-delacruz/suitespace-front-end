@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useRef, useEffect } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 
 function EditTodo(props) {
@@ -10,11 +10,21 @@ function EditTodo(props) {
 		setFormData({ ...formData, [evt.target.name]: evt.target.value })
 	}
 
+  const [validForm, setValidForm] = useState(true)
+
+  const formElement = useRef()
+
+  const handleSubmit = evt => {
+		evt.preventDefault()
+    console.log(location)
+    // props.handleUpdateTodo(formData)
+	}
+
   return (
     <>
     {console.log(formData)}
     <h1>Edit</h1>
-    <form autoComplete='off' className='flex flex-col gap-3'>
+    <form autoComplete='off' className='flex flex-col gap-3' ref={formElement} onSubmit={handleSubmit}>
       <div className='flex flex-col'>
         <label htmlFor='name-input'>Due Date</label>
         <input className='input-item'
@@ -48,6 +58,7 @@ function EditTodo(props) {
       <div className='btn-submit'>
         <button
           type='submit'
+          disabled={!validForm}
         >
           Save
         </button>
