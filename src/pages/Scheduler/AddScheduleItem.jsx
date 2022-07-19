@@ -1,3 +1,5 @@
+import moment from "moment";
+
 const AddScheduleItem = ({ value }) => {
   return (
     <>
@@ -5,7 +7,7 @@ const AddScheduleItem = ({ value }) => {
         <div className="flex justify-between w-full gap-6">
           <div className="flex flex-col gap-2 w-2/4">
             <label htmlFor="">Time</label>
-            <input type="time" />
+            <input type="time" placeholder='12:00am' />
             <p className="opacity-70 text-sm">Example: 9:00AM</p>
           </div>
           <div className="flex flex-col gap-2 w-2/4">
@@ -19,6 +21,7 @@ const AddScheduleItem = ({ value }) => {
           <input type="text" />
           <p className="opacity-70 text-sm">Example: Discussing brand identity</p>
         </div>
+        <input type="text" hidden name="date" value={value.format('hh:mm A')} />
       </form>
     </>
   )

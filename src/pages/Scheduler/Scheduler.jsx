@@ -17,10 +17,10 @@ const Scheduler = ({ value }) => {
   
   const [open, setOpen] = useState(false);
   const handleOpen = () => setOpen(true);
-  const handleClose = () => {
-    
-    setOpen(false)
-  }
+  const handleClose = () => setOpen(false);
+  const [formData, setFormData] = useState([
+
+  ])
 
   return (
     <div className='scheduler | flex flex-col gap-6'>
@@ -53,7 +53,7 @@ const Scheduler = ({ value }) => {
                 </span>
               </Typography>
               <Typography id="transition-modal-description" sx={{ mt: 2 }}>
-                <AddScheduleItem />
+                <AddScheduleItem value={value} />
               </Typography>
             </Box>
           </Fade>
