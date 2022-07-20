@@ -15,7 +15,7 @@ import './weather.css'
 
 const Weather = (props) => {
 
-  const getLocationInfo = async() => {
+  const getLocationInfo = async () => {
 
     if (props.user?.weather) {
       return await weatherService.getPref()
