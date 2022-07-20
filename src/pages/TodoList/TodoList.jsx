@@ -99,6 +99,7 @@ const TodoList = (props) => {
               handleOpen={handleOpen}
               handleClose={handleClose}
               handleUpdateTodo={handleUpdateTodo}
+              handleDeleteTodo={handleDeleteTodo}
               style={style}
               user={props.user}
               // isList={true}

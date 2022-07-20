@@ -52,14 +52,20 @@ function EditTodo(props) {
             required
           />
         </div>
-        <div className='btn-submit'>
+        {/* <div className='btn-submit'> */}
           <button
             type='submit'
-            disabled={!validForm}
+            // disabled={!validForm}
           >
             Save
           </button>
-        </div>
+        {/* </div> */}
+        <button
+          className='delete-todo-item'
+          onClick={() => props.handleDeleteTodo(props.todo._id)}
+        >
+          Delete
+        </button>
         <div>
           <Link
             to='/'

@@ -31,6 +31,7 @@ const TodoItem = (props) => {
 								formData={props.formData}
 								setFormData={props.setFormData}
 								handleUpdateTodo={props.handleUpdateTodo}
+								handleDeleteTodo={props.handleDeleteTodo}
               />
             </Typography>
           </Box>
@@ -42,9 +43,3 @@ const TodoItem = (props) => {
 export default TodoItem
 
 
-{/* <button
-	className='delete-todo-item'
-	onClick={() => props.handleDeleteTodo(props.todo._id)}
->
-	Delete
-</button> */}
