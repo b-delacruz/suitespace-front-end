@@ -19,8 +19,10 @@
 }
 
 .weather-graph {
-  min-width: 20px;
-  max-width: 400px;
+  position:relative;
+  min-width:400px;
+  max-width:600px;
+  max-height: 400px;
 }
 
 .weather-display {

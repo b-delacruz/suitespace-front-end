@@ -1,3 +1,4 @@
+import { Link } from 'react-router-dom'
 import '../../pages/TodoList/TodoList.css'
 
 const TodoItem = (props) => {
@@ -9,13 +10,20 @@ const TodoItem = (props) => {
 					<p>Title: {props.todo.title}</p>
 					<p>Description: {props.todo.description}</p>
 				</div>
-				{props.user?.profile === props.todo.owner && 
-					<div className=''>
+				{props.user?.profile === props.todo.owner._id && 
+					<div className='flex flex-col'>
+						<Link
+							to="/edit"
+							state={props.todo}
+							handleUpdateTodo={props.handleUpdateTodo}
+          	>
+            	Edit
+          	</Link>
 						<button
 							className='delete-todo-item'
 							onClick={() => props.handleDeleteTodo(props.todo._id)}
 						>
-							X
+							Delete
 						</button>
 					</div>
 				}

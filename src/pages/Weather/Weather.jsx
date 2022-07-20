@@ -15,7 +15,7 @@ import './weather.css'
 
 const Weather = (props) => {
 
-  const getLocationInfo = async() => {
+  const getLocationInfo = async () => {
 
     if (props.user?.weather) {
       return await weatherService.getPref()
@@ -44,15 +44,12 @@ const Weather = (props) => {
   // const [preference, setPreference] = useState(weatherService.getPref())
 
   useEffect(() => {
-    try {
-      weatherService.getWeatherDetails(searchLocation)
-        .then(result => {
-          setWeather(result)
-        })
-    } catch (error) {
-      console.log(error)
+    
+    const fetchWeatherDetails = async () => {
+      const weatherDetails = await weatherService.getWeatherDetails(searchLocation)
+      setWeather(weatherDetails)
     }
-
+    fetchWeatherDetails()
   }, [searchLocation])
 
   const handleSearchLocation = (formData) => {

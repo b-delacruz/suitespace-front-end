@@ -1,5 +1,5 @@
 import * as tokenService from './tokenService'
-const SERVER_URL = 'http://localhost:3001/api/calendars'
+const SERVER_URL = `${process.env.REACT_APP_BACK_END_SERVER_URL}/api/calendars`
 
 async function create(event) {
   console.log(event)

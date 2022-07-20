@@ -44,6 +44,18 @@ const WeatherDisplay = (props) => {
 
   const options = {
     responsive: true,
+    scales: {
+      x: {
+        ticks: {
+          color: 'white'
+        }
+      },
+      y: {
+        ticks: {
+          color: 'orange'
+        }
+      }
+    },
     plugins: {
       legend: {
         position: 'top',
