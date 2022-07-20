@@ -47,7 +47,8 @@ const App = () => {
 
   function handleSideBarOpen() {
     setOpen(true)
-  }
+  } 
+  
 
   return (
     <>
