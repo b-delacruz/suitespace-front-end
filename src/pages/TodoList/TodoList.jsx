@@ -91,7 +91,7 @@ const TodoList = (props) => {
       </div>
       <div className='todo-list-body'>
         <>
-          {todos?.map(todo => 
+          {todos.map(todo => 
             <TodoItem
               key={todo._id}
               todo={todo}
