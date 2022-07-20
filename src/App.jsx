@@ -47,23 +47,17 @@ const App = () => {
 
   function handleSideBarOpen() {
     setOpen(true)
-  }
+  } 
+  
 
   return (
     <>
       <NavBar user={user} handleLogout={handleLogout} />
-      <SideBar
-        open={open}
-        handleSideBarOpen={handleSideBarOpen}
-        handleSideBarClose={handleSideBarClose}
-      />
-      <div
-        className='app-toggle-sidebar | absolute right-0 top-0 flex justify-center items-center group'
-        onClick={open ? () => handleSideBarClose() : () => handleSideBarOpen()}
-        style={open ? { display: 'none' } : { display: 'flex' }}>
-        <ChevronLeft fontSize='large' />
+      <SideBar open={open} handleSideBarOpen={handleSideBarOpen} handleSideBarClose={handleSideBarClose} />
+      <div className='app-toggle-sidebar | fixed right-0 top-0 flex justify-center items-center group' onClick={open ? () => handleSideBarClose() : () => handleSideBarOpen()} style={open ? {display: 'none'} : {display: 'flex'}}>
+        <ChevronLeft fontSize='large'/>
         <span className='sidebar-tooltip | group-hover:scale-100 scale-0'>Open Sidebar</span>
-      </div>
+      </div>      
       <FavoriteBar />
       <NewsFeed />
       <Todolist user={user} />
