@@ -9,7 +9,7 @@ const TodoItem = (props) => {
 					<p>Title: {props.todo.title}</p>
 					<p>Description: {props.todo.description}</p>
 				</div>
-				{props.user?.profile === props.todo.owner._id && 
+				{props.user?.profile === props.todo.owner && 
 					<div className=''>
 						<button
 							className='delete-todo-item'

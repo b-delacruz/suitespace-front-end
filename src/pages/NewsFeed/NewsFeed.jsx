@@ -17,7 +17,7 @@ const NewsFeed = (props) => {
     const fetchNews = async () => {
       const newsData = await getNews()
       console.log(newsData.articles)
-      setNewsData(newsData.articles.slice(0,1))
+      setNewsData(newsData.articles)
     }
     fetchNews()
   }, [])
@@ -34,7 +34,7 @@ const NewsFeed = (props) => {
       getNews(formData.search)
       .then(newsData => {
         console.log(newsData.articles)
-        setNewsData(newsData.articles.slice(0,1))
+        setNewsData(newsData.articles)
       })
     } catch (error) {
       console.log(error)
@@ -49,39 +49,37 @@ const NewsFeed = (props) => {
 
   return (
     <>
-      <h2>News</h2>
-        <div className="news">
+      <div className="news-container">
+        <div className="news-nav"> 
           <form 
           autoComplete="off" 
           onSubmit={handleSubmit}
           >
-            <div className="news-body">
-              <input 
-              type="text"
-              name="search"
-              placeholder='Search News'
-              value={search}
-              onChange={handleChange}
-              className='news-button'
-              required
-              />
+            <input 
+            type="text"
+            name="search"
+            placeholder='Search News'
+            value={search}
+            onChange={handleChange}
+            className='news-button'
+            required
+            />
             <button 
             type="submit" 
             disabled={isFormInvalid()}
             >
               <SearchIcon/>
             </button>
-            </div>    
           </form>
-          <div className='news-body'>
-            {newsData.map(news =>
-            <div className='news-title' key={news.title}>
-              <NewsCard news={news}/>
-            </div> 
-            )}
-          </div>
         </div>
-      
+        <div className='news-body'>
+          {newsData.map(news =>
+          <div className='news-card' key={news.title}>
+            <NewsCard news={news}/>
+          </div> 
+          )}
+        </div>
+      </div>
     </>
   )
 }

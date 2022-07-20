@@ -26,7 +26,7 @@ import { ChevronLeft } from '@mui/icons-material';
 
 const App = () => {
   const [user, setUser] = useState(authService.getUser())
-  const [location, setLocation] = useState(locationService.getLocation())
+  // const [location, setLocation] = useState(locationService.getLocation())
   const [open, setOpen] = useState(true)
 
   const navigate = useNavigate()
