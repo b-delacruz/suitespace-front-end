@@ -1,7 +1,7 @@
 @import url('https://fonts.googleapis.com/css2?family=Sora:wght@100;200;300;400;500;600;700;800&display=swap');
 
 
-.news {
+.news-container {
   /* Dimensions */
   flex-wrap: wrap;
   width: 400px;
@@ -21,12 +21,19 @@
   --calendar-today-dark-blue: #35445d;
   --calendar-selected-dark-blue: rgba(53, 68, 93, 0.5);
   padding: .5em;
+  overflow: scroll;
 }
 
 .news-body {
   padding-right: .5em;
   padding-bottom: 1em;
 }
+
+.news-card {
+  padding-right: .5em;
+  padding-bottom: 1em;
+}
+
 .news-button {
   background-color: #ffffff18;
   transition: .5s;
