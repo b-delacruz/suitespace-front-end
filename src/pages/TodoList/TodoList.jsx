@@ -37,10 +37,9 @@ const TodoList = (props) => {
   const handleUpdateTodo = async updatedTodoFormData => {
     const updatedTodo = await todoService.update(updatedTodoFormData)
     const newTodosArray = todos.map(todo => 
-      todo._id === updatedTodoFormData._id ? updatedTodoFormData : todo
+      todo._id === updatedTodo._id ? updatedTodo : todo
     )
-    setTodos(newTodosArray)
-		// navigate('/')
+    setTodos(...newTodosArray)
   }
 
   const [open, setOpen] = useState(false);
@@ -91,20 +90,19 @@ const TodoList = (props) => {
       </div>
       <div className='todo-list-body'>
         <>
-          {todos.map(todo => 
-            <TodoItem
-              key={todo._id}
-              todo={todo}
-              open={open}
-              handleOpen={handleOpen}
-              handleClose={handleClose}
-              handleUpdateTodo={handleUpdateTodo}
-              handleDeleteTodo={handleDeleteTodo}
-              style={style}
-              user={props.user}
-              // isList={true}
-            />
-          )}
+          {
+            todos.map(todo => 
+              <TodoItem
+                key={todo._id}
+                todo={todo}
+                handleUpdateTodo={handleUpdateTodo}
+                handleDeleteTodo={handleDeleteTodo}
+                style={style}
+                user={props.user}
+                // isList={true}
+              />
+            )
+          }
         </>
       </div>
     </div>
