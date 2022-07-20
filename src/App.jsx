@@ -6,10 +6,14 @@ import Login from './pages/Login/Login'
 import Landing from './pages/Landing/Landing'
 import Profiles from './pages/Profiles/Profiles'
 import ChangePassword from './pages/ChangePassword/ChangePassword'
+import EditTodo from './pages/TodoList/EditTodoList'
 
 // Services
 import * as authService from './services/authService'
 import * as locationService from './services/locationService'
+
+// Files 
+import './App.css'
 
 // Main Pages
 import FavoriteBar from './pages/FavoriteBar/FavoriteBar'
@@ -18,10 +22,13 @@ import SideBar from './components/SideBar/SideBar'
 import NewsFeed from './pages/NewsFeed/NewsFeed'
 import Weather from './pages/Weather/Weather'
 
+// Packages 
+import { ChevronLeft } from '@mui/icons-material';
 
 const App = () => {
   const [user, setUser] = useState(authService.getUser())
-  const [location, setLocation] = useState(locationService.getLocation())
+  // const [location, setLocation] = useState(locationService.getLocation())
+  const [open, setOpen] = useState(true)
 
   const navigate = useNavigate()
 
@@ -35,15 +42,27 @@ const App = () => {
     setUser(authService.getUser())
   }
 
+  function handleSideBarClose() {
+    setOpen(false)
+  }
+
+  function handleSideBarOpen() {
+    setOpen(true)
+  } 
+  
+
   return (
     <>
       <NavBar user={user} handleLogout={handleLogout} />
-      <SideBar/>
+      <SideBar open={open} handleSideBarOpen={handleSideBarOpen} handleSideBarClose={handleSideBarClose} />
+      <div className='app-toggle-sidebar | fixed right-0 top-0 flex justify-center items-center group' onClick={open ? () => handleSideBarClose() : () => handleSideBarOpen()} style={open ? {display: 'none'} : {display: 'flex'}}>
+        <ChevronLeft fontSize='large'/>
+        <span className='sidebar-tooltip | group-hover:scale-100 scale-0'>Open Sidebar</span>
+      </div>      
       <FavoriteBar />
       <NewsFeed />
-      <Todolist />
-      <Weather />
-
+      <Todolist user={user} />
+      <Weather user={user} />
       <Routes>
         <Route path="/" element={<Landing user={user} />} />
         <Route
@@ -67,6 +86,10 @@ const App = () => {
               <Navigate to="/login" />
             )
           }
+        />
+        <Route
+          path="/edit"
+          element={<EditTodo />}
         />
       </Routes>
     </>

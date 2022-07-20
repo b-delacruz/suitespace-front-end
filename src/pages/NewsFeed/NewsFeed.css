@@ -1,0 +1,45 @@
+@import url('https://fonts.googleapis.com/css2?family=Sora:wght@100;200;300;400;500;600;700;800&display=swap');
+
+
+.news-container {
+  /* Dimensions */
+  flex-wrap: wrap;
+  width: 400px;
+  height: 400px;
+  /* Glass Morphism */
+  background: rgba(255, 255, 255, 0.045);
+  backdrop-filter: blur( 8px );
+  -webkit-backdrop-filter: blur( 8px );
+  border-radius: 10px;
+  border: 1px solid rgba( 255, 255, 255, 0.18 );
+  /* Font */
+  font-family: 'Sora', sans-serif;
+  text-align: center;
+  font-weight: 300;
+  --calendar-soft-yellow: #F2D3AB;
+  color: #f2d3ab;
+  --calendar-today-dark-blue: #35445d;
+  --calendar-selected-dark-blue: rgba(53, 68, 93, 0.5);
+  padding: .5em;
+  overflow: scroll;
+}
+
+.news-body {
+  padding-right: .5em;
+  padding-bottom: 1em;
+}
+
+.news-card {
+  padding-right: .5em;
+  padding-bottom: 1em;
+}
+
+.news-button {
+  background-color: #ffffff18;
+  transition: .5s;
+}
+
+.news-button:hover {
+  background-color: #35445d6d;
+  transition: .5s;
+}

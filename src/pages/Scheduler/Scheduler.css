@@ -1,0 +1,112 @@
+.scheduler {
+  margin-top: -1em;
+  width: 375px;
+  height: 475px;
+  font-family: 'Sora', sans-serif;
+
+  color: rgba(255, 255, 255, 0.95);
+  font-weight: 300;
+}
+
+.MuiBackdrop-root {
+  opacity: .25 !important;
+}
+
+.form-header {
+
+}
+
+label {
+  color: var(--soft-yellow);
+}
+
+.soft-yellow {
+  color: var(--soft-yellow);
+}
+
+input {
+  background: rgba(217, 216, 216, 0.111);
+  backdrop-filter: blur( 9px );
+  -webkit-backdrop-filter: blur( 9px );
+  border-radius: 10px;
+  border: 1px solid rgba( 255, 255, 255, 0.18 );
+  padding: .5em !important;
+  caret-color: var(--soft-yellow);
+  color: white;
+}
+
+input[type="time" i]::-webkit-calendar-picker-indicator {
+  background-image: url('../../../public/assets/time-svgrepo-com.svg');
+}
+
+input:focus {
+  outline: solid 1px rgba(255, 255, 255, 0.5);
+  background: rgba(237, 237, 237, 0.111);
+}
+
+.MuiBox-root {
+  background: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur( 100px );
+  -webkit-backdrop-filter: blur( 100px );
+  border-radius: 10px;
+  border: 1px solid rgba( 255, 255, 255, 0.18 );
+}
+
+.scheduler-date-display {
+  font-weight: 400;
+  color: var(--soft-yellow);
+}
+
+.scheduler-add-event-button {
+  height: 32px;
+  background-color: #ffffff18;
+  transition: .5s;
+  color: var(--soft-yellow);
+}
+.scheduler-add-event-button:hover {
+  background-color: #35445d6d;
+  transition: .5s;
+}
+
+.schedule-items-container {
+  height: 65%;
+  padding-block: 1em;
+}
+
+::-webkit-scrollbar {
+  background-color: rgba(0, 0, 0, 0);
+  width: 5px;
+}
+
+::-webkit-scrollbar-thumb {
+  border-radius: 20px;
+  background-color: #ffffff76;
+}
+
+.schedule-item {
+  height: fit-content;
+}
+
+.schedule-item-time {
+  width: 30%;
+}
+
+.schedule-item-divider-container {
+  height: 100%;
+  width: 20%;
+}
+
+.schedule-item-vertical-line {
+  height: 100%;
+  width: 3px;
+  background-color: var(--soft-yellow);
+}
+
+.schedule-item-description {
+  width: 50%;
+}
+
+.schedule-item-category {
+  color: rgba(255, 255, 255, 0.75);
+}
+
