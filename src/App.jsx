@@ -6,6 +6,7 @@ import Login from './pages/Login/Login'
 import Landing from './pages/Landing/Landing'
 import Profiles from './pages/Profiles/Profiles'
 import ChangePassword from './pages/ChangePassword/ChangePassword'
+import EditTodo from './pages/TodoList/EditTodoList'
 
 // Services
 import * as authService from './services/authService'
@@ -85,6 +86,10 @@ const App = () => {
               <Navigate to="/login" />
             )
           }
+        />
+        <Route
+          path="/edit"
+          element={<EditTodo />}
         />
       </Routes>
     </>
