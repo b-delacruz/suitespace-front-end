@@ -59,9 +59,8 @@ const App = () => {
       </div>      
       <FavoriteBar />
       <NewsFeed />
-      <Todolist />
-      <Weather user={user}/>
-
+      <Todolist user={user} />
+      <Weather user={user} />
       <Routes>
         <Route path="/" element={<Landing user={user} />} />
         <Route

@@ -2,7 +2,6 @@ import * as tokenService from './tokenService'
 const SERVER_URL = 'http://localhost:3001/api/todos'
 
 async function create(todo) {
-  console.log(todo)
   const res = await fetch(SERVER_URL, {
     method: 'POST',
     headers: {
@@ -12,6 +11,16 @@ async function create(todo) {
     body: JSON.stringify(todo)
   })
 	return await res.json()
+}
+
+async function deleteTodo(id) {
+  const res = await fetch(`${SERVER_URL}/${id}`, {
+    method: 'DELETE',
+    headers: {
+      'Authorization': `Bearer ${tokenService.getToken()}`
+    },
+  })
+	return res.json()
 }
 
 
@@ -24,5 +33,6 @@ async function getAll() {
 
 export {
 	create,
-  getAll
+  getAll,
+  deleteTodo
 }
