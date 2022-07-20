@@ -1,7 +1,7 @@
 //* React Hooks *//
 import { useState, useRef, useEffect } from 'react'
 
-const AddScheduleItem = ({ date, handleAddEvent }) => {
+const EditScheduleEvent = ({ date, handleEditEvent }) => {
   //* State *//
   const [validForm, setValidForm] = useState(false)
   const [formData, setFormData] = useState({
@@ -24,9 +24,9 @@ const AddScheduleItem = ({ date, handleAddEvent }) => {
   const handleChange = evt => setFormData({ ...formData, [evt.target.name]: evt.target.value })
   const handleSubmit = evt => {
 		evt.preventDefault()
-    handleAddEvent(formData)
+    handleEditEvent(formData)
 	}
-  
+
   return (
     <>
       <form ref={formElement} className="flex flex-col gap-6 pt-4" onSubmit={handleSubmit}>
@@ -92,4 +92,4 @@ const AddScheduleItem = ({ date, handleAddEvent }) => {
   )
 }
 
-export default AddScheduleItem
+export default EditScheduleEvent

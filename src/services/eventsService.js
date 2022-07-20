@@ -14,6 +14,20 @@ async function create(event) {
 	return await res.json()
 }
 
+async function update(event) {
+  console.log(event)
+  const res = await fetch(SERVER_URL, {
+    method: 'PUT',
+    headers: {
+      'Content-Type': 'application/json',
+      'Authorization': `Bearer ${tokenService.getToken()}`
+    },
+    body: JSON.stringify(event)
+  })
+	return await res.json()
+}
+
+
 async function getAll() {
   const res = await fetch(SERVER_URL)
   return await res.json()
@@ -21,5 +35,6 @@ async function getAll() {
 
 export {
 	create,
+  update,
   getAll,
 }
