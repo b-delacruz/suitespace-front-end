@@ -16,8 +16,7 @@ const NewsFeed = (props) => {
   useEffect(() => {
     const fetchNews = async () => {
       const newsData = await getNews()
-      console.log(newsData.articles)
-      setNewsData(newsData.articles)
+      setNewsData(newsData.articles.slice(0,10))
     }
     fetchNews()
   }, [])
@@ -33,8 +32,7 @@ const NewsFeed = (props) => {
     try{
       getNews(formData.search)
       .then(newsData => {
-        console.log(newsData.articles)
-        setNewsData(newsData.articles)
+        setNewsData(newsData.articles.slice(0,10))
       })
     } catch (error) {
       console.log(error)
@@ -47,6 +45,20 @@ const NewsFeed = (props) => {
     return !(search)
   }
 
+  const getFontSize = (textLength) => {
+    const baseSize = 8
+    if (textLength >= baseSize) {
+      textLength = baseSize - 1
+    }
+    const fontSize = baseSize - textLength
+    return `${fontSize}vw`
+  }
+  
+  const boxes = document.querySelectorAll('.box p')
+    
+  boxes.forEach(box => {
+    box.style.fontSize = getFontSize(box.textContent.length)
+  })
   return (
     <>
       <div className="news-container">
@@ -73,8 +85,8 @@ const NewsFeed = (props) => {
           </form>
         </div>
         <div className='news-body'>
-          {newsData.map(news =>
-          <div className='news-card' key={news.title}>
+          {newsData.map((news, idx) =>
+          <div className='news-card' key={idx}>
             <NewsCard news={news}/>
           </div> 
           )}
