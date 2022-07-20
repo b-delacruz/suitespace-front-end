@@ -6,5 +6,16 @@
   color: var(--soft-yellow);
   cursor: pointer;
   opacity: 1;
-  margin: .5em;
+  margin: 1em .5em;
+}
+
+.app-layout-container {
+  width: 75vw;
+  height: 90vh;
+  padding: 1em;
+  /* outline: 1px solid red; */
+}
+
+.app-layout-container * {
+  /* outline: 1px solid red; */
 }
