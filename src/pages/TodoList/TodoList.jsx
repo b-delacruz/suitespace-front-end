@@ -3,19 +3,13 @@ import { PropaneSharp } from '@mui/icons-material';
 import { Typography, Button, Modal, Box } from '@mui/material'
 import TodoItem from '../../components/Todo/TodoItem';
 import './TodoList.css';
-import '../../components/Todo/TodoModal.jsx'
+import '../../components/Todo/TodoAdd.jsx'
 import * as todoService from '../../services/todoService'
-import TodoModal from '../../components/Todo/TodoModal.jsx';
+import TodoModal from '../../components/Todo/TodoAdd.jsx';
 
 const TodoList = (props) => {
-  const [formData, setFormData] = useState({ // reMOVED THIS from MODAL
-    title: '',
-    description: '',
-    dueDate: new Date(),
-  })
-  const handleChange = evt => { // MOVED THIS TO MODAL
-    setFormData({...formData, [evt.target.name]: evt.target.value })
-  }
+  const [todos, setTodos] = useState([])
+  
   useEffect(() => {
     const fetchAllTodos = async () =>{
       const todoData = await todoService.getAll()
@@ -24,16 +18,9 @@ const TodoList = (props) => {
     fetchAllTodos()
   }, [])
   
-  const [todos, setTodos] = useState([])
-  
   const handleAddTodo = async newTodoData => {
     const newTodo = await todoService.create(newTodoData)
     setTodos([...todos, newTodo])
-  }
-  
-  const handleSubmit = evt => { // MOVED THIS TO MODAL
-    evt.preventDefault()
-    handleAddTodo(formData)
   }
 
   const handleDeleteTodo = async id => {
@@ -80,16 +67,13 @@ const TodoList = (props) => {
           onClose={handleClose}
           aria-labelledby='modal-modal-title'
           aria-describedby='modal-modal-description'
-          formData={formData}
         >
-          <Box sx={style} formData={formData}>
+          <Box sx={style}>
             <Typography id='modal-modal-title' variant='h6' component='h2'>
               Add Todo
             </Typography>
-            <Typography id='modal-modal-description' sx={{ mt: 2 }} formData={formData}>
+            <Typography id='modal-modal-description' sx={{ mt: 2 }}>
               <TodoModal
-                setFormData={setFormData}
-                formData={formData}
                 handleAddTodo={handleAddTodo}
               />
             </Typography>
