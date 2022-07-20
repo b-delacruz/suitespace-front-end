@@ -21,7 +21,7 @@ async function getPref() {
 }
 
 async function getWeatherDetails(location) {
-  const res = await fetch(`${SERVER_URL}/${location}/`)
+  const res = await fetch(`${SERVER_URL}/${location}`)
   return res.json()
 }
 
