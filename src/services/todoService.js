@@ -39,7 +39,13 @@ async function update(todo) {
 // ----------------NEED TO READJUST PROTECTED ROUTES----------------
 
 async function getAll() {
-  const res = await fetch(SERVER_URL)
+  const res = await fetch(`${SERVER_URL}/`, {
+    method: 'GET',
+    headers: {
+      'Authorization': `Bearer ${tokenService.getToken()}`,
+      'Content-Type': 'application/json'
+    },
+  })
   return await res.json()
 }
 
