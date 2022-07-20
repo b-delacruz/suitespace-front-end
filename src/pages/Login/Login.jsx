@@ -1,24 +1,97 @@
 import { useState } from 'react'
-import LoginForm from '../../components/LoginForm/LoginForm'
-import styles from './Login.module.css'
+import { useNavigate } from 'react-router-dom'
+import * as authService from '../../services/authService'
 
-const LoginPage = props => {
+import { Button, TextField, Dialog, DialogActions, DialogContent, DialogContentText, DialogTitle } from '@mui/material'
+
+const Login = props => {
+
+  const navigate = useNavigate()
   const [message, setMessage] = useState([''])
+  const [formData, setFormData] = useState({
+    email: '',
+    pw: '',
+  })
+
+  // MUI
+  const [open, setOpen] = useState(false);
+  const handleOpen = () => setOpen(true);
+  const handleClose = () => {
+    setFormData({
+      email: '',
+      pw: '',
+    })
+    setOpen(false);
+  }
 
   const updateMessage = msg => {
     setMessage(msg)
   }
 
-  return (
-    <main className={styles.container}>
-      <h1>Log In</h1>
-      <p>{message}</p>
-      <LoginForm
-        handleSignupOrLogin={props.handleSignupOrLogin}
-        updateMessage={updateMessage}
-      />
-    </main>
+  const handleChange = e => {
+    updateMessage('')
+    setFormData({ ...formData, [e.target.name]: e.target.value })
+  }
+
+  const handleSubmit = async evt => {
+    evt.preventDefault()
+    try {
+      await authService.login(formData)
+      props.handleSignupOrLogin()
+      navigate('/')
+    } catch (err) {
+      updateMessage(err.message)
+    }
+  }
+
+  return(
+    <div>
+      <Button variant="outlined" onClick={handleOpen}>
+        Log In
+      </Button>
+      <Dialog open={open} onClose={handleClose}>
+        <DialogTitle>Log In</DialogTitle>
+        <DialogContentText>
+          {message}
+        </DialogContentText>
+        <DialogContent>
+          <TextField
+            autoFocus
+            margin="dense"
+            id="standard-required"
+            label="Email"
+            helperText="Email"
+            type="text"
+            name="email"
+            value={formData.email}
+            onChange={handleChange}
+            autoComplete="off"
+            fullWidth
+            variant="standard"
+          />
+          <TextField
+            autoFocus
+            margin="dense"
+            id="standard-password-input"
+            label="Password"
+            helperText="Password"
+            type="password"
+            name="pw"
+            value={formData.pw}
+            onChange={handleChange}
+            autoComplete="off"
+            fullWidth
+            variant="standard"
+          />
+        </DialogContent>
+        <DialogActions>
+          <Button onClick={handleClose}>Cancel</Button>
+          <Button onClick={handleSubmit}>Log In</Button>
+        </DialogActions>
+      </Dialog>
+    </div>
   )
+
 }
 
-export default LoginPage
+export default Login
