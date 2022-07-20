@@ -8,3 +8,9 @@
   opacity: 1;
   margin: .5em;
 }
+
+.widget-container {
+  display: flex;
+  flex-wrap: wrap;
+  width: 70vw;
+}

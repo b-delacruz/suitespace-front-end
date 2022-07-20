@@ -58,10 +58,12 @@ const App = () => {
         <ChevronLeft fontSize='large'/>
         <span className='sidebar-tooltip | group-hover:scale-100 scale-0'>Open Sidebar</span>
       </div>      
-      <FavoriteBar />
-      <NewsFeed />
-      <Todolist user={user} />
-      <Weather user={user} />
+      <div className='widget-container'>
+        <FavoriteBar />
+        <NewsFeed />
+        <Todolist user={user} />
+        <Weather user={user} />
+      </div>
       <Routes>
         <Route path="/" element={<Landing user={user} />} />
         <Route
