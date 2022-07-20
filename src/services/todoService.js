@@ -1,5 +1,5 @@
 import * as tokenService from './tokenService'
-const SERVER_URL = 'http://localhost:3001/api/todos'
+const SERVER_URL = `${process.env.REACT_APP_BACK_END_SERVER_URL}/api/todos`
 
 async function create(todo) {
   const res = await fetch(SERVER_URL, {
