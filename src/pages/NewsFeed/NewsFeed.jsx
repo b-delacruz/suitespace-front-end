@@ -73,9 +73,9 @@ const NewsFeed = (props) => {
           </form>
         </div>
         <div className='news-body'>
-          {newsData.map(news =>
-          <div className='news-card' key={news.title}>
-            <NewsCard news={news}/>
+          {newsData.map((news, idx) =>
+          <div className='news-card' key={idx}>
+            <NewsCard news={news} />
           </div> 
           )}
         </div>

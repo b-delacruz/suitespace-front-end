@@ -33,6 +33,5 @@ export default function NewsCard(props) {
         </Button>
       </Box>   
     </Card>
-       
   );
 }

@@ -8,7 +8,7 @@ import { Modal, Box, Typography, Backdrop, Fade } from '@mui/material'
 //* Components *//
 import EditScheduleEvent from "./EditScheduleEvent"
 
-const ScheduleItem = ({ date, event, handleEditEvent }) => {
+const ScheduleItem = ({ date, event, handleUpdateEvent }) => {
   //* Modal State & Style *//
   const [open, setOpen] = useState(false)
   const handleOpen = () => setOpen(true)
@@ -66,7 +66,7 @@ const ScheduleItem = ({ date, event, handleEditEvent }) => {
               </span>
             </Typography>
             <Typography id="transition-modal-description" sx={{ mt: 2 }}>
-              <EditScheduleEvent date={date} handleEditEvent={handleEditEvent} />
+              <EditScheduleEvent date={date} handleUpdateEvent={handleUpdateEvent} />
             </Typography>
           </Box>
         </Fade>

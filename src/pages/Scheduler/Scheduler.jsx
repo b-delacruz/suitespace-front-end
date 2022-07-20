@@ -44,9 +44,12 @@ const Scheduler = ({ date }) => {
     const newEvent = await eventService.create(newEventData)
     setEventsData([...eventsData, newEvent])
   }
-  const handleEditEvent = async newEventData => {
-    const newEvent = await eventService.update(newEventData)
-    setEventsData([...eventsData, newEvent])
+  const handleUpdateEvent = async updatedEventData => {
+    const newEvent = await eventService.update(updatedEventData)
+    const newEventDataArray = await eventsData.map(event =>
+      event._id === newEvent._id ? newEvent : event
+    )
+    setEventsData([newEventDataArray])
   }
 
   return (
@@ -65,7 +68,7 @@ const Scheduler = ({ date }) => {
           aria-describedby="transition-modal-description"
           closeAfterTransition
           BackdropComponent={Backdrop}
-          handleAddEvent={handleAddEvent}
+          
           BackdropProps={{
             timeout: 1000,
           }}
@@ -80,7 +83,7 @@ const Scheduler = ({ date }) => {
                   {date.format('MMMM DD YYYY')}               
                 </span>
               </Typography>
-              <Typography id="transition-modal-description" sx={{ mt: 2 }}>
+              <Typography id="transition-modal-description" sx={{ mt: 2 }} component={'span'}>
                 <AddScheduleItem date={date} handleAddEvent={handleAddEvent} />
               </Typography>
             </Box>
@@ -90,7 +93,7 @@ const Scheduler = ({ date }) => {
       <div className=' schedule-items-container | overflow-y-scroll flex flex-col gap-4'>
         {eventsData.map((event, idx) => 
           date.format('MMMM DD YYYY') === event.date ? 
-            <ScheduleItem key={idx} date={date} event={event} handleEditEvent={handleEditEvent} />
+            <ScheduleItem key={idx} date={date} event={event} handleUpdateEvent={handleUpdateEvent} />
           : ''
         )}
       </div>

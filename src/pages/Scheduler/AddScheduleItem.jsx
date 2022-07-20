@@ -22,6 +22,7 @@ const AddScheduleItem = ({ date, handleAddEvent }) => {
   
   //* Functions *//
   const handleChange = evt => setFormData({ ...formData, [evt.target.name]: evt.target.value })
+
   const handleSubmit = evt => {
 		evt.preventDefault()
     handleAddEvent(formData)

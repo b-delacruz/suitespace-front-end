@@ -1,7 +1,7 @@
 //* React Hooks *//
 import { useState, useRef, useEffect } from 'react'
 
-const EditScheduleEvent = ({ date, handleEditEvent }) => {
+const EditScheduleEvent = ({ date, handleUpdateEvent }) => {
   //* State *//
   const [validForm, setValidForm] = useState(false)
   const [formData, setFormData] = useState({
@@ -21,10 +21,14 @@ const EditScheduleEvent = ({ date, handleEditEvent }) => {
   }, [formData])
   
   //* Functions *//
-  const handleChange = evt => setFormData({ ...formData, [evt.target.name]: evt.target.value })
+  function handleChange(evt) {
+    setFormData({ ...formData, [evt.target.name]: evt.target.value })
+  }
+    
+
   const handleSubmit = evt => {
 		evt.preventDefault()
-    handleEditEvent(formData)
+    handleUpdateEvent(formData)
 	}
 
   return (
@@ -83,7 +87,7 @@ const EditScheduleEvent = ({ date, handleEditEvent }) => {
           />
           <p className="opacity-70 text-sm">Example: Remote</p>
         </div>
-        <input type="text" hidden name="date" value={formData.date = date.format('MMMM DD YYYY')} />
+        <input type="text" hidden name="date" defaultValue={formData.date = date.format('MMMM DD YYYY')} />
         <button onClick={() => handleSubmit()}>
           SUBMIT
         </button>
