@@ -4,9 +4,10 @@ import { useState, useEffect, useRef } from 'react';
 
 function EditTodo(props) {
 
-  const [validForm, setValidForm] = useState(false)
+  const [formData, setFormData] = useState(props.todo)
+  const [validForm, setValidForm] = useState(true)
   const handleChange = evt => {
-    props.setFormData({...props.formData, [evt.target.name]: evt.target.value })
+    setFormData({...formData, [evt.target.name]: evt.target.value })
   }
   const formElement = useRef()
   useEffect(() => {
@@ -15,7 +16,7 @@ function EditTodo(props) {
 
   const handleSubmit = evt => {
     evt.preventDefault()
-    props.handleAddTodo(props.formData)
+    props.handleUpdateTodo(formData)
   }
 
   return (
@@ -26,7 +27,7 @@ function EditTodo(props) {
           <input className='input-item'
             name='dueDate'
             type='date'
-            value={props.formData.dueDate}
+            // value={formData.dueDate}
             onChange={handleChange}
             required
           />
@@ -36,7 +37,7 @@ function EditTodo(props) {
           <input className='input-item'
             name='title'
             type='text'
-            value={props.formData.title}
+            value={formData.title}
             onChange={handleChange}
             required
           />
@@ -46,7 +47,7 @@ function EditTodo(props) {
           <input className='input-item'
             name='description'
             type='text'
-            value={props.formData.description}
+            value={formData.description}
             onChange={handleChange}
             required
           />

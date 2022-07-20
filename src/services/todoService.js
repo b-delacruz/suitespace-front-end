@@ -1,5 +1,5 @@
 import * as tokenService from './tokenService'
-const SERVER_URL = 'http://localhost:3001/api/todos'
+const SERVER_URL = `${process.env.REACT_APP_BACK_END_SERVER_URL}/api/todos`
 
 async function create(todo) {
   const res = await fetch(SERVER_URL, {
@@ -23,6 +23,18 @@ async function deleteTodo(id) {
 	return res.json()
 }
 
+async function update(todo) {
+  const res = await fetch(`${SERVER_URL}/${todo._id}`, {
+    method: 'PUT',
+    headers: {
+      'Content-Type': 'application/json',
+      'Authorization': `Bearer ${tokenService.getToken()}` 
+    },
+    body: JSON.stringify(todo)
+  })
+  return res.json()
+}
+
 
 // ----------------NEED TO READJUST PROTECTED ROUTES----------------
 
@@ -34,5 +46,6 @@ async function getAll() {
 export {
 	create,
   getAll,
-  deleteTodo
+  deleteTodo,
+  update
 }

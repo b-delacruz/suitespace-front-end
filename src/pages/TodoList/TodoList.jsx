@@ -34,14 +34,13 @@ const TodoList = (props) => {
     setTodos(todos.filter(todo => todo._id !== deletedTodo._id))
   }
 
-  const handleUpdateTodo = updatedTodoFormData => {
-    console.log(updatedTodoFormData)
-    // // Using map to replace just the todo that was updated
-    // const newTodosArray = todos.map(todo => 
-    //   todo._id === updatedTodoFormData._id ? updatedTodoFormData : todo
-    // )
-    // setTodos(newTodosArray)
-		// // navigate('/') -------------- Navigate back to main page after submission
+  const handleUpdateTodo = async updatedTodoFormData => {
+    const updatedTodo = await todoService.update(updatedTodoFormData)
+    const newTodosArray = todos.map(todo => 
+      todo._id === updatedTodoFormData._id ? updatedTodoFormData : todo
+    )
+    setTodos(newTodosArray)
+		// navigate('/')
   }
 
   const [open, setOpen] = useState(false);
@@ -92,17 +91,16 @@ const TodoList = (props) => {
       </div>
       <div className='todo-list-body'>
         <>
-          {todos.map(todo => 
+          {todos?.map(todo => 
             <TodoItem
               key={todo._id}
               todo={todo}
               open={open}
               handleOpen={handleOpen}
               handleClose={handleClose}
+              handleUpdateTodo={handleUpdateTodo}
               style={style}
               user={props.user}
-              formData={formData}
-              setFormData={setFormData}
               // isList={true}
             />
           )}

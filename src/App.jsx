@@ -1,11 +1,6 @@
 import { useState } from 'react'
-import { Routes, Route, useNavigate, Navigate } from 'react-router-dom'
+import { useNavigate } from 'react-router-dom'
 import NavBar from './components/NavBar/NavBar'
-import Signup from './pages/Signup/Signup'
-import Login from './pages/Login/Login'
-import Landing from './pages/Landing/Landing'
-import Profiles from './pages/Profiles/Profiles'
-import ChangePassword from './pages/ChangePassword/ChangePassword'
 
 // Services
 import * as authService from './services/authService'
@@ -47,46 +42,36 @@ const App = () => {
 
   function handleSideBarOpen() {
     setOpen(true)
-  } 
-  
+  }
+
 
   return (
     <>
-      <NavBar user={user} handleLogout={handleLogout} />
-      <SideBar open={open} handleSideBarOpen={handleSideBarOpen} handleSideBarClose={handleSideBarClose} />
-      <div className='app-toggle-sidebar | fixed right-0 top-0 flex justify-center items-center group' onClick={open ? () => handleSideBarClose() : () => handleSideBarOpen()} style={open ? {display: 'none'} : {display: 'flex'}}>
-        <ChevronLeft fontSize='large'/>
+      <NavBar
+        user={user}
+        handleSignupOrLogin={handleSignupOrLogin}
+        handleLogout={handleLogout} 
+      />
+      <SideBar
+        open={open}
+        handleSideBarOpen={handleSideBarOpen}
+        handleSideBarClose={handleSideBarClose} 
+      />
+      <div 
+        className='app-toggle-sidebar | fixed right-0 top-0 flex justify-center items-center group' 
+        onClick={open ? () => handleSideBarClose() : () => handleSideBarOpen()} 
+        style={open ? { display: 'none' } : { display: 'flex' }}
+      >
+        <ChevronLeft fontSize='large' />
         <span className='sidebar-tooltip | group-hover:scale-100 scale-0'>Open Sidebar</span>
-      </div>      
+      </div>
       <FavoriteBar />
-      <NewsFeed />
-      <Todolist user={user} />
-      <Weather user={user} />
-      <Routes>
-        <Route path="/" element={<Landing user={user} />} />
-        <Route
-          path="/signup"
-          element={<Signup handleSignupOrLogin={handleSignupOrLogin} />}
-        />
-        <Route
-          path="/login"
-          element={<Login handleSignupOrLogin={handleSignupOrLogin} />}
-        />
-        <Route
-          path="/profiles"
-          element={user ? <Profiles /> : <Navigate to="/login" />}
-        />
-        <Route
-          path="/changePassword"
-          element={
-            user ? (
-              <ChangePassword handleSignupOrLogin={handleSignupOrLogin} />
-            ) : (
-              <Navigate to="/login" />
-            )
-          }
-        />
-      </Routes>
+      <div className='app-layout-container'>
+        <NewsFeed />
+        <Todolist user={user} />
+        <div className="break"></div>
+        <Weather user={user} />
+      </div>
     </>
   )
 }

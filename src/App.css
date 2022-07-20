@@ -8,3 +8,15 @@
   opacity: 1;
   margin: .5em;
 }
+
+.app-layout-container {
+  display:flex;
+  flex-direction: row;
+  justify-content: space-evenly;
+  flex-wrap: wrap;
+}
+
+.break {
+  flex-basis: 100%;
+  height: 0;
+}

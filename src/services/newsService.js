@@ -6,7 +6,7 @@
 // export {
 //   getNews
 // }
-const baseUrl = "http://localhost:3001"
+const baseUrl = `${process.env.REACT_APP_BACK_END_SERVER_URL}`
 
 export async function getNews (search) {
   const res = await fetch(`${baseUrl}/api/news/${search}`)

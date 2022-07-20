@@ -27,7 +27,10 @@ const TodoItem = (props) => {
             </Typography>
             <Typography id='modal-modal-description' sx={{ mt: 2 }}>
               <TodoEdit
-                // PASS PROPS NECESSARY FOR DELETE AND EDIT
+                todo={props.todo}
+								formData={props.formData}
+								setFormData={props.setFormData}
+								handleUpdateTodo={props.handleUpdateTodo}
               />
             </Typography>
           </Box>
