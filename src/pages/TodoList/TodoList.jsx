@@ -89,21 +89,23 @@ const TodoList = (props) => {
         <div>Showing Tag</div>
       </div>
       <div className='todo-list-body'>
-        <>
-          {
-            todos.map(todo => 
-              <TodoItem
-                key={todo._id}
-                todo={todo}
-                handleUpdateTodo={handleUpdateTodo}
-                handleDeleteTodo={handleDeleteTodo}
-                style={style}
-                user={props.user}
-                // isList={true}
-              />
-            )
-          }
-        </>
+          {props.user ? (
+            <>
+              {todos.map((todo, idx) => 
+                <TodoItem
+                  key={todo._id}
+                  todo={todo}
+                  handleUpdateTodo={handleUpdateTodo}
+                  handleDeleteTodo={handleDeleteTodo}
+                  style={style}
+                  user={props.user}
+                  // isList={true}
+                />
+              )}
+            </>
+          ) : (
+            ""
+          )}
       </div>
     </div>
     );
