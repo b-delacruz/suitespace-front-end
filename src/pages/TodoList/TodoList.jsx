@@ -1,4 +1,4 @@
-import { useState, useRef, useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import { PropaneSharp } from '@mui/icons-material';
 import { Typography, Button, Modal, Box } from '@mui/material'
 import TodoItem from '../../components/Todo/TodoItem';
@@ -8,6 +8,12 @@ import * as todoService from '../../services/todoService'
 import TodoModal from '../../components/Todo/TodoAdd.jsx';
 
 const TodoList = (props) => {
+
+  const [formData, setFormData] = useState({ // reMOVED THIS from MODAL
+    title: '',
+    description: '',
+    dueDate: new Date(),
+  })
   const [todos, setTodos] = useState([])
   
   useEffect(() => {
@@ -75,6 +81,7 @@ const TodoList = (props) => {
             <Typography id='modal-modal-description' sx={{ mt: 2 }}>
               <TodoModal
                 handleAddTodo={handleAddTodo}
+                formData={formData}
               />
             </Typography>
           </Box>
@@ -89,9 +96,13 @@ const TodoList = (props) => {
             <TodoItem
               key={todo._id}
               todo={todo}
-              handleDeleteTodo={handleDeleteTodo}
-              handleUpdateTodo={handleUpdateTodo}
+              open={open}
+              handleOpen={handleOpen}
+              handleClose={handleClose}
+              style={style}
               user={props.user}
+              formData={formData}
+              setFormData={setFormData}
               // isList={true}
             />
           )}
