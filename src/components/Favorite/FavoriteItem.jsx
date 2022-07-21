@@ -9,8 +9,9 @@ const FavoriteItem = ({ favorite, handleRemoveFavorite }) => {
         <img src={favorite.link + '/favicon.ico'} alt="" />
       </a>
       <button
+        className='favorite-remove-button'
         onClick={() => handleRemoveFavorite(favorite._id)}>
-        DELETE
+        Remove
       </button>
 
     </div>

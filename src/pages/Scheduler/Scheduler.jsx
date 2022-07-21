@@ -47,7 +47,6 @@ const Scheduler = ({ date, user }) => {
   };
 
   const handleUpdateEvent = async (updatedEventData) => {
-    console.log(updatedEventData);
     const newEvent = await eventService.update(updatedEventData);
     const newEventDataArray = eventsData.map((event) =>
       event._id === newEvent._id ? newEvent : event

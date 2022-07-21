@@ -85,7 +85,7 @@ const AddScheduleItem = ({ date, handleAddEvent }) => {
           <p className="opacity-70 text-sm">Example: Remote</p>
         </div>
         <input type="text" hidden name="date" value={formData.date = date.format('MMMM DD YYYY')} />
-        <button onClick={() => handleSubmit()}>
+        <button onClick={() => handleSubmit}>
           SUBMIT
         </button>
       </form>
