@@ -39,7 +39,7 @@ const TodoList = (props) => {
     const newTodosArray = todos.map(todo => 
       todo._id === updatedTodo._id ? updatedTodo : todo
     )
-    setTodos(...newTodosArray)
+    setTodos([...newTodosArray])
   }
 
   const [open, setOpen] = useState(false);
@@ -93,7 +93,7 @@ const TodoList = (props) => {
             <>
               {todos.map((todo, idx) => 
                 <TodoItem
-                  key={todo._id}
+                  key={idx}
                   todo={todo}
                   handleUpdateTodo={handleUpdateTodo}
                   handleDeleteTodo={handleDeleteTodo}
