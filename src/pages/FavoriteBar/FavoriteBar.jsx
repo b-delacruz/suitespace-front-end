@@ -1,4 +1,5 @@
 import * as favoriteService from '../../services/favoriteService'
+import './favorite.css'
 
 //* React Hooks *//
 import { useState, useEffect } from "react";
@@ -10,15 +11,14 @@ import { Modal, Box, Typography } from "@mui/material";
 import FavoriteItem from "../../components/Favorite/FavoriteItem"
 import AddFavoriteItem from "../../components/Favorite/AddFavoriteItem"
 
-const FavoriteBar = ({ user, favorites, setFavorites }) => {
+const FavoriteBar = ({ user }) => {
 
-  console.log(favorites)
-
-  const maxLength = 8
-  const currentLength = (typeof favorites === 'undefined' ? 0 : favorites.length)
+  
   const [open, setOpen] = useState(false);
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
+
+  const [favorites, setFavorites] = useState([])
 
   const style = {
     position: "absolute",
@@ -37,12 +37,12 @@ const FavoriteBar = ({ user, favorites, setFavorites }) => {
       setFavorites(favoriteData);
     };
     fetchAllFavorites();
-  },[setFavorites]);
+  }, []);
 
   const handleAddFavorite = async (newFavoriteItem) => {
     const newFavorite = await favoriteService.create(newFavoriteItem)
-    setFavorites(newFavorite)
-    setOpen(false)
+    setFavorites([...favorites, newFavorite])
+    handleClose()
 
   }
 
@@ -54,12 +54,40 @@ const FavoriteBar = ({ user, favorites, setFavorites }) => {
     setFavorites(newFavoriteArray);
   }
 
+  const maxLength = 8
+  const currentLength = (typeof favorites === 'undefined' ? 0 : favorites.length)
   return (
     <>
-      <div>
+      <div className='favorite-container'>
         <h1>Favorites</h1>
-        <div>
-          {0 < currentLength && currentLength < maxLength &&
+        <div className='favorite-item-container'>
+          { 0 === currentLength &&
+            <>
+              <button
+                onClick={handleOpen}
+              >
+                +
+              </button>
+              <Modal
+                open={open}
+                onClose={handleClose}
+                aria-labelledby='modal-modal-title'
+                aria-describedby='modal-modal-description'
+              >
+                <Box sx={style}>
+                  <Typography id='modal-modal-title' variant='h6' component='h2'>
+                    Add Favorite
+                  </Typography>
+                  <Typography id='modal-modal-description' sx={{ mt: 2 }}>
+                    <AddFavoriteItem
+                      handleAddFavorite={handleAddFavorite}
+                    />
+                  </Typography>
+                </Box>
+              </Modal>
+            </>
+          }
+          {(0 < currentLength && currentLength < maxLength) &&
             <>
               {favorites.map((favorite, idx) =>
                 <FavoriteItem
@@ -87,6 +115,7 @@ const FavoriteBar = ({ user, favorites, setFavorites }) => {
                   <Typography id='modal-modal-description' sx={{ mt: 2 }}>
                     <AddFavoriteItem
                       handleAddFavorite={handleAddFavorite}
+                      handleClose={handleClose}
                     />
                   </Typography>
                 </Box>

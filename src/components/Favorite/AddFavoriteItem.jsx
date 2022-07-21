@@ -1,7 +1,9 @@
 //* React Hooks *//
 import { useState, useRef, useEffect } from 'react'
 
-const AddFavoriteItem = ({ handleAddFavorite }) => {
+import './favorite.css'
+
+const AddFavoriteItem = ({ handleAddFavorite,handleClose }) => {
   //* State *//
   const [validForm, setValidForm] = useState(false)
   const [formData, setFormData] = useState({
@@ -11,6 +13,8 @@ const AddFavoriteItem = ({ handleAddFavorite }) => {
 
   //* useRef *//
   const formElement = useRef()
+
+  const httpsRegex = new RegExp(`https?:\/\/(www\.)?[-a-zA-Z0-9@:%._\+~#=]{1,256}\.[a-zA-Z0-9()]{1,6}\b([-a-zA-Z0-9()@:%_\+.~#?&//=]*)`)
 
   //* useEffect *//
   useEffect(() => {
@@ -22,6 +26,7 @@ const AddFavoriteItem = ({ handleAddFavorite }) => {
 
   const handleSubmit = evt => {
     evt.preventDefault()
+    handleClose()
     handleAddFavorite(formData)
   }
 
@@ -44,11 +49,11 @@ const AddFavoriteItem = ({ handleAddFavorite }) => {
           </div>
           <div className="flex flex-col gap-2 w-2/4">
             <label htmlFor="category-input">
-              URL Link <span>*</span>
+              HTTPS:// URL Link <span>*</span>
             </label>
             <input
               type="text"
-              placeholder="URL Link"
+              placeholder="https://www.example.com"
               name="link"
               value={formData.link}
               onChange={handleChange}

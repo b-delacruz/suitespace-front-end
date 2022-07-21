@@ -1,3 +1,4 @@
+// React
 import { useState, useEffect } from 'react'
 import { useNavigate } from 'react-router-dom'
 import NavBar from './components/NavBar/NavBar'
@@ -26,30 +27,35 @@ const App = () => {
 
 
   const getLocationDetails = async () => {
-    try {
-      locationService.getLocation()
-        .then(location => {
-          weatherService.getWeatherDetails(location)
-            .then(details => {
-              setWeather(details)
-            })
-        })
-    } catch (error) {
-      console.log(error)
+    if (user) {
+      try {
+        locationService.getLocation()
+          .then(location => {
+            weatherService.getWeatherDetails(location)
+              .then(details => {
+                setWeather(details)
+              })
+          })
+      } catch (error) {
+        console.log(error)
+      }
+    } else {
+      return "boston"
     }
   }
 
   const [weather, setWeather] = useState({})
   const [searchLocation, setSearchLocation] = useState(getLocationDetails)
-  const [favorites, setFavorites] = useState()
+
 
   useEffect(() => {
     const fetchWeatherDetails = async () => {
       const weatherDetails = await weatherService.getWeatherDetails(searchLocation)
       setWeather(weatherDetails)
     }
+
     fetchWeatherDetails()
-  }, [searchLocation, user])
+  }, [searchLocation])
 
   const navigate = useNavigate()
 
@@ -96,16 +102,14 @@ const App = () => {
       </div>
 
       <main className='app-layout-container | flex flex-wrap justify-between'>
-        { (user) ?
+        {(user) ?
           <section className='w-full flex gap-14'>
-          <FavoriteBar
-            user={user}
-            favorites={favorites}
-            setFavorites={setFavorites}
-          />
-        </section>
-        :
-        ""
+            <FavoriteBar
+              user={user}
+            />
+          </section>
+          :
+          ""
         }
         <section className='w-full flex gap-14'>
           <NewsFeed />
