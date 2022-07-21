@@ -13,46 +13,24 @@ import { useEffect, useState } from 'react'
 // CSS
 import './weather.css'
 
-const Weather = (props) => {
+const Weather = ({user,searchLocation,setSearchLocation,weather,setWeather}) => {
 
-  const getLocationDetails = async () => {
-    try {
-      locationService.getLocation()
-        .then(location => {
-          weatherService.getWeatherDetails(location)
-            .then(details => {
-              setWeather(details)
-            })
-        })
-    } catch (error) {
-      console.log(error)
-    }
-  }
+  
 
   const getWeatherDisplayDetails = async () => {
     const weatherDisplayDetail = await weatherService.getWeatherPref()
     setWeatherDisplay(weatherDisplayDetail)
   }
 
-  const [searchLocation, setSearchLocation] = useState(getLocationDetails)
+  
   const [weatherDisplay, setWeatherDisplay] = useState(getWeatherDisplayDetails)
-  const [weather, setWeather] = useState({})
+  
 
-  useEffect(() => {
-    
-    const fetchWeatherDetails = async () => {
-      const weatherDetails = await weatherService.getWeatherDetails(searchLocation)
-      setWeather(weatherDetails)
-    }
-    fetchWeatherDetails()
-  }, [searchLocation])
+  
 
   const handleSearchLocation = async (formData) => {
-    console.log(props.user)
-    console.log(formData.query)
-    if (props.user){
-      const updateLocation = await locationService.updateLocation(props.user, formData.query)
-      console.log((updateLocation))
+    if (user){
+      const updateLocation = await locationService.updateLocation(user, formData.query)
     }
     setSearchLocation(formData.query)
   }
