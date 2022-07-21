@@ -4,7 +4,7 @@ import NavBar from './components/NavBar/NavBar'
 
 // Services
 import * as authService from './services/authService'
-import * as locationService from './services/locationService'
+
 
 // Files 
 import './App.css'

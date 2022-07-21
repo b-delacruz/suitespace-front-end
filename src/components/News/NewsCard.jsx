@@ -16,6 +16,7 @@ export default function NewsCard(props) {
       <div className='news-card-container | flex flex-col justify-start items-start gap-2 '>
         <div className='news-card-header | font-bold'>
             {props.news.title.split(' ').slice().join(' ')}
+            {/* {props.news.title ? (props.news.title.length < 10) : props.news.title.split(' ').slice().join(' ')} */}
         </div>
         <div className='news-card-description | flex justify-start'>
     

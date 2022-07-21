@@ -62,6 +62,7 @@
   padding-inline: 1em;
   padding-block: .5em;
   text-align: start !important;
+  height: 100%;
 }
 
 .news-card-header {
