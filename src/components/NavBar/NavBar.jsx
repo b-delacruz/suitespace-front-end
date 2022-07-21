@@ -1,10 +1,7 @@
-import { Link } from 'react-router-dom'
 import './navbar.css'
 import Signup from '../../pages/Signup/Signup'
 import Login from '../../pages/Login/Login'
 import ChangePassword from '../../pages/ChangePassword/ChangePassword'
-
-import { Button } from '@mui/material'
 
 const NavBar = ({ user, handleLogout, handleSignupOrLogin }) => {
   return (
