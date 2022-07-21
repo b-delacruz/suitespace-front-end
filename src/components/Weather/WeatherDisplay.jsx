@@ -6,7 +6,7 @@ const WeatherDisplay = ({ weather, displayPref }) => {
 
   return (
     <>
-      <div className="weather-display-container divide-y">
+      <div className="weather-display-container">
         {/* Body content of card */}
         <div className="weather-content">
           <img
@@ -24,15 +24,15 @@ const WeatherDisplay = ({ weather, displayPref }) => {
         {/* Data info */}
         <div className="weather-data">
           <div className="weather-data-item">
-            <h4>Last Updated</h4>
+            <h4 className="weather-data-item-header">Last Updated</h4>
             {weather.current?.last_updated.slice(10, 16)}
           </div>
           <div className="weather-data-item">
-            <h4>Humidity</h4>
+            <h4 className="weather-data-item-header">Humidity</h4>
             {weather.current?.humidity}
           </div>
           <div className="weather-data-item">
-            <h4>UV</h4>
+            <h4 className="weather-data-item-header">UV</h4>
             {weather.current?.uv}
           </div>
         </div>

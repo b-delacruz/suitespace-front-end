@@ -50,7 +50,7 @@ const NewsFeed = (props) => {
       <div className="news-container">
         <div className="news-nav | flex justify-between items-center">
           <h1 className="news-title | text-xl">News Feed</h1>
-        <form autoCompete="off" onSubmit={handleSubmit}>
+        <form autoCompete="off" onSubmit={handleSubmit} className='flex items-center'>
             <input
               type="text"
               name="search"
@@ -61,8 +61,8 @@ const NewsFeed = (props) => {
               required
             />
             <button type="submit" disabled={isFormInvalid()} className="ml-1">
-              <SearchIcon />
             </button>
+            <SearchIcon />
           </form>
         </div>
         <div className="news-body">

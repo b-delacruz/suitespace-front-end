@@ -3,11 +3,10 @@
 @tailwind utilities;
 
 .weather-input-item {
-  
 }
 
 .weather-nav {
-  display:flex;
+  display: flex;
   flex-direction: row;
   justify-content: space-between;
   align-items: center;
@@ -38,10 +37,10 @@
   width: 60% !important;
 
   background: rgba(255, 255, 255, 0.045);
-  backdrop-filter: blur( 8px );
-  -webkit-backdrop-filter: blur( 8px );
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
   border-radius: 10px;
-  border: 1px solid rgba( 255, 255, 255, 0.18 );
+  border: 1px solid rgba(255, 255, 255, 0.18);
 }
 
 .weather-display-container {
@@ -53,32 +52,71 @@
   width: 40%;
 
   background: rgba(255, 255, 255, 0.045);
-  backdrop-filter: blur( 8px );
-  -webkit-backdrop-filter: blur( 8px );
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
   border-radius: 10px;
-  border: 1px solid rgba( 255, 255, 255, 0.18 );
+  border: 1px solid rgba(255, 255, 255, 0.18);
 }
 
 .weather-content {
-  display:flex;
+  display: flex;
   align-items: center;
   justify-content: space-around;
   gap: 1em;
 }
 
 .weather-content-image {
-  
 }
 
 .weather-data {
-  display:inline-flex;
+  display: inline-flex;
   align-items: flex-start;
+  gap: 2em;
 }
 
 .weather-data-item {
-  display:flex;
+  display: flex;
+  gap: .5em;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  margin: 1rem 1rem;
+}
+
+.weather-data-item-header {
+  color: white;
+}
+
+/* Media Query for Mobile Devices */
+@media (max-width: 480px) {
+  body {
+      background-color: red;
+  }
+}
+
+/* Media Query for low resolution  Tablets, Ipads */
+@media (min-width: 481px) and (max-width: 767px) {
+  body {
+      background-color: yellow;
+  }
+}
+
+/* Media Query for Tablets Ipads portrait mode */
+@media (min-width: 768px) and (max-width: 1024px){
+  body {
+      background-color: blue;
+  }
+}
+
+/* Media Query for Laptops and Desktops */
+@media (min-width: 1025px) and (max-width: 1280px){
+  body {
+      background-color: green;
+  }
+}
+
+/* Media Query for Large screens */
+@media (min-width: 1281px) {
+  body {
+      background-color: white;
+  }
 }

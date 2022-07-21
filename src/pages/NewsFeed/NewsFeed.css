@@ -23,6 +23,7 @@
 
 .news-title {
   font-weight: 400;
+  
 }
 
 .news-nav {
@@ -35,6 +36,118 @@
   gap: 1em;
   padding-right: .5em;
   height: 85%;
+  width: 100%;
   overflow-y: scroll;
+  overflow-x: hidden;
   padding-bottom: 1em;
+}
+
+/* Media Query for Mobile Devices */
+@media (max-width: 480px) {
+  .news-title {
+    font-weight: 400;
+    font-size: 1em !important;
+  }
+  .news-button {
+    width: 200px !important;
+    height: 35px;
+  }
+  .news-container {
+  flex-wrap: wrap;
+    width: 100%;
+    height: 50%;
+  
+    background: rgba(255, 255, 255, 0.045);
+    backdrop-filter: blur( 8px );
+    -webkit-backdrop-filter: blur( 8px );
+    border-radius: 10px;
+    border: 1px solid rgba( 255, 255, 255, 0.18 );
+  
+    font-family: 'Sora', sans-serif;
+    text-align: center;
+    font-weight: 300;
+    --calendar-soft-yellow: #F2D3AB;
+    color: #f2d3ab;
+    --calendar-today-dark-blue: #35445d;
+    --calendar-selected-dark-blue: rgba(53, 68, 93, 0.5);
+    padding: 0em 1em;
+  }
+}
+
+/* Media Query for low resolution  Tablets, Ipads */
+@media (min-width: 481px) and (max-width: 767px) {
+  .news-title {
+    font-weight: 400;
+    font-size: 1em !important;
+  }
+  .news-button {
+    width: 200px !important;
+    height: 35px;
+  }
+  .news-container {
+    flex-wrap: wrap;
+    width: 100%;
+    height: 100%;
+  
+    background: rgba(255, 255, 255, 0.045);
+    backdrop-filter: blur( 8px );
+    -webkit-backdrop-filter: blur( 8px );
+    border-radius: 10px;
+    border: 1px solid rgba( 255, 255, 255, 0.18 );
+  
+    font-family: 'Sora', sans-serif;
+    text-align: center;
+    font-weight: 300;
+    --calendar-soft-yellow: #F2D3AB;
+    color: #f2d3ab;
+    --calendar-today-dark-blue: #35445d;
+    --calendar-selected-dark-blue: rgba(53, 68, 93, 0.5);
+    padding: 0em 1em;
+  }
+}
+
+/* Media Query for Tablets Ipads portrait mode */
+@media (min-width: 768px) and (max-width: 1024px){
+  .news-title {
+    font-weight: 400;
+    font-size: 1em !important;
+  }
+  .news-button {
+    width: 200px !important;
+    height: 35px;
+  }
+  .news-container {
+    flex-wrap: wrap;
+    width: 100%;
+    height: 50%;
+  
+    background: rgba(255, 255, 255, 0.045);
+    backdrop-filter: blur( 8px );
+    -webkit-backdrop-filter: blur( 8px );
+    border-radius: 10px;
+    border: 1px solid rgba( 255, 255, 255, 0.18 );
+  
+    font-family: 'Sora', sans-serif;
+    text-align: center;
+    font-weight: 300;
+    --calendar-soft-yellow: #F2D3AB;
+    color: #f2d3ab;
+    --calendar-today-dark-blue: #35445d;
+    --calendar-selected-dark-blue: rgba(53, 68, 93, 0.5);
+    padding: 0em 1em;
+  }
+}
+
+/* Media Query for Laptops and Desktops */
+@media (min-width: 1025px) and (max-width: 1280px){
+  body {
+      background-color: green;
+  }
+}
+
+/* Media Query for Large screens */
+@media (min-width: 1281px) {
+  body {
+      background-color: white;
+  }
 }
