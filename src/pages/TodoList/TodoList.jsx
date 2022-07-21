@@ -1,19 +1,13 @@
 import { useState, useEffect } from 'react';
-import { PropaneSharp } from '@mui/icons-material';
-import { Typography, Button, Modal, Box } from '@mui/material'
+import { Modal, Box, Typography, Backdrop, Fade } from '@mui/material'
 import TodoItem from '../../components/Todo/TodoItem';
 import './TodoList.css';
 import '../../components/Todo/TodoAdd.jsx'
 import * as todoService from '../../services/todoService'
-import TodoModal from '../../components/Todo/TodoAdd.jsx';
+import TodoAdd from '../../components/Todo/TodoAdd.jsx';
 
 const TodoList = (props) => {
 
-  const [formData, setFormData] = useState({ // reMOVED THIS from MODAL
-    title: '',
-    description: '',
-    dueDate: new Date(),
-  })
   const [todos, setTodos] = useState([])
   
   useEffect(() => {
@@ -58,54 +52,78 @@ const TodoList = (props) => {
   }
   
   return (
-    <div className='todo-list'>
-      <div className='todo-list-header | flex justify-between'>
+    <div className='todo-list | flex'>
+      <div className='todo-list-header | text-lg'>
         <h1>Todos</h1>
-        <div>searchbar</div>
-        <div>grab button</div>
       </div>
       <div>
-        <Button onClick={handleOpen}>Add Todo</Button>
+        {props.user ? (
+          <button
+            onClick={handleOpen}
+            className='todo-add-event-button | flex justify-center items-center text-base rounded'
+          >
+            Add Todo
+          </button>
+        ) : (
+          <div>
+            Log in to add todos
+          </div>
+        )}
         <Modal
           open={open}
           onClose={handleClose}
           aria-labelledby='modal-modal-title'
           aria-describedby='modal-modal-description'
+          closeAfterTransition
+          BackdropComponent={Backdrop}
+          BackdropProps={{
+            timeout: 1000,
+          }}
         >
-          <Box sx={style}>
-            <Typography id='modal-modal-title' variant='h6' component='h2'>
-              Add Todo
-            </Typography>
-            <Typography id='modal-modal-description' sx={{ mt: 2 }}>
-              <TodoModal
-                handleAddTodo={handleAddTodo}
-                formData={formData}
-              />
-            </Typography>
-          </Box>
+          <Fade in={open}>
+            <Box sx={style}>
+              <Typography
+                id='modal-modal-title'
+                variant='h6'
+                component='h2'
+              >
+                <span className="form-header">
+                  <span className="soft-yellow">
+                    Add Todo
+                  </span>
+                </span>
+              </Typography>
+              <Typography
+                id='modal-modal-description'
+                sx={{ mt: 2 }}
+                component={"span"}
+              >
+                <TodoAdd
+                  handleAddTodo={handleAddTodo}
+                />
+              </Typography>
+            </Box>
+          </Fade>
         </Modal>
       </div>
-      <div className='todo-list-showing | flex'>
-        <div>Showing Tag</div>
-      </div>
-      <div className='todo-list-body'>
+      <div className='todo-items-container | overflow-y-scroll flex flex-col gap-4'>
           {props.user ? (
             <>
               {todos.map((todo, idx) => 
                 <TodoItem
-                  key={idx}
-                  todo={todo}
-                  handleUpdateTodo={handleUpdateTodo}
-                  handleDeleteTodo={handleDeleteTodo}
-                  style={style}
-                  user={props.user}
-                  // isList={true}
+                key={idx}
+                todo={todo}
+                handleUpdateTodo={handleUpdateTodo}
+                handleDeleteTodo={handleDeleteTodo}
+                style={style}
+                user={props.user}
+                // isList={true}
                 />
-              )}
+                )}
             </>
           ) : (
             ""
-          )}
+            )}
       </div>
     </div>
     );
