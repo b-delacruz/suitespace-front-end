@@ -1,6 +1,7 @@
 import * as React from 'react';
 import Card from '@mui/material/Card';
 import CardMedia from '@mui/material/CardMedia';
+import Bookmark from './Bookmark';
 import './NewsCard.css'
 
 export default function NewsCard(props) {
@@ -13,6 +14,7 @@ export default function NewsCard(props) {
         image={props.news.urlToImage ? props.news.urlToImage : 'https://i.imgur.com/QoMTW46.jpg' }
         alt="News image"
       />
+
       <div className='news-card-container | flex flex-col justify-start items-start gap-2 '>
         <div className='news-card-header | font-bold'>
             {props.news.title.split(' ').slice().join(' ')}
@@ -29,6 +31,7 @@ export default function NewsCard(props) {
           </button>
         </a>
       </div>   
+      <Bookmark />
     </Card>
   );
 }
