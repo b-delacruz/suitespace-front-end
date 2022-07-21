@@ -1,11 +1,12 @@
 @import url('https://fonts.googleapis.com/css2?family=Sora:wght@100;200;300;400;500;600;700;800&display=swap');
 
+
 .todo-list {
   margin-top: -1em;
   width: 375px;
   height: 475px;
   font-family: 'Sora', sans-serif;
-
+  
   color: rgba(255, 255, 255, 0.95);
   font-weight: 300;
 }
@@ -51,4 +52,35 @@ input:focus {
   height: 65%;
   padding-block: 1em;
   padding-right: .5em;
+}
+
+.todo-item-divider-container {
+  height: 100%;
+  width: 20%;
+}
+
+.todo-item-vertical-line {
+  height: 100%;
+  width: 3px;
+  background-color: var(--soft-yellow);
+}
+
+.todo-item-description {
+  width: 50%;
+}
+
+.todo-item-category {
+  color: rgba(255, 255, 255, 0.75);
+}
+
+.MuiBackdrop-root {
+  opacity: .25 !important;
+}
+
+.MuiBox-root {
+  background: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur( 100px );
+  -webkit-backdrop-filter: blur( 100px );
+  border-radius: 10px;
+  border: 1px solid rgba( 255, 255, 255, 0.18 );
 }

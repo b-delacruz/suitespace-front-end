@@ -65,7 +65,9 @@ const TodoList = (props) => {
             Add Todo
           </button>
         ) : (
-          "Log in to add todos"
+          <div>
+            Log in to add todos
+          </div>
         )}
         <Modal
           open={open}
@@ -105,7 +107,6 @@ const TodoList = (props) => {
         </Modal>
       </div>
       <div className='todo-items-container | overflow-y-scroll flex flex-col gap-4'>
-        <div>Showing Tag</div>
           {props.user ? (
             <>
               {todos.map((todo, idx) => 
