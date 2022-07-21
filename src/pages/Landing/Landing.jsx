@@ -23,7 +23,7 @@ const Landing = ({ user }) => {
 
   return (
     <main className={styles.container}>
-      <h1>hello, {user ? user.name : 'friend'}</h1>
+      {/* <h1>hello, {user ? user.name : 'friend'}</h1>
       <h1 className="text-3xl font-bold underline text-red-600">
         Hello world!
       </h1>
@@ -42,7 +42,7 @@ const Landing = ({ user }) => {
             Duis mollis, est non commodo luctus, nisi erat porttitor ligula.
           </Typography>
         </Box>
-      </Modal>
+      </Modal> */}
     </main>
   )
 }
