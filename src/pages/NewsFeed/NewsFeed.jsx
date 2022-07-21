@@ -16,7 +16,6 @@ const NewsFeed = (props) => {
   useEffect(() => {
     const fetchNews = async () => {
       const newsData = await getNews()
-      console.log(newsData.articles)
       setNewsData(newsData.articles)
     }
     fetchNews()
@@ -33,7 +32,6 @@ const NewsFeed = (props) => {
     try{
       getNews(formData.search)
       .then(newsData => {
-        console.log(newsData.articles)
         setNewsData(newsData.articles)
       })
     } catch (error) {

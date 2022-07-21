@@ -1,9 +1,10 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import { useNavigate } from 'react-router-dom'
 import NavBar from './components/NavBar/NavBar'
 
 // Services
 import * as authService from './services/authService'
+import * as weatherService from './services/weatherService'
 import * as locationService from './services/locationService'
 
 // Files 
@@ -21,8 +22,33 @@ import { ChevronLeft } from '@mui/icons-material';
 
 const App = () => {
   const [user, setUser] = useState(authService.getUser())
-  // const [location, setLocation] = useState(locationService.getLocation())
   const [open, setOpen] = useState(true)
+
+
+  const getLocationDetails = async () => {
+    try {
+      locationService.getLocation()
+        .then(location => {
+          weatherService.getWeatherDetails(location)
+            .then(details => {
+              setWeather(details)
+            })
+        })
+    } catch (error) {
+      console.log(error)
+    }
+  }
+
+  const [weather, setWeather] = useState({})
+  const [searchLocation, setSearchLocation] = useState(getLocationDetails)
+
+  useEffect(() => {
+    const fetchWeatherDetails = async () => {
+      const weatherDetails = await weatherService.getWeatherDetails(searchLocation)
+      setWeather(weatherDetails)
+    }
+    fetchWeatherDetails()
+  }, [searchLocation,user])
 
   const navigate = useNavigate()
 
@@ -34,6 +60,7 @@ const App = () => {
 
   const handleSignupOrLogin = () => {
     setUser(authService.getUser())
+    setSearchLocation(getLocationDetails)
   }
 
   function handleSideBarClose() {
@@ -73,7 +100,13 @@ const App = () => {
           <Todolist user={user} />
         </section>
         <section>
-          <Weather user={user} />
+          <Weather 
+          user={user} 
+          weather={weather} 
+          setWeather={setWeather}
+          searchLocation={searchLocation}
+          setSearchLocation={setSearchLocation}
+          />
         </section>
       </main>
     </>
