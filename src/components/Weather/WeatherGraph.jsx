@@ -47,13 +47,21 @@ const WeatherDisplay = (props) => {
     scales: {
       x: {
         ticks: {
-          color: 'white'
+          color: 'white',
+          font: {
+            size: 20,
+            family: 'Sora',
+          }
         }
       },
       y: {
         ticks: {
-          color: 'orange'
-        }
+          color: '#F2D3AB',
+          font: {
+            size: 20,
+            family: 'Sora'
+          },
+        },
       }
     },
     plugins: {
@@ -66,7 +74,11 @@ const WeatherDisplay = (props) => {
       title: {
         display: true,
         text: 'Temperature',
-        color: 'white'
+        color: 'white',
+        font: {
+          size: 30,
+          family: 'Sora'
+        },
       },
     },
   };
@@ -77,13 +89,22 @@ const WeatherDisplay = (props) => {
       {
         label: 'Hourly Forecast',
         data: hourData.map(hour => hour),
-        borderColor: 'rgb(255, 99, 132, 0.5)',
-        backgroundColor: 'rgb(255, 99, 132)',
+        borderColor: '#F2D3AB',
+        lineTension: 0.5,
+        borderWidth: 5,
+        backgroundColor: '#F2D3AB',
+        font: {
+          size: 30,
+          family: 'Sora'
+        },
       }
     ],
+    
   };
 
-  return <Line className='weather-graph' options={options} data={data} />
+  return (
+    <Line className='weather-graph' options={options} data={data} />
+  )
 }
 
 export default WeatherDisplay

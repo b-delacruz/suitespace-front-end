@@ -1,49 +1,48 @@
-import { useState } from 'react'
-import { useNavigate } from 'react-router-dom'
-import NavBar from './components/NavBar/NavBar'
+import { useState } from "react";
+import { useNavigate } from "react-router-dom";
+import NavBar from "./components/NavBar/NavBar";
 
 // Services
-import * as authService from './services/authService'
-import * as locationService from './services/locationService'
+import * as authService from "./services/authService";
+import * as locationService from "./services/locationService";
 
-// Files 
-import './App.css'
+// Files
+import "./App.css";
 
 // Main Pages
-import FavoriteBar from './pages/FavoriteBar/FavoriteBar'
-import Todolist from './pages/TodoList/TodoList'
-import SideBar from './components/SideBar/SideBar'
-import NewsFeed from './pages/NewsFeed/NewsFeed'
-import Weather from './pages/Weather/Weather'
+import FavoriteBar from "./pages/FavoriteBar/FavoriteBar";
+import Todolist from "./pages/TodoList/TodoList";
+import SideBar from "./components/SideBar/SideBar";
+import NewsFeed from "./pages/NewsFeed/NewsFeed";
+import Weather from "./pages/Weather/Weather";
 
-// Packages 
-import { ChevronLeft } from '@mui/icons-material';
+// Packages
+import { ChevronLeft } from "@mui/icons-material";
 
 const App = () => {
-  const [user, setUser] = useState(authService.getUser())
+  const [user, setUser] = useState(authService.getUser());
   // const [location, setLocation] = useState(locationService.getLocation())
-  const [open, setOpen] = useState(false)
+  const [open, setOpen] = useState(true);
 
-  const navigate = useNavigate()
+  const navigate = useNavigate();
 
   const handleLogout = () => {
-    authService.logout()
-    setUser(null)
-    navigate('/')
-  }
+    authService.logout();
+    setUser(null);
+    navigate("/");
+  };
 
   const handleSignupOrLogin = () => {
-    setUser(authService.getUser())
-  }
+    setUser(authService.getUser());
+  };
 
   function handleSideBarClose() {
-    setOpen(false)
+    setOpen(false);
   }
 
   function handleSideBarOpen() {
-    setOpen(true)
+    setOpen(true);
   }
-
 
   return (
     <>
@@ -53,28 +52,26 @@ const App = () => {
         handleLogout={handleLogout}
         handleSideBarOpen={handleSideBarOpen}
         handleSideBarClose={handleSideBarClose}
-        open={open} 
+        open={open}
       />
       <SideBar
         open={open}
         handleSideBarOpen={handleSideBarOpen}
         handleSideBarClose={handleSideBarClose}
-        user={user} 
+        user={user}
       />
       <FavoriteBar />
-      {/* <main className='app-layout-container | flex flex-wrap justify-between'>
-        <section className='w-full flex gap-14'>
+      <main className="app-layout-container | flex flex-wrap justify-between">
+        <section className="app-layout-top-container">
           <NewsFeed />
-        </section>
-        <section>
           <Todolist user={user} />
         </section>
-        {/* <section>
+        <section className="app-layout-bottom-container">
           <Weather user={user} />
-        </section> 
-      </main> */}
+        </section>
+      </main>
     </>
-  )
-}
+  );
+};
 
-export default App
+export default App;
