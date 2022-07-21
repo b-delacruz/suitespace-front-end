@@ -24,7 +24,10 @@ const TodoItem = (props) => {
 	return (
 		<>
 			{props.user?.profile === props.todo.owner && 
-      	<div className='todo-item' onClick={handleOpen}>
+      	<div
+          className='todo-item | flex w-full justify-between items-start'
+          onClick={handleOpen}
+        >
 					<input type="checkbox" />
 					<div className='todo-item-content'>
 						<p>Title: {props.todo.title}</p>
