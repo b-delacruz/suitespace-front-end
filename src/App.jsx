@@ -41,6 +41,7 @@ const App = () => {
 
   const [weather, setWeather] = useState({})
   const [searchLocation, setSearchLocation] = useState(getLocationDetails)
+  const [favorites, setFavorites] = useState()
 
   useEffect(() => {
     const fetchWeatherDetails = async () => {
@@ -48,7 +49,7 @@ const App = () => {
       setWeather(weatherDetails)
     }
     fetchWeatherDetails()
-  }, [searchLocation,user])
+  }, [searchLocation, user])
 
   const navigate = useNavigate()
 
@@ -77,35 +78,46 @@ const App = () => {
       <NavBar
         user={user}
         handleSignupOrLogin={handleSignupOrLogin}
-        handleLogout={handleLogout} 
+        handleLogout={handleLogout}
       />
       <SideBar
         open={open}
         handleSideBarOpen={handleSideBarOpen}
         handleSideBarClose={handleSideBarClose}
-        user={user} 
+        user={user}
       />
-      <div 
-        className='app-toggle-sidebar | fixed right-0 top-0 flex justify-center items-center group' 
-        onClick={open ? () => handleSideBarClose() : () => handleSideBarOpen()} 
+      <div
+        className='app-toggle-sidebar | fixed right-0 top-0 flex justify-center items-center group'
+        onClick={open ? () => handleSideBarClose() : () => handleSideBarOpen()}
         style={open ? { display: 'none' } : { display: 'flex' }}
       >
         <ChevronLeft fontSize='large' />
         <span className='sidebar-tooltip | group-hover:scale-100 scale-0'>Open Sidebar</span>
       </div>
-      <FavoriteBar />
+
       <main className='app-layout-container | flex flex-wrap justify-between'>
+        { (user) ?
+          <section className='w-full flex gap-14'>
+          <FavoriteBar
+            user={user}
+            favorites={favorites}
+            setFavorites={setFavorites}
+          />
+        </section>
+        :
+        ""
+        }
         <section className='w-full flex gap-14'>
           <NewsFeed />
           <Todolist user={user} />
         </section>
         <section>
-          <Weather 
-          user={user} 
-          weather={weather} 
-          setWeather={setWeather}
-          searchLocation={searchLocation}
-          setSearchLocation={setSearchLocation}
+          <Weather
+            user={user}
+            weather={weather}
+            setWeather={setWeather}
+            searchLocation={searchLocation}
+            setSearchLocation={setSearchLocation}
           />
         </section>
       </main>
