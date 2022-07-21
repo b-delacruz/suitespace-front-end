@@ -81,7 +81,7 @@ const EditScheduleEvent = ({ date, handleUpdateEvent, event }) => {
           <p className="opacity-70 text-sm">Example: Remote</p>
         </div>
         <input type="text" hidden name="date" defaultValue={formData.date = date.format('MMMM DD YYYY')} />
-        <button onClick={() => handleSubmit()}>
+        <button onClick={() => handleSubmit}>
           SUBMIT
         </button>
       </form>
