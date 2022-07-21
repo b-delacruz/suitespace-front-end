@@ -43,16 +43,16 @@ const Scheduler = ({ date, user }) => {
   const handleAddEvent = async (newEventData) => {
     const newEvent = await eventService.create(newEventData);
     setEventsData([...eventsData, newEvent]);
-    setOpen(false)
+    setOpen(false);
   };
 
   const handleUpdateEvent = async (updatedEventData) => {
-    console.log(updatedEventData);
     const newEvent = await eventService.update(updatedEventData);
     const newEventDataArray = eventsData.map((event) =>
       event._id === newEvent._id ? newEvent : event
     );
     setEventsData([...newEventDataArray]);
+    setOpen(false);
   };
 
   const handleDeleteEvent = async (eventId) => {
@@ -61,7 +61,7 @@ const Scheduler = ({ date, user }) => {
       (event, idx) => event._id !== deletedEvent._id
     );
     setEventsData(newEventsArray);
-    // setOpen(false)
+    setOpen(false);
   };
 
   return (

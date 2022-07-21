@@ -22,7 +22,7 @@ import { ChevronLeft } from '@mui/icons-material';
 const App = () => {
   const [user, setUser] = useState(authService.getUser())
   // const [location, setLocation] = useState(locationService.getLocation())
-  const [open, setOpen] = useState(true)
+  const [open, setOpen] = useState(false)
 
   const navigate = useNavigate()
 
@@ -50,7 +50,10 @@ const App = () => {
       <NavBar
         user={user}
         handleSignupOrLogin={handleSignupOrLogin}
-        handleLogout={handleLogout} 
+        handleLogout={handleLogout}
+        handleSideBarOpen={handleSideBarOpen}
+        handleSideBarClose={handleSideBarClose}
+        open={open} 
       />
       <SideBar
         open={open}
@@ -58,24 +61,18 @@ const App = () => {
         handleSideBarClose={handleSideBarClose}
         user={user} 
       />
-      <div 
-        className='app-toggle-sidebar | fixed right-0 top-0 flex justify-center items-center group' 
-        onClick={open ? () => handleSideBarClose() : () => handleSideBarOpen()} 
-        style={open ? { display: 'none' } : { display: 'flex' }}
-      >
-        <ChevronLeft fontSize='large' />
-        <span className='sidebar-tooltip | group-hover:scale-100 scale-0'>Open Sidebar</span>
-      </div>
       <FavoriteBar />
-      <main className='app-layout-container | flex flex-wrap justify-between'>
+      {/* <main className='app-layout-container | flex flex-wrap justify-between'>
         <section className='w-full flex gap-14'>
           <NewsFeed />
-          <Todolist user={user} />
         </section>
         <section>
-          <Weather user={user} />
+          <Todolist user={user} />
         </section>
-      </main>
+        {/* <section>
+          <Weather user={user} />
+        </section> 
+      </main> */}
     </>
   )
 }
