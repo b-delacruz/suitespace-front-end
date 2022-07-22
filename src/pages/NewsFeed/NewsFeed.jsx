@@ -50,7 +50,7 @@ const NewsFeed = (props) => {
       <div className="news-container">
         <div className="news-nav | flex justify-between items-center">
           <h1 className="news-title | text-xl">News Feed</h1>
-          <form autoCompete="off" onSubmit={handleSubmit} className='flex items-center'>
+          <form onSubmit={handleSubmit} className='flex items-center'>
             <input
               type="text"
               name="search"
@@ -67,7 +67,7 @@ const NewsFeed = (props) => {
         </div>
         <div className="news-body">
           {newsData.map((news, idx) => (
-            <NewsCard news={news} />
+            <NewsCard key={idx} news={news} />
           ))}
         </div>
       </div>

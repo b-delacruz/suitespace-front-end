@@ -54,7 +54,7 @@ const EditScheduleEvent = ({
           </div>
           <div className="flex flex-col gap-2 w-2/4">
             <label htmlFor="category-input">
-              Catagory <span>*</span>
+              Category <span>*</span>
             </label>
             <input
               type="text"
