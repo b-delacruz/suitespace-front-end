@@ -7,9 +7,13 @@
   gap: 1em;
 }
 
+.app-layout-favorite-bar {
+  height: 5%;
+}
+
 .app-layout-top-container {
   width: 100%;
-  height: 50%;
+  height: 45%;
   display: flex;
   gap: 1em;
   justify-content: space-between;
@@ -17,7 +21,7 @@
 
 .app-layout-bottom-container {
   width: 100%;
-  height: 50%;
+  height: 45%;
   display: flex;
 }
 

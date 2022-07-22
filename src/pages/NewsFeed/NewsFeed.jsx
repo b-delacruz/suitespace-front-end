@@ -13,12 +13,11 @@ const NewsFeed = (props) => {
 
   useEffect(() => {
     const fetchNews = async () => {
-      const newsData = await getNews();
-      console.log(newsData.articles);
-      setNewsData(newsData.articles);
-    };
-    fetchNews();
-  }, []);
+      const newsData = await getNews()
+      setNewsData(newsData.articles)
+    }
+    fetchNews()
+  }, [])
 
   const handleChange = (evt) => {
     setFormData({
@@ -27,13 +26,13 @@ const NewsFeed = (props) => {
     });
   };
 
-  const handleSubmit = async (evt) => {
-    evt.preventDefault();
-    try {
-      getNews(formData.search).then((newsData) => {
-        console.log(newsData.articles);
-        setNewsData(newsData.articles);
-      });
+	const handleSubmit = async evt => {
+		evt.preventDefault()
+    try{
+      getNews(formData.search)
+      .then(newsData => {
+        setNewsData(newsData.articles)
+      })
     } catch (error) {
       console.log(error);
     }

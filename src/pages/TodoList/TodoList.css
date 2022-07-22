@@ -1,3 +1,6 @@
+@import url('https://fonts.googleapis.com/css2?family=Sora:wght@100;200;300;400;500;600;700;800&display=swap');
+
+
 .todo-list {
   background: rgba(255, 255, 255, 0.045);
   backdrop-filter: blur( 8px );
@@ -6,9 +9,36 @@
   border: 1px solid rgba( 255, 255, 255, 0.18 );
   width: 50%;
   height: 100%;
+  font-family: 'Sora', sans-serif;
+  
+  color: rgba(255, 255, 255, 0.95);
+  font-weight: 300;
+  padding-inline: 1em;
+}
+
+.todo-list-header {
+  justify-content: space-between;
+  align-items: center;
+  height: 15% !important;
+  font-weight: 400;
+  color: var(--soft-yellow);
+}
+
+.todo-add-event-button {
+  flex-shrink: 0;
+  background-color: #ffffff18;
+  transition: .5s;
+  color: var(--soft-yellow);
+  width: fit-content;
+  padding: .5em 1em;
+}
+.todo-add-event-button:hover {
+  background-color: #35445d6d;
+  transition: .5s;
 }
 
 .todo-item-container {
+  height: 85% !important;
   width: 100%;
 }
 
@@ -61,4 +91,78 @@
   body {
       background-color: white;
   }
+}
+
+input {
+  background: rgba(217, 216, 216, 0.111);
+  backdrop-filter: blur( 9px );
+  -webkit-backdrop-filter: blur( 9px );
+  border-radius: 10px;
+  border: 1px solid rgba( 255, 255, 255, 0.18 );
+  padding: .5em !important;
+  caret-color: var(--soft-yellow);
+  color: white;
+}
+
+input:focus {
+  outline: solid 1px rgba(255, 255, 255, 0.5);
+  background: rgba(237, 237, 237, 0.111);
+}
+
+.verticle-line {
+  height: 100%;
+  width: 10px;
+  background: var(--soft-yellow);
+}
+
+.todo-item {
+  display: flex;
+  height: fit-content !important;
+  border-radius: 10px;
+  transition: .5s;
+  padding: 1em;
+}
+
+.outer-box {
+  height: 40px;
+  width: 40px;
+  color: ;
+}
+
+
+.todo-item:hover {
+  cursor: pointer;
+  background: rgba(255, 255, 255, 0.1);
+  transition: .5s;
+}
+
+.todo-items-container {
+  height: 85%;
+  padding-block: 1em;
+  padding-right: .5em;
+}
+
+.todo-item-divider-container {
+  height: 100%;
+  width: 20%;
+}
+
+.todo-item-description {
+  width: 50%;
+}
+
+.todo-item-category {
+  color: rgba(255, 255, 255, 0.75);
+}
+
+.MuiBackdrop-root {
+  opacity: .25 !important;
+}
+
+.MuiBox-root {
+  background: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur( 100px );
+  -webkit-backdrop-filter: blur( 100px );
+  border-radius: 10px;
+  border: 1px solid rgba( 255, 255, 255, 0.18 );
 }

@@ -1,9 +1,11 @@
-import { useState } from "react";
+// React
+import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import NavBar from "./components/NavBar/NavBar";
 
 // Services
 import * as authService from "./services/authService";
+import * as weatherService from "./services/weatherService";
 import * as locationService from "./services/locationService";
 
 // Files
@@ -21,8 +23,37 @@ import { ChevronLeft } from "@mui/icons-material";
 
 const App = () => {
   const [user, setUser] = useState(authService.getUser());
-  // const [location, setLocation] = useState(locationService.getLocation())
   const [open, setOpen] = useState(true);
+
+  const getLocationDetails = async () => {
+    if (user) {
+      try {
+        locationService.getLocation().then((location) => {
+          weatherService.getWeatherDetails(location).then((details) => {
+            setWeather(details);
+          });
+        });
+      } catch (error) {
+        console.log(error);
+      }
+    } else {
+      return "boston";
+    }
+  };
+
+  const [weather, setWeather] = useState({});
+  const [searchLocation, setSearchLocation] = useState(getLocationDetails);
+
+  useEffect(() => {
+    const fetchWeatherDetails = async () => {
+      const weatherDetails = await weatherService.getWeatherDetails(
+        searchLocation
+      );
+      setWeather(weatherDetails);
+    };
+
+    fetchWeatherDetails();
+  }, [searchLocation]);
 
   const navigate = useNavigate();
 
@@ -34,6 +65,7 @@ const App = () => {
 
   const handleSignupOrLogin = () => {
     setUser(authService.getUser());
+    setSearchLocation(getLocationDetails);
   };
 
   function handleSideBarClose() {
@@ -60,14 +92,26 @@ const App = () => {
         handleSideBarClose={handleSideBarClose}
         user={user}
       />
-      <FavoriteBar />
       <main className="app-layout-container | flex flex-wrap justify-between">
+        {user ? (
+          <section className="app-layout-favorite-bar w-full flex gap-14">
+            <FavoriteBar user={user} />
+          </section>
+        ) : (
+          ""
+        )}
         <section className="app-layout-top-container">
           <NewsFeed />
           <Todolist user={user} />
         </section>
         <section className="app-layout-bottom-container">
-          <Weather user={user} />
+          <Weather
+            user={user}
+            weather={weather}
+            setWeather={setWeather}
+            searchLocation={searchLocation}
+            setSearchLocation={setSearchLocation}
+          />
         </section>
       </main>
     </>

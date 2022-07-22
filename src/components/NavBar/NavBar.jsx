@@ -1,4 +1,3 @@
-import { Link } from "react-router-dom";
 import "./navbar.css";
 import Signup from "../../pages/Signup/Signup";
 import Login from "../../pages/Login/Login";
@@ -18,7 +17,9 @@ const NavBar = ({
     <>
       {user ? (
         <nav className=" navbar-container |">
-          <h1 className="navbar-title |">SuiteSpace | <span className="text-lg">{user.name}</span></h1>
+          <h1 className="navbar-title |">
+            SuiteSpace | <span className="text-lg">{user.name}</span>
+          </h1>
           <div className="navbar-buttons-container">
             <div>
               <button onClick={handleLogout} className="nav-button | rounded ">
