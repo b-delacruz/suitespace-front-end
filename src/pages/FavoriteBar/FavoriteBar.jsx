@@ -107,7 +107,7 @@ const FavoriteBar = ({ user }) => {
                   >
                     Add Favorite
                   </Typography>
-                  <Typography id="modal-modal-description" sx={{ mt: 2 }}>
+                  <Typography id="modal-modal-description" component={'span'} sx={{ mt: 2 }}>
                     <AddFavoriteItem
                       handleAddFavorite={handleAddFavorite}
                       handleClose={handleClose}

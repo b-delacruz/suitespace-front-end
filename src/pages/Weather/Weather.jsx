@@ -8,14 +8,13 @@ import * as weatherService from '../../services/weatherService'
 import * as locationService from '../../services/locationService'
 
 // React
-import { useEffect, useState } from 'react'
+import { useState } from 'react'
 
 // CSS
 import './weather.css'
 
-const Weather = ({user,searchLocation,setSearchLocation,weather,setWeather}) => {
+const Weather = ({user,setSearchLocation,weather}) => {
 
-  
 
   const getWeatherDisplayDetails = async () => {
     const weatherDisplayDetail = await weatherService.getWeatherPref()
@@ -24,9 +23,6 @@ const Weather = ({user,searchLocation,setSearchLocation,weather,setWeather}) => 
 
   
   const [weatherDisplay, setWeatherDisplay] = useState(getWeatherDisplayDetails)
-  
-
-  
 
   const handleSearchLocation = async (formData) => {
     if (user){

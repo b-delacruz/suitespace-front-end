@@ -1,17 +1,22 @@
 import { useState, useEffect, useRef } from "react";
 
 function EditTodo(props) {
+  //* State *//
+  const formElement = useRef();
   const [formData, setFormData] = useState(props.todo);
   const [validForm, setValidForm] = useState(true);
-  const handleChange = (evt) => {
-    setFormData({ ...formData, [evt.target.name]: evt.target.value });
-  };
-  const formElement = useRef();
+  
+  //* useEffect *//
   useEffect(() => {
     formElement.current.checkValidity()
       ? setValidForm(true)
       : setValidForm(false);
   }, [props.formData]);
+
+  //* Function *//
+  const handleChange = (evt) => {
+    setFormData({ ...formData, [evt.target.name]: evt.target.value });
+  };
 
   const handleSubmit = (evt) => {
     evt.preventDefault();
@@ -59,14 +64,12 @@ function EditTodo(props) {
             required
           />
         </div>
-        {/* <div className='btn-submit'> */}
         <button
           type="submit"
-          // disabled={!validForm}
+          disabled={!validForm}
         >
           Save
         </button>
-        {/* </div> */}
       </form>
       <button
         className="delete-todo-item"

@@ -1,12 +1,15 @@
-import { Modal, Box, Typography, Backdrop, Fade } from "@mui/material";
 import "../../pages/TodoList/TodoList.css";
 import TodoEdit from "../../components/Todo/TodoEdit.jsx";
+
+//* Packages *//
 import { useState } from "react";
+import { Modal, Box, Typography, Backdrop, Fade } from "@mui/material";
 
 const TodoItem = (props) => {
   const [open, setOpen] = useState(false);
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
+  
   const style = {
     position: "absolute",
     top: "50%",

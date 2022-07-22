@@ -1,4 +1,3 @@
-import * as React from "react";
 import "./NewsCard.css";
 
 export default function NewsCard(props) {
