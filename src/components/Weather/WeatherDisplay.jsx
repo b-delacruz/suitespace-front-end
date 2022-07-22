@@ -22,7 +22,7 @@ const WeatherDisplay = ({ weather }) => {
             <h2>{weather.current?.condition.text}</h2>
             <h1>
               {weather.current?.temp_f}
-              <span>&#176;</span>
+              <span>&#176;F</span>
             </h1>
           </div>
 
@@ -58,7 +58,7 @@ const WeatherDisplay = ({ weather }) => {
             <h2>{weatherForecastTomorrow?.day.condition.text}</h2>
             <h1>
               {weatherForecastTomorrow?.day.avgtemp_f}
-              <span>&#176;</span>
+              <span>&#176;F</span>
             </h1>
           </div>
           {/*  Overmorrow */}
@@ -72,7 +72,7 @@ const WeatherDisplay = ({ weather }) => {
             <h2>{weatherForecastOvermorrow?.day.condition.text}</h2>
             <h1>
               {weatherForecastOvermorrow?.day.avgtemp_f}
-              <span>&#176;</span>
+              <span>&#176;F</span>
             </h1>
           </div>
 
