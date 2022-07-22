@@ -1,15 +1,13 @@
 # Suitespace
 
 [The Suite Space](https://suitespace.netlify.app//)
+
 [The Back-End](https://github.com/andywtse/suitespace-back-end)
 
 Suitespace is a website that serves as a hub for important widgets such as: weather, news, to-do's, calendar, etc.
 
-<img width="600" alt="Home Page" src="https://i.imgur.com/T14ywSO.png">
+<img width="600" alt="Home Page" src="https://i.imgur.com/UtCSScm.png">
 
-<br>
-
-<img width="600" alt="Team page" src="https://i.imgur.com/VK75kOD.png">
 
 ---
 
