@@ -1,13 +1,37 @@
-nav {
+.navbar-container {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  gap: 2em;
   height: 10vh;
+  padding-left: 2em;
   color: var(--soft-yellow);
 }
 
-.nav-username {
-  
+.navbar-title-container {
+  display: flex;
+  gap: 2em;
+  align-items: flex-end;
+}
+
+.navbar-title {
+  color: var(--soft-yellow);
+  font-size: 1.75em;
+}
+
+.navbar-username {
+  font-size: 1.25em;
+}
+
+.navbar-buttons-container {
+  display: flex;
+  position: relative;
+  align-items: center;
+  gap: 2em;
 }
 
 .nav-button {
+  padding: .25em .5em;
   background-color: #ffffff18;
   transition: .5s;
 }
@@ -15,4 +39,127 @@ nav {
 .nav-button:hover {
   background-color: #6376966d;
   transition: .5s;
+}
+
+.app-toggle-sidebar-container {
+  height: 40px;
+  width: 40px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: fixed;
+  margin-right: 2em;
+  right: 0;
+}
+
+.app-toggle-sidebar {
+  display: flex;
+  height: 40px;
+  width: 40px;
+  justify-content: center;
+  align-items: center;
+  border-radius: 50%;
+  background-color: rgba(255, 255, 255, 0.109);
+  color: var(--soft-yellow);
+  cursor: pointer;
+  opacity: 1;
+}
+
+/* Media Query for Mobile Devices */
+@media (max-width: 480px) {
+  .navbar-container {
+    display: flex;
+    flex-direction: column;
+    padding-top: 1em;
+    align-items: flex-start;
+    justify-content: flex-start;
+    gap: 1em;
+    height: -webkit-fit-content;
+    height: -moz-fit-content;
+    height: fit-content;
+    padding-left: 1em;
+    color: var(--soft-yellow);
+  }
+
+  .navbar-title {
+    color: var(--soft-yellow);
+    font-size: 1.5em;
+  }
+
+  .navbar-buttons-container {
+    display: flex;
+    position: relative;
+    align-items: center;
+    gap: 1em;
+  }
+
+  .nav-button {
+    background-color: #ffffff18;
+    transition: .5s;
+  }
+
+  .app-toggle-sidebar-container {
+    display: flex;
+    position: fixed;
+    margin-right: 1em;
+    margin-top: 1em;
+    right: 0;
+  }
+}
+
+/* Media Query for low resolution  Tablets, Ipads */
+@media (min-width: 481px) and (max-width: 658px) {
+  .navbar-container {
+    display: flex;
+    flex-direction: column;
+    padding-top: 1em;
+    align-items: flex-start;
+    justify-content: flex-start;
+    gap: 1em;
+    height: -webkit-fit-content;
+    height: -moz-fit-content;
+    height: fit-content;
+    padding-left: 1em;
+    color: var(--soft-yellow);
+  }
+
+  .navbar-title {
+    color: var(--soft-yellow);
+    font-size: 1.5em;
+  }
+
+  .navbar-buttons-container {
+    display: flex;
+    position: relative;
+    align-items: center;
+    gap: 1em;
+  }
+
+  .nav-button {
+    background-color: #ffffff18;
+    transition: .5s;
+  }
+
+  .app-toggle-sidebar-container {
+    display: flex;
+    position: fixed;
+    margin-right: 1em;
+    margin-top: 1em;
+    right: 0;
+  }
+}
+
+/* Media Query for Tablets Ipads portrait mode */
+@media (min-width: 768px) and (max-width: 1024px){
+  
+}
+
+/* Media Query for Laptops and Desktops */
+@media (min-width: 1025px) and (max-width: 1280px){
+
+}
+
+/* Media Query for Large screens */
+@media (min-width: 1281px) {
+  
 }
