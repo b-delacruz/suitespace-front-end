@@ -100,7 +100,7 @@ const AddScheduleItem = ({ date, handleAddEvent }) => {
           value={(formData.date = date.format("MMMM DD YYYY"))}
         />
         <button
-          className="modal-button submit | rounded"
+          className="modal-button submit | rounded text-white"
           onClick={() => handleSubmit()}
         >
           SUBMIT
