@@ -22,7 +22,7 @@ function EditTodo(props) {
     <>
       <form
         autoComplete="off"
-        className="flex flex-col gap-3"
+        className="flex flex-col gap-6"
         ref={formElement}
         onSubmit={handleSubmit}
       >
@@ -32,7 +32,7 @@ function EditTodo(props) {
             className="input-item"
             name="dueDate"
             type="date"
-            // value={formData.dueDate}
+            value={formData.dueDate}
             onChange={handleChange}
             required
           />
@@ -59,21 +59,16 @@ function EditTodo(props) {
             required
           />
         </div>
-        {/* <div className='btn-submit'> */}
-        <button
-          type="submit"
-          // disabled={!validForm}
-        >
-          Save
-        </button>
-        {/* </div> */}
+        <div className="flex w-full justify-between">
+          <button className="modal-button submit | rounded">SUBMIT</button>
+          <button
+            className="modal-button danger | rounded"
+            onClick={() => props.handleDeleteTodo(props.todo._id)}
+          >
+            DELETE
+          </button>
+        </div>
       </form>
-      <button
-        className="delete-todo-item"
-        onClick={() => props.handleDeleteTodo(props.todo._id)}
-      >
-        Delete
-      </button>
     </>
   );
 }
