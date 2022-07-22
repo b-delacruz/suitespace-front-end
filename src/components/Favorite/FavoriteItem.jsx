@@ -4,16 +4,15 @@ import './favorite.css'
 const FavoriteItem = ({ favorite, handleRemoveFavorite }) => {
   return (
     <div className='favorite-item'>
-      <a href={favorite.link} target="_blank" rel="noopener noreferrer">
+      <a href={favorite.link} target="_blank" rel="noopener noreferrer" className='flex items-center gap-3'>
         <h2>{favorite.name}</h2>
-        <img src={favorite.link + '/favicon.ico'} alt="" />
+        <img style={{height: '20px'}}src={favorite.link + '/favicon.ico'} alt="" />
       </a>
       <button
         className='favorite-remove-button'
         onClick={() => handleRemoveFavorite(favorite._id)}>
-        Remove
+        x
       </button>
-
     </div>
   )
 }

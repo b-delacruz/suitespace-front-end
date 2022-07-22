@@ -20,7 +20,7 @@ const WeatherSearchForm = (props) => {
   return (
     <>
       <div>
-        <form onSubmit={handleSubmit}>
+        <form onSubmit={handleSubmit} className='flex items-center gap-1'>
           <input className='weather-input-item'
             name="query"
             type="text"

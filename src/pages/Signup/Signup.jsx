@@ -1,12 +1,11 @@
-import { useState } from 'react'
-import { useNavigate } from 'react-router-dom'
-import * as authService from '../../services/authService'
+import { useState } from "react";
+import { useNavigate } from "react-router-dom";
+import * as authService from "../../services/authService";
 
 //* Package Imports *//
-import { Modal, Box, Typography } from "@mui/material";
+import { Modal, Box, Typography, Fade, Backdrop } from "@mui/material";
 
-const Signup = props => {
-
+const Signup = (props) => {
   const style = {
     position: "absolute",
     top: "50%",
@@ -17,156 +16,177 @@ const Signup = props => {
     color: "white",
   };
 
-
   //Sign Up
-  const navigate = useNavigate()
-  const [message, setMessage] = useState([''])
+  const navigate = useNavigate();
+  const [message, setMessage] = useState([""]);
   const [formData, setFormData] = useState({
-    name: '',
-    email: '',
-    password: '',
-    passwordConf: '',
-    location: '',
-  })
+    name: "",
+    email: "",
+    password: "",
+    passwordConf: "",
+    location: "",
+  });
 
   // MUI
   const [open, setOpen] = useState(false);
   const handleOpen = () => setOpen(true);
   const handleClose = () => {
     setFormData({
-      name: '',
-      email: '',
-      password: '',
-      passwordConf: '',
-      location: '',
-    })
+      name: "",
+      email: "",
+      password: "",
+      passwordConf: "",
+      location: "",
+    });
     setOpen(false);
-  }
+  };
 
-  const updateMessage = msg => {
-    setMessage(msg)
-  }
+  const updateMessage = (msg) => {
+    setMessage(msg);
+  };
 
-  const { name, email, password, passwordConf, location } = formData
+  const { name, email, password, passwordConf, location } = formData;
 
-  const handleSubmit = async e => {
-    e.preventDefault()
+  const handleSubmit = async (e) => {
+    e.preventDefault();
 
     try {
-      await authService.signup(formData)
+      await authService.signup(formData);
       window.location.reload();
-      props.handleSignupOrLogin()
-      navigate('/')
+      props.handleSignupOrLogin();
+      navigate("/");
     } catch (err) {
-      updateMessage(err.message)
+      updateMessage(err.message);
     }
-  }
+  };
 
-  const handleChange = e => {
-    updateMessage('')
+  const handleChange = (e) => {
+    updateMessage("");
     setFormData({
       ...formData,
       [e.target.name]: e.target.value,
-    })
-  }
+    });
+  };
 
   const isFormInvalid = () => {
-    return !(name && email && location && password && password === passwordConf)
-  }
+    return !(
+      name &&
+      email &&
+      location &&
+      password &&
+      password === passwordConf
+    );
+  };
 
   return (
     <div>
-      <button className='nav-button | flex justify-center items-center text-base rounded px-5 py-1' onClick={handleOpen}>
+      <button
+        className="nav-button | flex justify-center items-center text-base rounded px-5 py-1"
+        onClick={handleOpen}
+      >
         Sign Up
       </button>
       <Modal
         open={open}
         onClose={handleClose}
-        aria-labelledby='modal-modal-title'
-        aria-describedby='modal-modal-description'
+        aria-labelledby="transition-modal-title"
+        aria-describedby="transition-modal-description"
+        closeAfterTransition
+        BackdropComponent={Backdrop}
+        BackdropProps={{
+          timeout: 1000,
+        }}
       >
-        <Box sx={style}>
-          <Typography id='modal-modal-title' variant='h6' component='h2'>
-            Sign Up
-          </Typography>
-          <Typography id='modal-modal-description' sx={{ mt: 2 }}>
-            <form className="flex flex-col gap-6 pt-4" onSubmit={handleSubmit}>
-              <div className="flex gap-6">
-                <div className="flex flex-col gap-2">
-                  <label htmlFor="category-input">
-                    Name <span>*</span>
-                  </label>
-                  <input
-                    type="text"
-                    placeholder="Name"
-                    name="name"
-                    value={formData.name}
-                    onChange={handleChange}
-                    required
-                  />
+        <Fade in={open}>
+          <Box sx={style}>
+            <Typography id="transition-modal-title" variant="h6" component="h2">
+              Sign Up
+            </Typography>
+            <Typography id="transition-modal-description" sx={{ mt: 2 }}>
+              <form
+                className="flex flex-col gap-6 pt-4"
+                onSubmit={handleSubmit}
+              >
+                <div className="flex flex-col gap-6">
+                  <div className="flex flex-col gap-2">
+                    <label htmlFor="category-input">
+                      Name <span>*</span>
+                    </label>
+                    <input
+                      type="text"
+                      placeholder="Name"
+                      name="name"
+                      value={formData.name}
+                      onChange={handleChange}
+                      required
+                    />
+                  </div>
+                  <div className="flex flex-col gap-2">
+                    <label htmlFor="category-input">
+                      Email <span>*</span>
+                    </label>
+                    <input
+                      type="email"
+                      placeholder="Email"
+                      name="email"
+                      value={formData.email}
+                      onChange={handleChange}
+                      required
+                    />
+                  </div>
+                  <div className="flex flex-col gap-2">
+                    <label htmlFor="category-input">
+                      Password <span>*</span>
+                    </label>
+                    <input
+                      type="password"
+                      placeholder="Password"
+                      name="password"
+                      value={formData.password}
+                      onChange={handleChange}
+                      required
+                    />
+                  </div>
+                  <div className="flex flex-col gap-2">
+                    <label htmlFor="category-input">
+                      Confirm Password <span>*</span>
+                    </label>
+                    <input
+                      type="password"
+                      placeholder="Confirm Password"
+                      name="passwordConf"
+                      value={formData.Conf}
+                      onChange={handleChange}
+                      required
+                    />
+                  </div>
+                  <div className="flex flex-col gap-2">
+                    <label htmlFor="category-input">
+                      City <span>*</span>
+                    </label>
+                    <input
+                      type="text"
+                      placeholder="City"
+                      name="location"
+                      value={formData.location}
+                      onChange={handleChange}
+                      required
+                    />
+                  </div>
                 </div>
-                <div className="flex flex-col gap-2">
-                  <label htmlFor="category-input">
-                    Email <span>*</span>
-                  </label>
-                  <input
-                    type="email"
-                    placeholder="Email"
-                    name="email"
-                    value={formData.email}
-                    onChange={handleChange}
-                    required
-                  />
-                </div>
-                <div className="flex flex-col gap-2 w-2/4">
-                  <label htmlFor="category-input">
-                    Password <span>*</span>
-                  </label>
-                  <input
-                    type="password"
-                    placeholder="Password"
-                    name="password"
-                    value={formData.password}
-                    onChange={handleChange}
-                    required
-                  />
-                </div>
-                <div className="flex flex-col gap-2">
-                  <label htmlFor="category-input">
-                    Confirm Password <span>*</span>
-                  </label>
-                  <input
-                    type="password"
-                    placeholder="Confirm Password"
-                    name="passwordConf"
-                    value={formData.Conf}
-                    onChange={handleChange}
-                    required
-                  />
-                </div>
-                <div className="flex flex-col gap-2">
-                  <label htmlFor="category-input">
-                    City <span>*</span>
-                  </label>
-                  <input
-                    type="text"
-                    placeholder="City"
-                    name="location"
-                    value={formData.location}
-                    onChange={handleChange}
-                    required
-                  />
-                </div>
-              </div>
-              <button disabled={isFormInvalid()} onClick={() => handleSubmit}>
-                SUBMIT
-              </button>
-            </form>
-          </Typography>
-        </Box>
+                <button
+                  className="modal-button submit | rounded"
+                  onClick={() => handleSubmit()}
+                >
+                  SUBMIT
+                </button>
+              </form>
+            </Typography>
+          </Box>
+        </Fade>
       </Modal>
     </div>
-  )
-}
+  );
+};
 
-export default Signup
+export default Signup;

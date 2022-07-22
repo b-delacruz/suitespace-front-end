@@ -8,7 +8,7 @@ const AddFavoriteItem = ({ handleAddFavorite,handleClose }) => {
   const [validForm, setValidForm] = useState(false)
   const [formData, setFormData] = useState({
     name: '',
-    link: '',
+    link: 'https://',
   })
 
   //* useRef *//
@@ -58,7 +58,10 @@ const AddFavoriteItem = ({ handleAddFavorite,handleClose }) => {
             />
           </div>
         </div>
-        <button onClick={() => handleSubmit} disabled={!validForm}>
+        <button
+          className="modal-button submit | rounded"
+          onClick={() => handleSubmit()}
+        >
           SUBMIT
         </button>
       </form>
