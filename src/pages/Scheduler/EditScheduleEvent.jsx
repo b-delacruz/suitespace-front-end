@@ -100,7 +100,11 @@ const EditScheduleEvent = ({
           defaultValue={(formData.date = date.format("MMMM DD YYYY"))}
         />
         <div className="flex w-full justify-between">
-          <button className="modal-button submit | rounded" onClick={() => handleSubmit()}>
+          <button
+            className="modal-button submit | rounded"
+            onClick={() => handleSubmit()}
+            disabled={!validForm}
+          >
             SUBMIT
           </button>
           <button

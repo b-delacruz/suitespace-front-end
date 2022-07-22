@@ -1,10 +1,12 @@
-import { useState, useEffect } from "react";
-import { Modal, Box, Typography, Backdrop, Fade } from "@mui/material";
-import TodoItem from "../../components/Todo/TodoItem";
 import "./TodoList.css";
 import "../../components/Todo/TodoAdd.jsx";
 import * as todoService from "../../services/todoService";
+import TodoItem from "../../components/Todo/TodoItem";
 import TodoAdd from "../../components/Todo/TodoAdd.jsx";
+
+import { useState, useEffect } from "react";
+import { Modal, Box, Typography, Backdrop, Fade } from "@mui/material";
+
 
 const TodoList = (props) => {
   const [todos, setTodos] = useState([]);

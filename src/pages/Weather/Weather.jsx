@@ -13,7 +13,7 @@ import { useState } from 'react'
 // CSS
 import './weather.css'
 
-const Weather = ({user,setSearchLocation,weather}) => {
+const Weather = ({ user, setSearchLocation, weather }) => {
 
 
   const getWeatherDisplayDetails = async () => {
@@ -21,12 +21,12 @@ const Weather = ({user,setSearchLocation,weather}) => {
     setWeatherDisplay(weatherDisplayDetail)
   }
 
-  
+
   const [weatherDisplay, setWeatherDisplay] = useState(getWeatherDisplayDetails)
 
   const handleSearchLocation = async (formData) => {
-    if (user){
-      const updateLocation = await locationService.updateLocation(user, formData.query)
+    if (user) {
+      locationService.updateLocation(user, formData.query)
     }
     setSearchLocation(formData.query)
   }

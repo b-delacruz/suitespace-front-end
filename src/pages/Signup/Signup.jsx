@@ -102,7 +102,10 @@ const Signup = (props) => {
             <Typography id="transition-modal-title" variant="h6" component="h2">
               Sign Up
             </Typography>
-            <Typography id="transition-modal-description" sx={{ mt: 2 }}>
+            <Typography>
+              {message}
+            </Typography>
+            <Typography id="transition-modal-description" component={'span'} sx={{ mt: 2 }}>
               <form
                 className="flex flex-col gap-6 pt-4"
                 onSubmit={handleSubmit}
@@ -177,6 +180,7 @@ const Signup = (props) => {
                 <button
                   className="modal-button submit | rounded"
                   onClick={() => handleSubmit()}
+                  disabled={isFormInvalid()}
                 >
                   SUBMIT
                 </button>

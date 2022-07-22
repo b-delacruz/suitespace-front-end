@@ -102,6 +102,7 @@ const AddScheduleItem = ({ date, handleAddEvent }) => {
         <button
           className="modal-button submit | rounded"
           onClick={() => handleSubmit()}
+          disabled={!validForm}
         >
           SUBMIT
         </button>
