@@ -71,7 +71,10 @@ const Login = props => {
           <Typography id='modal-modal-title' variant='h6' component='h2'>
             Log In
           </Typography>
-          <Typography id='modal-modal-description' sx={{ mt: 2 }}>
+          <Typography>
+            {message}
+          </Typography>
+          <Typography id='modal-modal-description' component={'span'} sx={{ mt: 2 }}>
             <form className="flex flex-col gap-6 pt-4" onSubmit={handleSubmit}>
               <div className="flex justify-between w-full gap-6">
                 <div className="flex flex-col gap-2 w-2/4">

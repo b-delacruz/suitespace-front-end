@@ -5,7 +5,7 @@ import "./favorite.css";
 import { useState, useEffect } from "react";
 
 //* Package Imports *//
-import { Modal, Box, Typography } from "@mui/material";
+import { Modal, Box, Typography, Backdrop, Fade } from "@mui/material";
 
 //* Components *//
 import FavoriteItem from "../../components/Favorite/FavoriteItem";
@@ -60,25 +60,34 @@ const FavoriteBar = ({ user }) => {
         <div className="favorite-item-container">
           {0 === currentLength && (
             <>
-              <button className="favorite-item-add-button" onClick={handleOpen}>+</button>
+              <button className="favorite-item-add-button" onClick={handleOpen}>
+                +
+              </button>
               <Modal
                 open={open}
                 onClose={handleClose}
-                aria-labelledby="modal-modal-title"
-                aria-describedby="modal-modal-description"
+                aria-labelledby="transition-modal-title"
+                aria-describedby="transition-modal-description"
+                closeAfterTransition
+                BackdropComponent={Backdrop}
+                BackdropProps={{
+                  timeout: 1000,
+                }}
               >
-                <Box sx={style}>
-                  <Typography
-                    id="modal-modal-title"
-                    variant="h6"
-                    component="h2"
-                  >
-                    Add Favorite
-                  </Typography>
-                  <Typography id="modal-modal-description" sx={{ mt: 2 }}>
-                    <AddFavoriteItem handleAddFavorite={handleAddFavorite} />
-                  </Typography>
-                </Box>
+                <Fade in={open}>
+                  <Box sx={style}>
+                    <Typography
+                      id="modal-modal-title"
+                      variant="h6"
+                      component="h2"
+                    >
+                      Add Favorite
+                    </Typography>
+                    <Typography id="modal-modal-description" sx={{ mt: 2 }}>
+                      <AddFavoriteItem handleAddFavorite={handleAddFavorite} />
+                    </Typography>
+                  </Box>
+                </Fade>
               </Modal>
             </>
           )}
@@ -92,28 +101,41 @@ const FavoriteBar = ({ user }) => {
                   handleRemoveFavorite={handleRemoveFavorite}
                 />
               ))}
-              <button className="favorite-item-add-button" onClick={handleOpen}>+</button>
+              <button className="favorite-item-add-button" onClick={handleOpen}>
+                +
+              </button>
               <Modal
                 open={open}
                 onClose={handleClose}
-                aria-labelledby="modal-modal-title"
-                aria-describedby="modal-modal-description"
+                aria-labelledby="transition-modal-title"
+                aria-describedby="transition-modal-description"
+                closeAfterTransition
+                BackdropComponent={Backdrop}
+                BackdropProps={{
+                  timeout: 1000,
+                }}
               >
-                <Box sx={style}>
-                  <Typography
-                    id="modal-modal-title"
-                    variant="h6"
-                    component="h2"
-                  >
-                    Add Favorite
-                  </Typography>
-                  <Typography id="modal-modal-description" sx={{ mt: 2 }}>
-                    <AddFavoriteItem
-                      handleAddFavorite={handleAddFavorite}
-                      handleClose={handleClose}
-                    />
-                  </Typography>
-                </Box>
+                <Fade in={open}>
+                  <Box sx={style}>
+                    <Typography
+                      id="transition-modal-title"
+                      variant="h6"
+                      component="h2"
+                    >
+                      Add Favorite
+                    </Typography>
+                    <Typography
+                      id="transition-modal-description"
+                      component={'span'}
+                      sx={{ mt: 2 }}
+                    >
+                      <AddFavoriteItem
+                        handleAddFavorite={handleAddFavorite}
+                        handleClose={handleClose}
+                      />
+                    </Typography>
+                  </Box>
+                </Fade>
               </Modal>
             </>
           )}

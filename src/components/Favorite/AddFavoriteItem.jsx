@@ -1,9 +1,7 @@
-//* React Hooks *//
+import './favorite.css'
 import { useState, useRef, useEffect } from 'react'
 
-import './favorite.css'
-
-const AddFavoriteItem = ({ handleAddFavorite,handleClose }) => {
+const AddFavoriteItem = ({ handleAddFavorite }) => {
   //* State *//
   const [validForm, setValidForm] = useState(false)
   const [formData, setFormData] = useState({
@@ -61,6 +59,7 @@ const AddFavoriteItem = ({ handleAddFavorite,handleClose }) => {
         <button
           className="modal-button submit | rounded"
           onClick={() => handleSubmit()}
+          disabled={!validForm}
         >
           SUBMIT
         </button>

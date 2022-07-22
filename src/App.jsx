@@ -23,9 +23,6 @@ import SideBar from "./components/SideBar/SideBar";
 import NewsFeed from "./pages/NewsFeed/NewsFeed";
 import Weather from "./pages/Weather/Weather";
 
-// Packages
-import { ChevronLeft } from "@mui/icons-material";
-
 const App = () => {
   const [user, setUser] = useState(authService.getUser());
   const [open, setOpen] = useState(true);

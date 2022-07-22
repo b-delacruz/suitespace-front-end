@@ -1,4 +1,3 @@
-import * as React from "react";
 import "./NewsCard.css";
 
 export default function NewsCard(props) {
@@ -20,7 +19,7 @@ export default function NewsCard(props) {
             {/* BUGGGG WITH SPAN BACKGROUND NOT CLICKABLE */}
           </a>
           <span className="news-card-image-learnmore">
-            <a href={props.news.url}>Learn More</a>
+            <a href={props.news.url} target="_blank" rel="noopener noreferrer">Learn More</a>
           </span>
         </div>
         <div className="news-card-description-container">

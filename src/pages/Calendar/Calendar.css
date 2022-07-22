@@ -6,11 +6,11 @@
   height: 375px;
 
   background: rgba(255, 255, 255, 0.045);
-  backdrop-filter: blur( 8px );
-  -webkit-backdrop-filter: blur( 8px );
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
   border-radius: 10px;
-  border: 1px solid rgba( 255, 255, 255, 0.18 );
-  
+  border: 1px solid rgba(255, 255, 255, 0.18);
+
   font-family: 'Sora', sans-serif;
   text-align: center;
   color: rgba(255, 255, 255, 0.95);
@@ -126,13 +126,13 @@
     flex-wrap: wrap;
     width: 350px;
     height: 350px;
-  
+
     background: rgba(255, 255, 255, 0.045);
-    backdrop-filter: blur( 8px );
-    -webkit-backdrop-filter: blur( 8px );
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
     border-radius: 10px;
-    border: 1px solid rgba( 255, 255, 255, 0.18 );
-    
+    border: 1px solid rgba(255, 255, 255, 0.18);
+
     font-family: 'Sora', sans-serif;
     text-align: center;
     color: rgba(255, 255, 255, 0.95);
@@ -148,27 +148,27 @@
 /* Media Query for low resolution  Tablets, Ipads */
 @media (min-width: 481px) and (max-width: 767px) {
   body {
-      background-color: yellow;
+    background-color: yellow;
   }
 }
 
 /* Media Query for Tablets Ipads portrait mode */
-@media (min-width: 768px) and (max-width: 1024px){
+@media (min-width: 768px) and (max-width: 1024px) {
   body {
-      background-color: blue;
+    background-color: blue;
   }
 }
 
 /* Media Query for Laptops and Desktops */
-@media (min-width: 1025px) and (max-width: 1280px){
+@media (min-width: 1025px) and (max-width: 1280px) {
   body {
-      background-color: green;
+    background-color: green;
   }
 }
 
 /* Media Query for Large screens */
 @media (min-width: 1281px) {
   body {
-      background-color: white;
+    background-color: white;
   }
 }

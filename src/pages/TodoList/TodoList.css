@@ -42,8 +42,16 @@
   width: 100%;
 }
 
+.todo-item {
+  background: rgba(255, 255, 255, 0.045);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  border-radius: 10px;
+  border: 1px solid rgba(255, 255, 255, 0.18);
+}
+
 .input-item, .btn-submit {
-  border: 1px solid black;
+  
 }
 
 /* Media Query for Mobile Devices */
@@ -124,14 +132,56 @@ input:focus {
 }
 
 .outer-box {
-  height: 40px;
-  width: 40px;
-  color: ;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 30px;
+  width: 30px;
+  border-radius: 50%;
+  border: 2px solid var(--soft-yellow);
+  cursor: pointer;
+}
+
+.inner-box {
+  height: 80%;
+  width: 80%;
+  border-radius: 50%;
+  transition: .5s;
+}
+
+.fill-color {
+  background-color: var(--soft-yellow);
+}
+
+
+.css-1k28a84 {
+  display: flex;
+  flex-direction: column;
+  gap: 1em;
+  background: rgba(255, 255, 255, 0.1) !important;
+  backdrop-filter: blur( 100px );
+  -webkit-backdrop-filter: blur( 100px );
+  border-radius: 10px;
+  border: 1px solid rgba( 255, 255, 255, 0.18 ) !important;
+  color: var(--soft-yellow);
+  box-shadow: none !important;
+}
+
+.css-1csh13w {
+  display: flex;
+  flex-direction: column;
+  gap: 1em;
+  background: rgba(255, 255, 255, 0.1) !important;
+  backdrop-filter: blur( 100px );
+  -webkit-backdrop-filter: blur( 100px );
+  border-radius: 10px;
+  border: 1px solid rgba( 255, 255, 255, 0.18 ) !important;
+  color: var(--soft-yellow);
+  box-shadow: none !important;
 }
 
 
 .todo-item:hover {
-  cursor: pointer;
   background: rgba(255, 255, 255, 0.1);
   transition: .5s;
 }

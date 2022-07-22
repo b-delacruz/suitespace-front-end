@@ -2,13 +2,12 @@
 
 [The Suite Space](https://suitespace.netlify.app//)
 
+[The Back-End](https://github.com/andywtse/suitespace-back-end)
+
 Suitespace is a website that serves as a hub for important widgets such as: weather, news, to-do's, calendar, etc.
 
-<img width="600" alt="Home Page" src="https://i.imgur.com/T14ywSO.png">
+<img width="600" alt="Home Page" src="https://i.imgur.com/UtCSScm.png">
 
-<br>
-
-<img width="600" alt="Team page" src="https://i.imgur.com/VK75kOD.png">
 
 ---
 
@@ -47,9 +46,18 @@ Suitespace is a website that serves as a hub for important widgets such as: weat
 
 ---
 
-## Goals
+## Next Steps
 
 - Bookmark articles from News section
 - Expanded page for each component for detailed information
 - Color pickers for item in Todo and Calendar
 - Weather alerts
+
+---
+
+## Contributors
+
+ - [Mauricio Lovera](https://github.com/mauLovera)
+ - [Andy Tse](https://github.com/andywtse)
+ - [Nathan Hardenburg](https://github.com/ntharden)
+ - [Brian Delacruz](https://github.com/b-delacruz)
