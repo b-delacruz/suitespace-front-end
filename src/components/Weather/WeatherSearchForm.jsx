@@ -14,7 +14,7 @@ const WeatherSearchForm = (props) => {
     evt.preventDefault()
     props.handleSearchLocation(formData)
     setFormData({ query: '' })
-    
+
   }
 
   return (
@@ -29,7 +29,7 @@ const WeatherSearchForm = (props) => {
             value={formData.query}
             onChange={handleChange}
           />
-          <button type="submit"><SearchIcon/></button>
+          <button type="submit"><SearchIcon /></button>
         </form>
       </div>
     </>

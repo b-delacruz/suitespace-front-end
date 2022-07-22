@@ -1,20 +1,26 @@
 import { useState, useEffect, useRef } from "react";
+import moment from 'moment'
 
 function EditTodo(props) {
+  //* State *//
+  const formElement = useRef();
   const [formData, setFormData] = useState(props.todo);
   const [validForm, setValidForm] = useState(true);
-  const handleChange = (evt) => {
-    setFormData({ ...formData, [evt.target.name]: evt.target.value });
-  };
-  const formElement = useRef();
+
+  //* useEffect *//
   useEffect(() => {
     formElement.current.checkValidity()
       ? setValidForm(true)
       : setValidForm(false);
   }, [props.formData]);
 
+  //* Function *//
+  const handleChange = (evt) => {
+    setFormData({ ...formData, [evt.target.name]: evt.target.value });
+  };
+
   const handleSubmit = (evt) => {
-    evt.preventDefault();
+    evt.preventDefault()
     props.handleUpdateTodo(formData);
   };
 
@@ -32,7 +38,7 @@ function EditTodo(props) {
             className="input-item"
             name="dueDate"
             type="date"
-            value={formData.dueDate}
+            value={(formData.dueDate = moment().format("YYYY-MM-DD"))}
             onChange={handleChange}
             required
           />
@@ -60,15 +66,16 @@ function EditTodo(props) {
           />
         </div>
         <div className="flex w-full justify-between">
-          <button className="modal-button submit | rounded">SUBMIT</button>
-          <button
-            className="modal-button danger | rounded"
-            onClick={() => props.handleDeleteTodo(props.todo._id)}
-          >
-            DELETE
-          </button>
+          <button className="modal-button submit | rounded" >SUBMIT</button>
         </div>
       </form>
+      <button 
+        className="modal-button danger | rounded "
+        onClick={() => props.handleDeleteTodo(props.todo._id)}
+      >
+        DELETE
+      </button>
+
     </>
   );
 }

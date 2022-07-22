@@ -126,6 +126,7 @@ const FavoriteBar = ({ user }) => {
                     </Typography>
                     <Typography
                       id="transition-modal-description"
+                      component={'span'}
                       sx={{ mt: 2 }}
                     >
                       <AddFavoriteItem

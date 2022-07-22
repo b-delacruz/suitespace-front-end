@@ -54,7 +54,7 @@ const EditScheduleEvent = ({
           </div>
           <div className="flex flex-col gap-2 w-2/4">
             <label htmlFor="category-input">
-              Catagory <span>*</span>
+              Category <span>*</span>
             </label>
             <input
               type="text"
@@ -100,7 +100,11 @@ const EditScheduleEvent = ({
           defaultValue={(formData.date = date.format("MMMM DD YYYY"))}
         />
         <div className="flex w-full justify-between">
-          <button className="modal-button submit | rounded" onClick={() => handleSubmit()}>
+          <button
+            className="modal-button submit | rounded"
+            onClick={() => handleSubmit()}
+            disabled={!validForm}
+          >
             SUBMIT
           </button>
           <button

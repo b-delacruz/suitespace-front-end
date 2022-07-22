@@ -1,7 +1,9 @@
-import { Modal, Box, Typography, Backdrop, Fade } from "@mui/material";
 import "../../pages/TodoList/TodoList.css";
 import TodoEdit from "../../components/Todo/TodoEdit.jsx";
+
+//* Packages *//
 import { useState } from "react";
+import { Modal, Box, Typography, Backdrop, Fade } from "@mui/material";
 
 const TodoItem = (props) => {
   const [open, setOpen] = useState(false);
@@ -65,7 +67,7 @@ const TodoItem = (props) => {
                 Edit: {props.todo.title}
               </span>
             </Typography>
-            <Typography id="modal-modal-description" sx={{ mt: 2 }}>
+            <Typography id="modal-modal-description" component={'span'} sx={{ mt: 2 }}>
               <TodoEdit
                 todo={props.todo}
                 formData={props.formData}

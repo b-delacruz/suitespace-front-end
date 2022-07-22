@@ -1,8 +1,9 @@
-import React, { useState, useEffect } from "react";
-import SearchIcon from "@mui/icons-material/Search";
-import { getNews } from "../../services/newsService";
 import "./NewsFeed.css";
 import NewsCard from "../../components/News/NewsCard";
+import { useState, useEffect } from "react";
+import SearchIcon from "@mui/icons-material/Search";
+import { getNews } from "../../services/newsService";
+
 
 const NewsFeed = (props) => {
   const [formData, setFormData] = useState({
@@ -26,13 +27,13 @@ const NewsFeed = (props) => {
     });
   };
 
-	const handleSubmit = async evt => {
-		evt.preventDefault()
-    try{
+  const handleSubmit = async evt => {
+    evt.preventDefault()
+    try {
       getNews(formData.search)
-      .then(newsData => {
-        setNewsData(newsData.articles)
-      })
+        .then(newsData => {
+          setNewsData(newsData.articles)
+        })
     } catch (error) {
       console.log(error);
     }
@@ -49,7 +50,7 @@ const NewsFeed = (props) => {
       <div className="news-container">
         <div className="news-nav | flex justify-between items-center">
           <h1 className="news-title | text-xl">News Feed</h1>
-        <form autoCompete="off" onSubmit={handleSubmit} className='flex items-center'>
+          <form onSubmit={handleSubmit} className='flex items-center'>
             <input
               type="text"
               name="search"
@@ -66,7 +67,7 @@ const NewsFeed = (props) => {
         </div>
         <div className="news-body">
           {newsData.map((news, idx) => (
-            <NewsCard news={news} />
+            <NewsCard key={idx} news={news} />
           ))}
         </div>
       </div>

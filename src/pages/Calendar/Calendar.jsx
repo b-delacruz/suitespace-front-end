@@ -13,7 +13,7 @@ import ChevronRightIcon from '@mui/icons-material/ChevronRight'
 const Calendar = ({ date, setDate }) => {
   //* State *//
   const [calendar, setCalendar] = useState([])
-  
+
   //* useEffect *//
   useEffect(() => {
     setCalendar(renderCalendar(date))
@@ -33,7 +33,7 @@ const Calendar = ({ date, setDate }) => {
 
   //! Switch Refactor !//
   const dayStyles = (day) => {
-    if (isToday(day)) return 'today' 
+    if (isToday(day)) return 'today'
     if (isSelected(day)) return 'selected'
     if (day.isBefore(startOfMonth)) return 'before-month'
     if (day.isAfter(endOfMonth)) return 'after-month'
@@ -46,7 +46,7 @@ const Calendar = ({ date, setDate }) => {
         <header className='calendar-header | flex justify-between items-center text-2xl'>
           <div className='flex gap-6'>
             <h1>
-              {currentMonth()} 
+              {currentMonth()}
             </h1>
             <button className='calendar-today-button | flex justify-center items-center text-base rounded px-5' onClick={() => handleCurrentDay()}>
               Today
@@ -57,27 +57,27 @@ const Calendar = ({ date, setDate }) => {
               <ChevronLeftIcon fontSize='large' />
             </button>
             <button className='flex justify-end' onClick={() => handleNextMonth()}>
-              <ChevronRightIcon fontSize='large'/>
+              <ChevronRightIcon fontSize='large' />
             </button>
           </div>
         </header>
         <div className='calendar-days-of-week | flex justify-around items-center'>
-          {daysOfWeek.map((day, idx) => 
+          {daysOfWeek.map((day, idx) =>
             <div key={idx} className='flex'>{day}</div>
           )}
         </div>
         <main className='calendar-body | flex justify-center items-center'>
-        {calendar.map((week, index) => 
-          <div className='week | flex justify-center items-center' key={index}>
-            {week.map((day, idx) => 
-              <div className='day | flex justify-around items-center' onClick={() => setDate(day)} key={idx}>
-                <span className={dayStyles(day)} id='day'>
-                  {day.format('D')}
-                </span>
-              </div>  
-            )}
-          </div>
-        )}
+          {calendar.map((week, index) =>
+            <div className='week | flex justify-center items-center' key={index}>
+              {week.map((day, idx) =>
+                <div className='day | flex justify-around items-center' onClick={() => setDate(day)} key={idx}>
+                  <span className={dayStyles(day)} id='day'>
+                    {day.format('D')}
+                  </span>
+                </div>
+              )}
+            </div>
+          )}
         </main>
       </section>
     </>
