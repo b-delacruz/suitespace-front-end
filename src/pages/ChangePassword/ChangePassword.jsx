@@ -1,122 +1,152 @@
-import { useState } from 'react'
-import { useNavigate } from 'react-router-dom'
-import * as authService from '../../services/authService'
+import { useState } from "react";
+import { useNavigate } from "react-router-dom";
+import * as authService from "../../services/authService";
 
-import { Button, TextField, Dialog, DialogActions, DialogContent, DialogTitle, DialogContentText } from '@mui/material'
+//* Package Imports *//
+import { Modal, Box, Typography, Backdrop, Fade } from "@mui/material";
 
-const ChangePassword = props => {
+const ChangePassword = (props) => {
+  const style = {
+    position: "absolute",
+    top: "50%",
+    left: "50%",
+    transform: "translate(-50%, -50%)",
+    width: 600,
+    p: 4,
+    color: "white",
+  };
 
-  const [message, setMessage] = useState([''])
-  const navigate = useNavigate()
+  const [message, setMessage] = useState([""]);
+  const navigate = useNavigate();
   const [formData, setFormData] = useState({
-    pw: '',
-    newPw: '',
-    newPwConf: '',
-  })
+    pw: "",
+    newPw: "",
+    newPwConf: "",
+  });
 
   // MUI
   const [open, setOpen] = useState(false);
   const handleOpen = () => setOpen(true);
   const handleClose = () => {
     setFormData({
-      pw: '',
-      newPw: '',
-      newPwConf: '',
-    })
-    setMessage('')
+      pw: "",
+      newPw: "",
+      newPwConf: "",
+    });
+    setMessage("");
     setOpen(false);
-  }
+  };
 
-  const updateMessage = msg => {
-    setMessage(msg)
-  }
+  const updateMessage = (msg) => {
+    setMessage(msg);
+  };
 
-  const handleChange = e => {
-    updateMessage('')
+  const handleChange = (e) => {
+    updateMessage("");
     setFormData({
       ...formData,
       [e.target.name]: e.target.value,
-    })
-  }
+    });
+  };
 
-  const handleSubmit = async e => {
-    e.preventDefault()
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    handleClose();
     try {
-      await authService.changePassword(formData)
-      props.handleSignupOrLogin()
-      navigate('/')
+      await authService.changePassword(formData);
+      props.handleSignupOrLogin();
+      navigate("/");
     } catch (err) {
-      updateMessage(err.message)
+      updateMessage(err.message);
     }
-  }
+  };
 
-  const { pw, newPw, newPwConf } = formData
+  const { pw, newPw, newPwConf } = formData;
 
   const isFormInvalid = () => {
-    return !(pw && newPw && newPw === newPwConf)
-  }
+    return !(pw && newPw && newPw === newPwConf);
+  };
 
   return (
     <div>
-      <button onClick={handleOpen} className='nav-button | flex justify-center items-center text-base rounded px-5 py-1'>
+      <button onClick={handleOpen} className="nav-button | rounded">
         Change Password
       </button>
-      <Dialog open={open} onClose={handleClose}>
-        <DialogTitle>Change Password</DialogTitle>
-        <DialogContentText>
-          {message}
-        </DialogContentText>
-        <DialogContent>
-          <TextField
-            autoFocus
-            margin="dense"
-            id="standard-password-input"
-            label="Password"
-            helperText="Password"
-            type="password"
-            name="pw"
-            value={pw}
-            onChange={handleChange}
-            autoComplete="off"
-            fullWidth
-            variant="standard"
-          />
-          <TextField
-            autoFocus
-            margin="dense"
-            id="standard-password-input"
-            label="Password"
-            helperText="Password"
-            type="password"
-            name="newPw"
-            value={newPw}
-            onChange={handleChange}
-            autoComplete="off"
-            fullWidth
-            variant="standard"
-          />
-          <TextField
-            autoFocus
-            margin="dense"
-            id="standard-password-input"
-            label="Confirm Password"
-            helperText="Confirm Password"
-            type="password"
-            name="newPwConf"
-            value={newPwConf}
-            onChange={handleChange}
-            autoComplete="off"
-            fullWidth
-            variant="standard"
-          />
-        </DialogContent>
-        <DialogActions>
-          <Button onClick={handleClose}>Cancel</Button>
-          <Button disabled={isFormInvalid()} onClick={handleSubmit}>Sign Up</Button>
-        </DialogActions>
-      </Dialog>
+      <Modal
+        open={open}
+        onClose={handleClose}
+        aria-labelledby="transition-modal-title"
+        aria-describedby="transition-modal-description"
+        closeAfterTransition
+        BackdropComponent={Backdrop}
+        BackdropProps={{
+          timeout: 1000,
+        }}
+      >
+        <Fade in={open}>
+          <Box sx={style}>
+            <Typography id="modal-modal-title" variant="h6" component="h2">
+              Sign Up
+            </Typography>
+            <Typography id="modal-modal-description" sx={{ mt: 2 }}>
+              <form
+                className="flex flex-col gap-6 pt-4"
+                onSubmit={handleSubmit}
+              >
+                <div className="flex flex-col gap-6">
+                  <div className="flex flex-col gap-2">
+                    <label htmlFor="category-input">
+                      Current Password <span>*</span>
+                    </label>
+                    <input
+                      type="password"
+                      placeholder="Current Password"
+                      name="pw"
+                      value={formData.pw}
+                      onChange={handleChange}
+                      required
+                    />
+                  </div>
+                  <div className="flex flex-col gap-2">
+                    <label htmlFor="category-input">
+                      New Password <span>*</span>
+                    </label>
+                    <input
+                      type="password"
+                      placeholder="New Password"
+                      name="newPw"
+                      value={formData.newPw}
+                      onChange={handleChange}
+                      required
+                    />
+                  </div>
+                  <div className="flex flex-col gap-2">
+                    <label htmlFor="category-input">
+                      Password <span>*</span>
+                    </label>
+                    <input
+                      type="password"
+                      placeholder="Password"
+                      name="newPwConf"
+                      value={formData.newPwConf}
+                      onChange={handleChange}
+                      required
+                    />
+                  </div>
+                </div>
+                <button
+                  className="modal-button submit | rounded"
+                  onClick={() => handleSubmit()}
+                >
+                  SUBMIT
+                </button>
+              </form>
+            </Typography>
+          </Box>
+        </Fade>
+      </Modal>
     </div>
-  )
-}
+  );
+};
 
-export default ChangePassword
+export default ChangePassword;

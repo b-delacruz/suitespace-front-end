@@ -1,116 +1,122 @@
-import { useState, useEffect } from 'react';
-import { PropaneSharp } from '@mui/icons-material';
-import { Typography, Button, Modal, Box } from '@mui/material'
-import TodoItem from '../../components/Todo/TodoItem';
-import './TodoList.css';
-import '../../components/Todo/TodoAdd.jsx'
-import * as todoService from '../../services/todoService'
-import TodoModal from '../../components/Todo/TodoAdd.jsx';
+import { useState, useEffect } from "react";
+import { Modal, Box, Typography, Backdrop, Fade } from "@mui/material";
+import TodoItem from "../../components/Todo/TodoItem";
+import "./TodoList.css";
+import "../../components/Todo/TodoAdd.jsx";
+import * as todoService from "../../services/todoService";
+import TodoAdd from "../../components/Todo/TodoAdd.jsx";
 
 const TodoList = (props) => {
-
-  const [formData, setFormData] = useState({ // reMOVED THIS from MODAL
-    title: '',
-    description: '',
-    dueDate: new Date(),
-  })
-  const [todos, setTodos] = useState([])
-  
-  useEffect(() => {
-    const fetchAllTodos = async () =>{
-      const todoData = await todoService.getAll()
-      setTodos(todoData)
-    }
-    fetchAllTodos()
-  }, [])
-  
-  const handleAddTodo = async newTodoData => {
-    const newTodo = await todoService.create(newTodoData)
-    setTodos([...todos, newTodo])
-  }
-
-  const handleDeleteTodo = async id => {
-    const deletedTodo = await todoService.deleteTodo(id)
-    setTodos(todos.filter(todo => todo._id !== deletedTodo._id))
-  }
-
-  const handleUpdateTodo = async updatedTodoFormData => {
-    const updatedTodo = await todoService.update(updatedTodoFormData)
-    const newTodosArray = todos.map(todo => 
-      todo._id === updatedTodo._id ? updatedTodo : todo
-    )
-    setTodos([...newTodosArray])
-  }
+  const [todos, setTodos] = useState([]);
 
   const [open, setOpen] = useState(false);
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
+
+  useEffect(() => {
+    const fetchAllTodos = async () => {
+      const todoData = await todoService.getAll();
+      setTodos(todoData);
+    };
+    fetchAllTodos();
+  }, []);
+
+  const handleAddTodo = async (newTodoData) => {
+    const newTodo = await todoService.create(newTodoData);
+    setTodos([...todos, newTodo]);
+    handleClose();
+  };
+
+  const handleDeleteTodo = async (id) => {
+    const deletedTodo = await todoService.deleteTodo(id);
+    setTodos(todos.filter((todo) => todo._id !== deletedTodo._id));
+    handleClose();
+  };
+
+  const handleUpdateTodo = async (updatedTodoFormData) => {
+    const updatedTodo = await todoService.update(updatedTodoFormData);
+    const newTodosArray = todos.map((todo) =>
+      todo._id === updatedTodo._id ? updatedTodo : todo
+    );
+    setTodos([...newTodosArray]);
+    handleClose();
+  };
+
   const style = {
-    position: 'absolute',
-    top: '50%',
-    left: '50%',
-    transform: 'translate(-50%, -50%)',
+    position: "absolute",
+    top: "50%",
+    left: "50%",
+    transform: "translate(-50%, -50%)",
     width: 400,
-    bgcolor: 'background.paper',
-    border: '2px solid #000',
+    bgcolor: "background.paper",
+    border: "2px solid #000",
     boxShadow: 6,
     p: 4,
-  }
-  
+  };
+
   return (
-    <div className='todo-list'>
-      <div className='todo-list-header | flex justify-between'>
+    <div className="todo-list | ">
+      <div className="todo-list-header | text-lg flex">
         <h1>Todos</h1>
-        <div>searchbar</div>
-        <div>grab button</div>
+        {props.user ? (
+          <button
+            onClick={handleOpen}
+            className="todo-add-event-button | flex justify-center items-center text-base rounded"
+          >
+            Add Todo
+          </button>
+        ) : (
+          <div>Log in to add todos</div>
+        )}
       </div>
-      <div>
-        <Button onClick={handleOpen}>Add Todo</Button>
-        <Modal
-          open={open}
-          onClose={handleClose}
-          aria-labelledby='modal-modal-title'
-          aria-describedby='modal-modal-description'
-        >
+      <Modal
+        open={open}
+        onClose={handleClose}
+        aria-labelledby="modal-modal-title"
+        aria-describedby="modal-modal-description"
+        closeAfterTransition
+        BackdropComponent={Backdrop}
+        BackdropProps={{
+          timeout: 1000,
+        }}
+      >
+        <Fade in={open}>
           <Box sx={style}>
-            <Typography id='modal-modal-title' variant='h6' component='h2'>
-              Add Todo
+            <Typography id="modal-modal-title" variant="h6" component="h2">
+              <span className="form-header">
+                <span className="soft-yellow">Add Todo</span>
+              </span>
             </Typography>
-            <Typography id='modal-modal-description' sx={{ mt: 2 }}>
-              <TodoModal
-                handleAddTodo={handleAddTodo}
-                formData={formData}
-              />
+            <Typography
+              id="modal-modal-description"
+              sx={{ mt: 2 }}
+              component={"span"}
+            >
+              <TodoAdd handleAddTodo={handleAddTodo} />
             </Typography>
           </Box>
-        </Modal>
-      </div>
-      <div className='todo-list-showing | flex'>
-        <div>Showing Tag</div>
-      </div>
-      <div className='todo-list-body'>
-          {props.user ? (
-            <>
-              {todos.map((todo, idx) => 
-                <TodoItem
-                  key={idx}
-                  todo={todo}
-                  handleUpdateTodo={handleUpdateTodo}
-                  handleDeleteTodo={handleDeleteTodo}
-                  style={style}
-                  user={props.user}
-                  // isList={true}
-                />
-              )}
-            </>
-          ) : (
-            ""
-          )}
+        </Fade>
+      </Modal>
+      <div className="todo-items-container | overflow-y-scroll flex flex-col gap-4">
+        {props.user ? (
+          <>
+            {todos.map((todo, idx) => (
+              <TodoItem
+                key={idx}
+                todo={todo}
+                handleUpdateTodo={handleUpdateTodo}
+                handleDeleteTodo={handleDeleteTodo}
+                style={style}
+                user={props.user}
+              />
+            ))}
+          </>
+        ) : (
+          ""
+        )}
       </div>
     </div>
-    );
-  }
-  
-  export default TodoList;
+  );
+};
 
-  
+export default TodoList;

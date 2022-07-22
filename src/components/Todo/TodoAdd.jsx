@@ -1,11 +1,11 @@
 import { useState, useEffect, useRef } from 'react';
 
 
-const TodoModal = (props) => {
-  const [formData, setFormData] = useState({ // reMOVED THIS from MODAL
+const TodoAdd = (props) => {
+  const [formData, setFormData] = useState({
     title: '',
     description: '',
-    dueDate: new Date(),
+    dueDate: new Date(Date.now()).toISOString().slice(0, 10),
   })
   const [validForm, setValidForm] = useState(false)
   const handleChange = evt => {
@@ -23,28 +23,33 @@ const TodoModal = (props) => {
 
 	return (
 		<>
-      <form onSubmit={handleSubmit} autoComplete='off' ref={formElement} className='flex flex-col gap-3'>
-        <div className='flex flex-col'>
-          <label>Due Date</label>
-          <input className='input-item'
-            name='dueDate'
-            type='date'
-            value={formData.dueDate}
-            required
-            onChange={handleChange}
-          />
+      <form onSubmit={handleSubmit} autoComplete='off' ref={formElement} className='flex flex-col gap-6 pt-4'>
+        <div className="flex justify-between w-full gap-6">
+          <div className='flex flex-col gap-2 w-2/4'>
+            <label>
+              Due Date <span>*</span>
+            </label>
+            <input
+              className='input-item'
+              name='dueDate'
+              type='date'
+              value={formData.dueDate}
+              required
+              onChange={handleChange}
+            />
+          </div>
+          <div className='flex flex-col gap-2 w-2/4'>
+            <label>Title</label>
+            <input className='input-item'
+              name='title'
+              type='text'
+              value={formData.title}
+              required
+              onChange={handleChange}
+            />
+          </div>
         </div>
-        <div className='flex flex-col'>
-          <label>Title</label>
-          <input className='input-item'
-            name='title'
-            type='text'
-            value={formData.title}
-            required
-            onChange={handleChange}
-          />
-        </div>
-        <div className='flex flex-col'>
+        <div className='flex flex-col gap-2'>
           <label>Description</label>
           <input className='input-item'
             name='description'
@@ -67,4 +72,4 @@ const TodoModal = (props) => {
 	)
 }
 
-export default TodoModal
+export default TodoAdd

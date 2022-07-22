@@ -1,43 +1,54 @@
 //* React Hooks *//
-import { useState, useRef, useEffect } from 'react'
+import { useState, useRef, useEffect } from "react";
 
-const EditScheduleEvent = ({ date, handleUpdateEvent, event }) => {
+const EditScheduleEvent = ({
+  date,
+  handleUpdateEvent,
+  event,
+  handleDeleteEvent,
+}) => {
   //* State *//
-  const [validForm, setValidForm] = useState(false)
-  const [formData, setFormData] = useState(event)
+  const [validForm, setValidForm] = useState(false);
+  const [formData, setFormData] = useState(event);
 
   //* useRef *//
-  const formElement = useRef()
-  
+  const formElement = useRef();
+
   //* useEffect *//
   useEffect(() => {
-    formElement.current.checkValidity() ? setValidForm(true) : setValidForm(false)
-  }, [formData])
-  
+    formElement.current.checkValidity()
+      ? setValidForm(true)
+      : setValidForm(false);
+  }, [formData]);
+
   //* Functions *//
   function handleChange(evt) {
-    setFormData({ ...formData, [evt.target.name]: evt.target.value })
+    setFormData({ ...formData, [evt.target.name]: evt.target.value });
   }
-    
-  const handleSubmit = evt => {
-		evt.preventDefault()
-    handleUpdateEvent(formData)
-	}
+
+  const handleSubmit = (evt) => {
+    evt.preventDefault();
+    handleUpdateEvent(formData);
+  };
 
   return (
     <>
-      <form ref={formElement} className="flex flex-col gap-6 pt-4" onSubmit={handleSubmit}>
+      <form
+        ref={formElement}
+        className="flex flex-col gap-6 pt-4"
+        onSubmit={handleSubmit}
+      >
         <div className="flex justify-between w-full gap-6">
           <div className="flex flex-col gap-2 w-2/4">
             <label htmlFor="time-input">
               Time <span>*</span>
             </label>
-            <input 
-              type="time" 
+            <input
+              type="time"
               name="time"
               value={formData.time}
               required
-              onChange={handleChange} 
+              onChange={handleChange}
             />
             <p className="opacity-70 text-sm">Example: 9:00AM</p>
           </div>
@@ -45,13 +56,13 @@ const EditScheduleEvent = ({ date, handleUpdateEvent, event }) => {
             <label htmlFor="category-input">
               Catagory <span>*</span>
             </label>
-            <input 
+            <input
               type="text"
-              placeholder="Work" 
+              placeholder="Work"
               name="category"
               value={formData.category}
-              onChange={handleChange} 
-              required 
+              onChange={handleChange}
+              required
             />
             <p className="opacity-70 text-sm">Example: Meeting</p>
           </div>
@@ -60,33 +71,48 @@ const EditScheduleEvent = ({ date, handleUpdateEvent, event }) => {
           <label htmlFor="description-input">
             Description <span>*</span>
           </label>
-          <input 
+          <input
             type="text"
-            name='description'
-            placeholder='Choosing between two colors'
+            name="description"
+            placeholder="Choosing between two colors"
             value={formData.description}
-            onChange={handleChange} 
+            onChange={handleChange}
             required
           />
-          <p className="opacity-70 text-sm">Example: Discussing brand identity</p>
+          <p className="opacity-70 text-sm">
+            Example: Discussing brand identity
+          </p>
         </div>
         <div className="flex flex-col gap-2">
           <label htmlFor="location-input">Location</label>
-          <input 
+          <input
             type="text"
-            name='location'
+            name="location"
             value={formData.location}
-            onChange={handleChange} 
+            onChange={handleChange}
           />
           <p className="opacity-70 text-sm">Example: Remote</p>
         </div>
-        <input type="text" hidden name="date" defaultValue={formData.date = date.format('MMMM DD YYYY')} />
-        <button onClick={() => handleSubmit()}>
-          SUBMIT
-        </button>
+        <input
+          type="text"
+          hidden
+          name="date"
+          defaultValue={(formData.date = date.format("MMMM DD YYYY"))}
+        />
+        <div className="flex w-full justify-between">
+          <button className="modal-button submit | rounded" onClick={() => handleSubmit()}>
+            SUBMIT
+          </button>
+          <button
+            className="modal-button danger | rounded"
+            onClick={() => handleDeleteEvent(event._id)}
+          >
+            DELETE
+          </button>
+        </div>
       </form>
     </>
-  )
-}
+  );
+};
 
-export default EditScheduleEvent
+export default EditScheduleEvent;
