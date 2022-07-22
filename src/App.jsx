@@ -4,14 +4,9 @@ import { useNavigate } from "react-router-dom";
 import NavBar from "./components/NavBar/NavBar";
 
 // Services
-<<<<<<< HEAD
-import * as authService from './services/authService'
-
-=======
 import * as authService from "./services/authService";
 import * as weatherService from "./services/weatherService";
 import * as locationService from "./services/locationService";
->>>>>>> upstream/main
 
 // Files
 import "./App.css";
