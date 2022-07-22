@@ -1,38 +1,55 @@
-import './navbar.css'
-import Signup from '../../pages/Signup/Signup'
-import Login from '../../pages/Login/Login'
-import ChangePassword from '../../pages/ChangePassword/ChangePassword'
+import "./navbar.css";
+import Signup from "../../pages/Signup/Signup";
+import Login from "../../pages/Login/Login";
+import ChangePassword from "../../pages/ChangePassword/ChangePassword";
+import { ChevronLeft } from "@mui/icons-material";
 
-
-
-const NavBar = ({ user, handleLogout, handleSignupOrLogin }) => {
+const NavBar = ({
+  user,
+  handleLogout,
+  handleSignupOrLogin,
+  handleSideBarOpen,
+  handleSideBarClose,
+  open,
+}) => {
   return (
     <>
-      {user ?
-        <nav className='| flex justify-start items-center px-6'>
-          <ul className='| flex gap-12 items-center'>
-            <li className='| text-2xl'>
-              SuiteSpace
-            </li>
-            <li className='nav-username |'>
-              {user.name}
-            </li>
-            <li>
-              <button onClick={handleLogout} className='nav-button | flex justify-center items-center text-base rounded px-5 py-1'>
+      {user ? (
+        <nav className=" navbar-container |">
+          <h1 className="navbar-title |">
+            SuiteSpace | <span className="text-lg">{user.name}</span>
+          </h1>
+          <div className="navbar-buttons-container">
+            <div>
+              <button onClick={handleLogout} className="nav-button | rounded ">
                 Log Out
               </button>
-            </li>
-            <li>
+            </div>
+            <div>
               <ChangePassword handleSignupOrLogin={handleSignupOrLogin} />
-            </li>
-          </ul>
+            </div>
+          </div>
+          <div
+            className="app-toggle-sidebar-container"
+            style={open ? { display: "none" } : { display: "flex" }}
+          >
+            <div
+              className="app-toggle-sidebar | group"
+              onClick={
+                open ? () => handleSideBarClose() : () => handleSideBarOpen()
+              }
+            >
+              <ChevronLeft fontSize="large" />
+              <span className="sidebar-tooltip | group-hover:scale-100 scale-0">
+                Open Sidebar
+              </span>
+            </div>
+          </div>
         </nav>
-        :
-        <nav className='| flex justify-start items-center px-4'>
-          <ul className='| flex gap-16 items-center'>
-            <li className='nav-app-title | text-2xl'>
-              SuiteSpace
-            </li>
+      ) : (
+        <nav className=" navbar-container |">
+          <h1 className="navbar-title | text-2xl">SuiteSpace</h1>
+          <ul className="navbar-buttons-container">
             <li>
               <Login handleSignupOrLogin={handleSignupOrLogin} />
             </li>
@@ -41,9 +58,9 @@ const NavBar = ({ user, handleLogout, handleSignupOrLogin }) => {
             </li>
           </ul>
         </nav>
-      }
+      )}
     </>
-  )
-}
+  );
+};
 
-export default NavBar
+export default NavBar;

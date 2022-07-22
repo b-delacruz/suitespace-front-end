@@ -6,11 +6,11 @@
   height: 375px;
 
   background: rgba(255, 255, 255, 0.045);
-  backdrop-filter: blur( 8px );
-  -webkit-backdrop-filter: blur( 8px );
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
   border-radius: 10px;
-  border: 1px solid rgba( 255, 255, 255, 0.18 );
-  
+  border: 1px solid rgba(255, 255, 255, 0.18);
+
   font-family: 'Sora', sans-serif;
   text-align: center;
   color: rgba(255, 255, 255, 0.95);
@@ -118,4 +118,57 @@
 
 .after-month {
   color: rgba(255, 255, 255, 0.40);
+}
+
+/* Media Query for Mobile Devices */
+@media (max-width: 480px) {
+  .calendar {
+    flex-wrap: wrap;
+    width: 350px;
+    height: 350px;
+
+    background: rgba(255, 255, 255, 0.045);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+    border-radius: 10px;
+    border: 1px solid rgba(255, 255, 255, 0.18);
+
+    font-family: 'Sora', sans-serif;
+    text-align: center;
+    color: rgba(255, 255, 255, 0.95);
+    font-weight: 300;
+    --calendar-soft-yellow: #F2D3AB;
+    --calendar-today-soft-yellow: #f2d3ab;
+    --calendar-today-dark-blue: #35445d;
+    --calendar-selected-dark-blue: rgba(53, 68, 93, 0.5);
+    padding: .5em;
+  }
+}
+
+/* Media Query for low resolution  Tablets, Ipads */
+@media (min-width: 481px) and (max-width: 767px) {
+  body {
+    background-color: yellow;
+  }
+}
+
+/* Media Query for Tablets Ipads portrait mode */
+@media (min-width: 768px) and (max-width: 1024px) {
+  body {
+    background-color: blue;
+  }
+}
+
+/* Media Query for Laptops and Desktops */
+@media (min-width: 1025px) and (max-width: 1280px) {
+  body {
+    background-color: green;
+  }
+}
+
+/* Media Query for Large screens */
+@media (min-width: 1281px) {
+  body {
+    background-color: white;
+  }
 }

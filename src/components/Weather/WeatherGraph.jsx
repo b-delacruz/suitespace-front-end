@@ -22,10 +22,6 @@ ChartJS.register(
   Legend
 );
 
-// const labels = ['00:00', '01:00', '02:00', '03:00', '04:00', '05:00', '06:00', '07:00', '08:00', '09:00', '10:00', '11:00', 
-// '12:00', '13:00', '14:00', '15:00', '16:00', '17:00', '18:00', '19:00', '20:00', '21:00', '22:00', '23:00'];
-
-
 const WeatherDisplay = (props) => {
 
   let labels = []
@@ -47,13 +43,21 @@ const WeatherDisplay = (props) => {
     scales: {
       x: {
         ticks: {
-          color: 'white'
+          color: 'white',
+          font: {
+            size: 20,
+            family: 'Sora',
+          }
         }
       },
       y: {
         ticks: {
-          color: 'orange'
-        }
+          color: '#F2D3AB',
+          font: {
+            size: 20,
+            family: 'Sora'
+          },
+        },
       }
     },
     plugins: {
@@ -66,7 +70,11 @@ const WeatherDisplay = (props) => {
       title: {
         display: true,
         text: 'Temperature',
-        color: 'white'
+        color: 'white',
+        font: {
+          size: 30,
+          family: 'Sora'
+        },
       },
     },
   };
@@ -77,13 +85,22 @@ const WeatherDisplay = (props) => {
       {
         label: 'Hourly Forecast',
         data: hourData.map(hour => hour),
-        borderColor: 'rgb(255, 99, 132, 0.5)',
-        backgroundColor: 'rgb(255, 99, 132)',
+        borderColor: '#F2D3AB',
+        lineTension: 0.5,
+        borderWidth: 5,
+        backgroundColor: '#F2D3AB',
+        font: {
+          size: 30,
+          family: 'Sora'
+        },
       }
     ],
+
   };
 
-  return <Line className='weather-graph' options={options} data={data} />
+  return (
+    <Line className='weather-graph' options={options} data={data} />
+  )
 }
 
 export default WeatherDisplay

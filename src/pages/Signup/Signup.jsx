@@ -1,138 +1,196 @@
-import { useState } from 'react'
-import { useNavigate } from 'react-router-dom'
-import * as authService from '../../services/authService'
+import { useState } from "react";
+import { useNavigate } from "react-router-dom";
+import * as authService from "../../services/authService";
 
-import { Button, TextField, Dialog, DialogActions, DialogContent, DialogTitle, DialogContentText } from '@mui/material'
+//* Package Imports *//
+import { Modal, Box, Typography, Fade, Backdrop } from "@mui/material";
 
-const Signup = props => {
+const Signup = (props) => {
+  const style = {
+    position: "absolute",
+    top: "50%",
+    left: "50%",
+    transform: "translate(-50%, -50%)",
+    width: 600,
+    p: 4,
+    color: "white",
+  };
 
   //Sign Up
-  const navigate = useNavigate()
-  const [message, setMessage] = useState([''])
+  const navigate = useNavigate();
+  const [message, setMessage] = useState([""]);
   const [formData, setFormData] = useState({
-    name: '',
-    email: '',
-    password: '',
-    passwordConf: '',
-  })
+    name: "",
+    email: "",
+    password: "",
+    passwordConf: "",
+    location: "",
+  });
 
   // MUI
   const [open, setOpen] = useState(false);
   const handleOpen = () => setOpen(true);
   const handleClose = () => {
     setFormData({
-      name: '',
-      email: '',
-      password: '',
-      passwordConf: '',
-    })
+      name: "",
+      email: "",
+      password: "",
+      passwordConf: "",
+      location: "",
+    });
     setOpen(false);
-  }
+  };
 
-  const updateMessage = msg => {
-    setMessage(msg)
-  }
+  const updateMessage = (msg) => {
+    setMessage(msg);
+  };
 
-  const { name, email, password, passwordConf } = formData
+  const { name, email, password, passwordConf, location } = formData;
 
-  const handleSubmit = async e => {
-    e.preventDefault()
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+
     try {
-      await authService.signup(formData)
-      props.handleSignupOrLogin()
-      navigate('/')
+      await authService.signup(formData);
+      window.location.reload();
+      props.handleSignupOrLogin();
+      navigate("/");
     } catch (err) {
-      updateMessage(err.message)
+      updateMessage(err.message);
     }
-  }
+  };
 
-  const handleChange = e => {
-    updateMessage('')
+  const handleChange = (e) => {
+    updateMessage("");
     setFormData({
       ...formData,
       [e.target.name]: e.target.value,
-    })
-  }
+    });
+  };
 
   const isFormInvalid = () => {
-    return !(name && email && password && password === passwordConf)
-  }
+    return !(
+      name &&
+      email &&
+      location &&
+      password &&
+      password === passwordConf
+    );
+  };
 
   return (
     <div>
-      <button className='nav-button | flex justify-center items-center text-base rounded px-5 py-1' onClick={handleOpen}>
+      <button
+        className="nav-button | flex justify-center items-center text-base rounded px-5 py-1"
+        onClick={handleOpen}
+      >
         Sign Up
       </button>
-      <Dialog open={open} onClose={handleClose}>
-        <DialogTitle>Sign Up</DialogTitle>
-        <DialogContentText>
-          {message}
-        </DialogContentText>
-        <DialogContent>
-          <TextField
-            autoFocus
-            margin="dense"
-            id="standard-required"
-            label="Name"
-            helperText="Name"
-            type="text"
-            name="name"
-            value={name}
-            onChange={handleChange}
-            autoComplete="off"
-            fullWidth
-            variant="standard"
-          />
-          <TextField
-            autoFocus
-            margin="dense"
-            id="standard-required"
-            label="Email"
-            helperText="Email"
-            type="text"
-            name="email"
-            value={email}
-            onChange={handleChange}
-            autoComplete="off"
-            fullWidth
-            variant="standard"
-          />
-          <TextField
-            autoFocus
-            margin="dense"
-            id="standard-password-input"
-            label="Password"
-            helperText="Password"
-            type="password"
-            name="password"
-            value={password}
-            onChange={handleChange}
-            autoComplete="off"
-            fullWidth
-            variant="standard"
-          />
-          <TextField
-            autoFocus
-            margin="dense"
-            id="standard-password-input"
-            label="Confirm Password"
-            helperText="Confirm Password"
-            type="password"
-            name="passwordConf"
-            value={passwordConf}
-            onChange={handleChange}
-            autoComplete="off"
-            fullWidth
-            variant="standard"
-          />
-        </DialogContent>
-        <DialogActions>
-          <Button onClick={handleClose}>Cancel</Button>
-          <Button disabled={isFormInvalid()} onClick={handleSubmit}>Sign Up</Button>
-        </DialogActions>
-      </Dialog>
+      <Modal
+        open={open}
+        onClose={handleClose}
+        aria-labelledby="transition-modal-title"
+        aria-describedby="transition-modal-description"
+        closeAfterTransition
+        BackdropComponent={Backdrop}
+        BackdropProps={{
+          timeout: 1000,
+        }}
+      >
+        <Fade in={open}>
+          <Box sx={style}>
+            <Typography id="transition-modal-title" variant="h6" component="h2">
+              Sign Up
+            </Typography>
+            <Typography>
+              {message}
+            </Typography>
+            <Typography id="transition-modal-description" component={'span'} sx={{ mt: 2 }}>
+              <form
+                className="flex flex-col gap-6 pt-4"
+                onSubmit={handleSubmit}
+              >
+                <div className="flex flex-col gap-6">
+                  <div className="flex flex-col gap-2">
+                    <label htmlFor="category-input">
+                      Name <span>*</span>
+                    </label>
+                    <input
+                      type="text"
+                      placeholder="Name"
+                      name="name"
+                      value={formData.name}
+                      onChange={handleChange}
+                      required
+                    />
+                  </div>
+                  <div className="flex flex-col gap-2">
+                    <label htmlFor="category-input">
+                      Email <span>*</span>
+                    </label>
+                    <input
+                      type="email"
+                      placeholder="Email"
+                      name="email"
+                      value={formData.email}
+                      onChange={handleChange}
+                      required
+                    />
+                  </div>
+                  <div className="flex flex-col gap-2">
+                    <label htmlFor="category-input">
+                      Password <span>*</span>
+                    </label>
+                    <input
+                      type="password"
+                      placeholder="Password"
+                      name="password"
+                      value={formData.password}
+                      onChange={handleChange}
+                      required
+                    />
+                  </div>
+                  <div className="flex flex-col gap-2">
+                    <label htmlFor="category-input">
+                      Confirm Password <span>*</span>
+                    </label>
+                    <input
+                      type="password"
+                      placeholder="Confirm Password"
+                      name="passwordConf"
+                      value={formData.Conf}
+                      onChange={handleChange}
+                      required
+                    />
+                  </div>
+                  <div className="flex flex-col gap-2">
+                    <label htmlFor="category-input">
+                      City <span>*</span>
+                    </label>
+                    <input
+                      type="text"
+                      placeholder="City"
+                      name="location"
+                      value={formData.location}
+                      onChange={handleChange}
+                      required
+                    />
+                  </div>
+                </div>
+                <button
+                  className="modal-button submit | rounded"
+                  onClick={() => handleSubmit()}
+                  disabled={isFormInvalid()}
+                >
+                  SUBMIT
+                </button>
+              </form>
+            </Typography>
+          </Box>
+        </Fade>
+      </Modal>
     </div>
-  )
-}
+  );
+};
 
-export default Signup
+export default Signup;

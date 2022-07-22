@@ -2,9 +2,20 @@ import { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import * as authService from '../../services/authService'
 
-import { Button, TextField, Dialog, DialogActions, DialogContent, DialogContentText, DialogTitle } from '@mui/material'
+//* Package Imports *//
+import { Modal, Box, Typography } from "@mui/material";
 
 const Login = props => {
+
+  const style = {
+    position: "absolute",
+    top: "50%",
+    left: "50%",
+    transform: "translate(-50%, -50%)",
+    width: 600,
+    p: 4,
+    color: "white",
+  };
 
   const navigate = useNavigate()
   const [message, setMessage] = useState([''])
@@ -37,6 +48,7 @@ const Login = props => {
     evt.preventDefault()
     try {
       await authService.login(formData)
+      window.location.reload();
       props.handleSignupOrLogin()
       navigate('/')
     } catch (err) {
@@ -44,52 +56,62 @@ const Login = props => {
     }
   }
 
-  return(
+  return (
     <div>
       <button className='nav-button | flex justify-center items-center text-base rounded px-5 py-1' onClick={handleOpen}>
         Log In
       </button>
-      <Dialog open={open} onClose={handleClose}>
-        <DialogTitle>Log In</DialogTitle>
-        <DialogContentText>
-          {message}
-        </DialogContentText>
-        <DialogContent>
-          <TextField
-            autoFocus
-            margin="dense"
-            id="standard-required"
-            label="Email"
-            helperText="Email"
-            type="text"
-            name="email"
-            value={formData.email}
-            onChange={handleChange}
-            autoComplete="off"
-            fullWidth
-            variant="standard"
-          />
-          <TextField
-            autoFocus
-            margin="dense"
-            id="standard-password-input"
-            label="Password"
-            helperText="Password"
-            type="password"
-            name="pw"
-            value={formData.pw}
-            onChange={handleChange}
-            autoComplete="off"
-            fullWidth
-            variant="standard"
-          />
-        </DialogContent>
-        <DialogActions>
-          <Button onClick={handleClose}>Cancel</Button>
-          <Button onClick={handleSubmit}>Log In</Button>
-        </DialogActions>
-      </Dialog>
-    </div>
+      <Modal
+        open={open}
+        onClose={handleClose}
+        aria-labelledby='modal-modal-title'
+        aria-describedby='modal-modal-description'
+      >
+        <Box sx={style}>
+          <Typography id='modal-modal-title' variant='h6' component='h2'>
+            Log In
+          </Typography>
+          <Typography>
+            {message}
+          </Typography>
+          <Typography id='modal-modal-description' component={'span'} sx={{ mt: 2 }}>
+            <form className="flex flex-col gap-6 pt-4" onSubmit={handleSubmit}>
+              <div className="flex justify-between w-full gap-6">
+                <div className="flex flex-col gap-2 w-2/4">
+                  <label htmlFor="category-input">
+                    Email <span>*</span>
+                  </label>
+                  <input
+                    type="email"
+                    placeholder="Email"
+                    name="email"
+                    value={formData.email}
+                    onChange={handleChange}
+                    required
+                  />
+                </div>
+                <div className="flex flex-col gap-2 w-2/4">
+                  <label htmlFor="category-input">
+                    Password <span>*</span>
+                  </label>
+                  <input
+                    type="password"
+                    placeholder="Password"
+                    name="pw"
+                    value={formData.pw}
+                    onChange={handleChange}
+                    required
+                  />
+                </div>
+              </div>
+              <button onClick={() => handleSubmit}>
+                SUBMIT
+              </button>
+            </form>
+          </Typography>
+        </Box>
+      </Modal>
+    </div >
   )
 
 }

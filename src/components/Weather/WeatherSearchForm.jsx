@@ -14,13 +14,13 @@ const WeatherSearchForm = (props) => {
     evt.preventDefault()
     props.handleSearchLocation(formData)
     setFormData({ query: '' })
-    
+
   }
 
   return (
     <>
       <div>
-        <form onSubmit={handleSubmit}>
+        <form onSubmit={handleSubmit} className='flex items-center gap-1'>
           <input className='weather-input-item'
             name="query"
             type="text"
@@ -29,7 +29,7 @@ const WeatherSearchForm = (props) => {
             value={formData.query}
             onChange={handleChange}
           />
-          <button type="submit"><SearchIcon/></button>
+          <button type="submit"><SearchIcon /></button>
         </form>
       </div>
     </>

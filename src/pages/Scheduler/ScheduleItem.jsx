@@ -1,44 +1,47 @@
 //* React Hooks *//
-import { useState } from "react"
+import { useState } from "react";
 
 //* Package Imports *//
-import moment from "moment"
-import { Modal, Box, Typography, Backdrop, Fade } from '@mui/material'
+import moment from "moment";
+import { Modal, Box, Typography, Backdrop, Fade } from "@mui/material";
 
 //* Components *//
-import EditScheduleEvent from "./EditScheduleEvent"
+import EditScheduleEvent from "./EditScheduleEvent";
 
-const ScheduleItem = ({ date, event, handleUpdateEvent, handleDeleteEvent }) => {
+const ScheduleItem = ({
+  date,
+  event,
+  handleUpdateEvent,
+  handleDeleteEvent,
+}) => {
   //* Modal State & Style *//
-  const [open, setOpen] = useState(false)
-  const handleOpen = () => setOpen(true)
-  const handleClose = () => setOpen(false)
+  const [open, setOpen] = useState(false);
+  const handleOpen = () => setOpen(true);
+  const handleClose = () => setOpen(false);
   const style = {
-    position: 'absolute',
-    top: '50%',
-    left: '50%',
-    transform: 'translate(-50%, -50%)',
+    position: "absolute",
+    top: "50%",
+    left: "50%",
+    transform: "translate(-50%, -50%)",
     width: 600,
     p: 4,
-    color: 'white',
-  }
-  
+    color: "white",
+  };
+
   return (
     <>
-      <div 
+      <div
         className="schedule-item | flex w-full justify-between items-start"
         onClick={handleOpen}
       >
         <h1 className="schedule-item-time | text-lg self-center">
-          {moment(`${event.time}`, 'hh:mm').format('h:mm A')}
+          {moment(`${event.time}`, "hh:mm").format("h:mm A")}
         </h1>
         <div className="schedule-item-divider-container | flex items-center justify-center">
           <div className="schedule-item-vertical-line"></div>
         </div>
         <div className="schedule-item-description">
-          <h2 className="schedule-item-category | text-sm" >
-            {event.category}
-          </h2>
+          <h2 className="schedule-item-category | text-sm">{event.category}</h2>
           <h1 className="schedule-item-event-name | text-base">
             {event.description}
           </h1>
@@ -58,24 +61,26 @@ const ScheduleItem = ({ date, event, handleUpdateEvent, handleDeleteEvent }) => 
         <Fade in={open}>
           <Box sx={style}>
             <Typography id="transition-modal-title" variant="h6" component="h2">
-              <span className='form-header'>
-                <span className='soft-yellow'>               
+              <span className="form-header">
+                <span className="soft-yellow">
                   Edit {event.category} on: <br />
-                </span> 
-                {date.format('MMMM DD YYYY')}               
+                </span>
+                {date.format("MMMM DD YYYY")}
               </span>
-              <button onClick={() => handleDeleteEvent(event._id)}>
-                DELETE
-              </button>
             </Typography>
             <Typography id="transition-modal-description" sx={{ mt: 2 }}>
-              <EditScheduleEvent date={date} handleUpdateEvent={handleUpdateEvent} event={event} />
+              <EditScheduleEvent
+                date={date}
+                handleUpdateEvent={handleUpdateEvent}
+                event={event}
+                handleDeleteEvent={handleDeleteEvent}
+              />
             </Typography>
           </Box>
         </Fade>
       </Modal>
     </>
-  )
-}
+  );
+};
 
-export default ScheduleItem
+export default ScheduleItem;

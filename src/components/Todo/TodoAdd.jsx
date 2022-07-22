@@ -1,70 +1,84 @@
-import { useState, useEffect, useRef } from 'react';
+import { useState, useEffect, useRef } from "react";
 
+const TodoAdd = (props) => {
 
-const TodoModal = (props) => {
-  const [formData, setFormData] = useState({ // reMOVED THIS from MODAL
-    title: '',
-    description: '',
-    dueDate: new Date(),
-  })
-  const [validForm, setValidForm] = useState(false)
-  const handleChange = evt => {
-    setFormData({...formData, [evt.target.name]: evt.target.value })
-  }
   const formElement = useRef()
-  useEffect(() => {
-    formElement.current.checkValidity() ? setValidForm(true) : setValidForm(false)
-  }, [formData])
+  const [formData, setFormData] = useState({
+    title: "",
+    description: "",
+    dueDate: new Date(Date.now()).toISOString().slice(0, 10),
+  });
+  const [validForm, setValidForm] = useState(false);
 
-  const handleSubmit = evt => {
-    evt.preventDefault()
-    props.handleAddTodo(formData)
+  useEffect(() => {
+    formElement.current.checkValidity()
+      ? setValidForm(true)
+      : setValidForm(false);
+  }, [formData]);
+
+  const handleChange = evt => {
+    setFormData({ ...formData, [evt.target.name]: evt.target.value })
   }
 
-	return (
-		<>
-      <form onSubmit={handleSubmit} autoComplete='off' ref={formElement} className='flex flex-col gap-3'>
-        <div className='flex flex-col'>
-          <label>Due Date</label>
-          <input className='input-item'
-            name='dueDate'
-            type='date'
+  const handleSubmit = (evt) => {
+    evt.preventDefault();
+    props.handleAddTodo(formData);
+  };
+
+  return (
+    <>
+      <form
+        onSubmit={handleSubmit}
+        autoComplete="off"
+        ref={formElement}
+        className="flex flex-col gap-6 "
+      >
+        <div className="flex flex-col gap-2">
+          <label>
+            Due Date <span>*</span>
+          </label>
+          <input
+            className="input-item"
+            name="dueDate"
+            type="date"
             value={formData.dueDate}
             required
             onChange={handleChange}
           />
         </div>
-        <div className='flex flex-col'>
+        <div className="flex flex-col gap-2">
           <label>Title</label>
-          <input className='input-item'
-            name='title'
-            type='text'
+          <input
+            className="input-item"
+            name="title"
+            type="text"
             value={formData.title}
             required
             onChange={handleChange}
+            placeholder='Dog'
           />
         </div>
-        <div className='flex flex-col'>
+        <div className="flex flex-col gap-2">
           <label>Description</label>
-          <input className='input-item'
-            name='description'
-            type='text'
+          <input
+            className="input-item"
+            name="description"
+            type="text"
             value={formData.description}
             required
+            placeholder='Take to the park'
             onChange={handleChange}
           />
         </div>
-        <div className='btn-submit'>
-          <button
-            type='submit'
-            disabled={!validForm}
-          >
-            Add Todo
-          </button>
-        </div>
+        <button
+          className="modal-button submit | rounded text-white"
+          disabled={!validForm}
+        >
+          SUBMIT
+        </button>
       </form>
     </>
-	)
-}
+  );
+};
 
-export default TodoModal
+export default TodoAdd;

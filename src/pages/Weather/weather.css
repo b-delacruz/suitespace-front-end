@@ -1,16 +1,11 @@
 .weather-container {
-  background: rgba(255, 255, 255, 0.111);
-  backdrop-filter: blur( 9px );
-  -webkit-backdrop-filter: blur( 9px );
+  background: rgba(255, 255, 255, 0.045);
+  backdrop-filter: blur( 8px );
+  -webkit-backdrop-filter: blur( 8px );
   border-radius: 10px;
   border: 1px solid rgba( 255, 255, 255, 0.18 );
-  width: 60%;
-  min-width: 400px;
-}
-
-.weather-body {
-  display: flex;
-  flex-direction: row;
-  justify-content: space-around;
-  margin: 1rem;
+  width: 100%;
+  height: 400px;
+  color: var(--soft-yellow);
+  padding: 0em 1em;
 }
