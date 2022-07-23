@@ -1,7 +1,17 @@
 import "./NewsCard.css";
+import { useState } from 'react';
+import * as bookmarkService from '../../services/bookmarkService.js'
+import IconButton from '@mui/material/IconButton';
+import TurnedInNotSharpIcon from '@mui/icons-material/TurnedInNotSharp';
 
-export default function NewsCard(props) {
+function NewsCard(props) {
 
+  const [bookmarkData, setBookmarkData] = useState(props)
+
+  const addBookmark = async () => {
+    const bookmark = await bookmarkService.create(bookmarkData)
+ 
+  }
   return (
     <>
       <div className="news-card">
@@ -30,7 +40,14 @@ export default function NewsCard(props) {
             {props.news.description?.split(".").splice(0, 1).join(" ")}.
           </div>
         </div>
+        <div>
+          <IconButton onClick={addBookmark} aria-label="bookmark">
+            <TurnedInNotSharpIcon />
+          </IconButton>
+        </div>
       </div>
     </>
   );
 }
+
+export default NewsCard
